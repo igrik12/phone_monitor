@@ -45,12 +45,13 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 ),
               ),
               SliverFillRemaining(
+                hasScrollBody: true,
                 child: TabBarView(
                   controller: controller,
                   children: <Widget>[
-                    Center(child: CpuTab()),
-                    Center(child: Text("Tab two")),
-                    Center(child: Text("Tab three")),
+                    CpuTab(),
+                    Text("Tab two"),
+                    Text("Tab three"),
                   ],
                 ),
               ),

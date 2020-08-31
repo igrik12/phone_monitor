@@ -1,7 +1,9 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:mp_chart/mp/chart/line_chart.dart';
+import 'package:phone_monitor/controllers/cpu_controller.dart';
 import 'package:phone_monitor/widgets/chartController.dart';
 
 class CpuChart extends StatefulWidget {
@@ -17,13 +19,22 @@ class CpuChart extends StatefulWidget {
 class _CpuChartState extends State<CpuChart> {
   ChartController chartController;
   StreamSubscription _streamSubscription;
+  var utilisation = '0%';
+  var currentOutOfMax = 'N/A';
 
   @override
   void initState() {
     super.initState();
+    final cpuController = Get.find<CpuController>();
     chartController = ChartController();
     _streamSubscription = widget.stream.listen((cpuData) {
-      chartController.addEntry(cpuData[widget.index].toDouble());
+      var currentFreq = cpuData[widget.index].toDouble();
+      var max = cpuController.cpuInfo.minMaxFrequencies[widget.index].max;
+      chartController.addEntry(currentFreq);
+      setState(() {
+        utilisation = '${(currentFreq * 100 / max).truncate()}%';
+        currentOutOfMax = '$currentFreq mhz / $max mhz';
+      });
     });
   }
 
@@ -36,6 +47,20 @@ class _CpuChartState extends State<CpuChart> {
 
   @override
   Widget build(BuildContext context) {
-    return LineChart(chartController.controller);
+    return Column(
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [Text(utilisation), Text(currentOutOfMax)],
+        ),
+        SizedBox(
+          height: 5,
+        ),
+        Expanded(
+            child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: LineChart(chartController.controller)))
+      ],
+    );
   }
 }

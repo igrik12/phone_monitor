@@ -8,14 +8,11 @@ import 'package:mp_chart/mp/core/data_provider/line_data_provider.dart';
 import 'package:mp_chart/mp/core/data_set/line_data_set.dart';
 import 'package:mp_chart/mp/core/description.dart';
 import 'package:mp_chart/mp/core/entry/entry.dart';
-import 'package:mp_chart/mp/core/enums/legend_form.dart';
 import 'package:mp_chart/mp/core/enums/mode.dart';
 import 'package:mp_chart/mp/core/enums/y_axis_label_position.dart';
 import 'package:mp_chart/mp/core/fill_formatter/i_fill_formatter.dart';
 import 'package:mp_chart/mp/core/highlight/highlight.dart';
 import 'package:mp_chart/mp/core/utils/color_utils.dart';
-
-import 'constants.dart';
 
 class ChartController implements OnChartValueSelectedListener {
   static const int VISIBLE_COUNT = 60;
