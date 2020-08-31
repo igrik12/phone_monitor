@@ -8,7 +8,7 @@ DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
 class CpuController extends GetxController {
   CpuInfo cpuInfo;
   AndroidDeviceInfo deviceInfo;
-  int overallUsage;
+  int overallUsage = 0;
   Stream<Map<int, int>> stream = CpuReader.cpuStream(500).asBroadcastStream();
 
   @override

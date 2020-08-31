@@ -33,11 +33,16 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 appBar: AppBar(
                     shape: ContinuousRectangleBorder(
                         borderRadius: BorderRadius.only(
-                            bottomLeft: Radius.circular(40),
-                            bottomRight: Radius.circular(40))),
+                            bottomLeft: Radius.circular(20),
+                            bottomRight: Radius.circular(20))),
                     title: Text('Phone Monitor'),
+                    actions: [
+                      IconButton(icon: Icon(Icons.settings), onPressed: () {})
+                    ],
+                    backgroundColor: Colors.blue[400],
                     bottom: TabBar(
                       controller: tabController,
+                      indicatorColor: Colors.white,
                       indicatorSize: TabBarIndicatorSize.label,
                       tabs: [
                         Tab(

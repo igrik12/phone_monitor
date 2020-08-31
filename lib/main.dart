@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-          scaffoldBackgroundColor: Colors.white,
+          scaffoldBackgroundColor: Color.fromRGBO(242, 246, 247, 1),
           visualDensity: VisualDensity.adaptivePlatformDensity,
           textTheme: TextTheme(
               bodyText2: TextStyle(fontWeight: FontWeight.w500, fontSize: 14))),

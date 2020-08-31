@@ -105,7 +105,8 @@ class CpuTab extends StatelessWidget {
                               ],
                             ),
                             Text(
-                              cpuController.cpuInfo.numberOfCores.toString() ??
+                              cpuController.cpuInfo?.numberOfCores
+                                      ?.toString() ??
                                   'N/A',
                             )
                           ]),
