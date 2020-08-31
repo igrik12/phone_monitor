@@ -1,10 +1,7 @@
-import 'package:cpu_reader/cpu_reader.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:phone_monitor/controllers/cpu_controller.dart';
 import 'package:phone_monitor/widgets/chart.dart';
-
-Stream<Map<int, int>> stream = CpuReader.cpuStream(500).asBroadcastStream();
 
 class CpuTab extends StatelessWidget {
   CpuTab({Key key}) : super(key: key);
@@ -12,68 +9,135 @@ class CpuTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<CpuController>(
-        init: CpuController(),
-        builder: (_) => Column(
-              children: [
-                Card(
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10)),
-                  child: Container(
-                    width: Get.width * 0.98,
-                    height: 100,
-                    color: Colors.greenAccent,
-                  ),
-                ),
-                Expanded(
-                  flex: 1,
-                  child: Card(
-                    elevation: 2,
-                    shadowColor: Colors.white,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15)),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Text(
-                            'Cpu Frequency Charts',
-                            style: TextStyle(
-                                fontSize: 16,
-                                color: Colors.lightBlue,
-                                fontWeight: FontWeight.w500),
+      init: CpuController(),
+      builder: (cpuController) => CustomScrollView(
+        slivers: [
+          SliverToBoxAdapter(
+            child: Card(
+                elevation: 2,
+                shadowColor: Colors.white,
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15)),
+                child: Container(
+                  padding: EdgeInsets.all(15),
+                  child: Column(
+                    children: [
+                      Row(
+                        children: [
+                          Flexible(
+                            child: Column(
+                              children: [
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text('Overall Cpu Usage',
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                        )),
+                                    Text('${cpuController.overallUsage}%',
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                        ))
+                                  ],
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                ClipRRect(
+                                  borderRadius: BorderRadius.circular(20),
+                                  child: LinearProgressIndicator(
+                                    minHeight: 10,
+                                    backgroundColor: Colors.blue[50],
+                                    value: cpuController.overallUsage / 100,
+                                    valueColor:
+                                        new AlwaysStoppedAnimation<Color>(
+                                            Colors.blue),
+                                  ),
+                                )
+                              ],
+                            ),
                           ),
-                        ),
-                        Expanded(
-                            child: IgnorePointer(
-                          child: GridView.count(
-                            crossAxisCount: 2,
-                            mainAxisSpacing: 20,
-                            crossAxisSpacing: 20,
-                            padding: const EdgeInsets.all(12.0),
-                            childAspectRatio: 1.5,
-                            children: new List<Widget>.generate(
-                                _.cpuInfo?.numberOfCores ?? 0,
-                                (i) => CpuChart(
-                                      index: i,
-                                      stream: stream,
-                                    )),
+                          SizedBox(
+                            width: 20,
                           ),
-                        )),
-                      ],
-                    ),
+                          RichText(
+                              text: TextSpan(
+                                  text: '35 C',
+                                  style: TextStyle(
+                                      fontSize: 26,
+                                      color: Colors.blue,
+                                      fontWeight: FontWeight.w600)))
+                        ],
+                      ),
+                      SizedBox(height: 20),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              Icon(Icons.blur_circular),
+                              SizedBox(
+                                width: 5,
+                              ),
+                              Text('Cpu Hardware'),
+                            ],
+                          ),
+                          Text(
+                            cpuController.deviceInfo?.hardware?.toUpperCase() ??
+                                'N/A',
+                          )
+                        ],
+                      ),
+                      SizedBox(height: 10),
+                      Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                Icon(Icons.blur_on),
+                                SizedBox(
+                                  width: 5,
+                                ),
+                                Text('Cpu Cores'),
+                              ],
+                            ),
+                            Text(
+                              cpuController.cpuInfo.numberOfCores.toString() ??
+                                  'N/A',
+                            )
+                          ]),
+                      Row(),
+                      Row()
+                    ],
                   ),
-                ),
-                Card(
-                  elevation: 2,
-                  shadowColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(15)),
-                  child: SizedBox(
-                    height: 120,
-                  ),
-                )
-              ],
-            ));
+                )),
+          ),
+          SliverToBoxAdapter(
+              child: SizedBox(
+            height: 25,
+          )),
+          SliverGrid(
+            gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
+              maxCrossAxisExtent: 250.0,
+              mainAxisSpacing: 10.0,
+              crossAxisSpacing: 10.0,
+              childAspectRatio: 1.8,
+            ),
+            delegate: SliverChildBuilderDelegate(
+              (BuildContext context, int index) {
+                return CpuChart(
+                  index: index,
+                  stream: cpuController.stream,
+                );
+              },
+              childCount: cpuController.cpuInfo?.numberOfCores ?? 0,
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

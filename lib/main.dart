@@ -16,7 +16,7 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: Colors.white,
           visualDensity: VisualDensity.adaptivePlatformDensity,
           textTheme: TextTheme(
-              bodyText2: TextStyle(fontWeight: FontWeight.w500, fontSize: 12))),
+              bodyText2: TextStyle(fontWeight: FontWeight.w500, fontSize: 14))),
       home: Scaffold(
         body: Home(),
       ),

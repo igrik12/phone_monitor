@@ -33,7 +33,7 @@ class _CpuChartState extends State<CpuChart> {
       chartController.addEntry(currentFreq);
       setState(() {
         utilisation = '${(currentFreq * 100 / max).truncate()}%';
-        currentOutOfMax = '$currentFreq mhz / $max mhz';
+        currentOutOfMax = '${currentFreq.truncate()} mhz / $max mhz';
       });
     });
   }
@@ -49,9 +49,17 @@ class _CpuChartState extends State<CpuChart> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [Text(utilisation), Text(currentOutOfMax)],
+        Wrap(
+          spacing: 14.0,
+          alignment: WrapAlignment.spaceBetween,
+          direction: Axis.horizontal,
+          children: [
+            Text(
+              utilisation,
+              style: TextStyle(color: Colors.blue),
+            ),
+            Text(currentOutOfMax)
+          ],
         ),
         SizedBox(
           height: 5,
