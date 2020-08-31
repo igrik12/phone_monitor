@@ -15,15 +15,22 @@ class CpuTab extends StatelessWidget {
         init: CpuController(),
         builder: (_) => Column(
               children: [
+                Card(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)),
+                  child: Container(
+                    width: Get.width * 0.98,
+                    height: 100,
+                    color: Colors.greenAccent,
+                  ),
+                ),
                 Expanded(
-                    flex: 1,
-                    child: SizedBox(
-                      height: 10,
-                    )),
-                Expanded(
-                  flex: 2,
+                  flex: 1,
                   child: Card(
-                    elevation: 5,
+                    elevation: 2,
+                    shadowColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(15)),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
@@ -32,7 +39,7 @@ class CpuTab extends StatelessWidget {
                           child: Text(
                             'Cpu Frequency Charts',
                             style: TextStyle(
-                                fontSize: 18,
+                                fontSize: 16,
                                 color: Colors.lightBlue,
                                 fontWeight: FontWeight.w500),
                           ),
@@ -43,7 +50,7 @@ class CpuTab extends StatelessWidget {
                             crossAxisCount: 2,
                             mainAxisSpacing: 20,
                             crossAxisSpacing: 20,
-                            padding: const EdgeInsets.all(8.0),
+                            padding: const EdgeInsets.all(12.0),
                             childAspectRatio: 1.5,
                             children: new List<Widget>.generate(
                                 _.cpuInfo?.numberOfCores ?? 0,
@@ -57,6 +64,15 @@ class CpuTab extends StatelessWidget {
                     ),
                   ),
                 ),
+                Card(
+                  elevation: 2,
+                  shadowColor: Colors.white,
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(15)),
+                  child: SizedBox(
+                    height: 120,
+                  ),
+                )
               ],
             ));
   }

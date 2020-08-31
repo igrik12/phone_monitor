@@ -13,10 +13,13 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        scaffoldBackgroundColor: Colors.white,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
+          scaffoldBackgroundColor: Colors.white,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+          textTheme: TextTheme(
+              bodyText2: TextStyle(fontWeight: FontWeight.w500, fontSize: 12))),
+      home: Scaffold(
+        body: Home(),
       ),
-      home: Scaffold(body: Home()),
     );
   }
 }

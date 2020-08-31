@@ -9,15 +9,17 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
-  TabController controller;
+  TabController tabController;
+  ScrollController scrollController;
 
   @override
   void initState() {
     super.initState();
-    controller = TabController(
+    tabController = TabController(
       length: 3,
       vsync: this,
     );
+    scrollController = ScrollController();
   }
 
   @override
@@ -25,37 +27,49 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     return GetBuilder<HomeController>(
         init: HomeController(),
         builder: (homecontroller) {
-          return CustomScrollView(
-            slivers: [
-              SliverAppBar(
-                shape: ContinuousRectangleBorder(
-                    borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(40),
-                        bottomRight: Radius.circular(40))),
-                elevation: 5,
-                title: Text('Phone Monitor'),
-                bottom: TabBar(
-                  controller: controller,
-                  indicatorSize: TabBarIndicatorSize.label,
-                  tabs: [
-                    Tab(icon: Icon(Icons.memory)),
-                    Tab(icon: Icon(Icons.directions_transit)),
-                    Tab(icon: Icon(Icons.directions_bike)),
-                  ],
+          return NestedScrollView(
+            controller: scrollController,
+            headerSliverBuilder:
+                (BuildContext context, bool innerBoxIsScrolled) {
+              return [
+                SliverAppBar(
+                  shape: ContinuousRectangleBorder(
+                      borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(40),
+                          bottomRight: Radius.circular(40))),
+                  title: Text('Phone Monitor'),
+                  pinned: true,
+                  floating: true,
+                  forceElevated: innerBoxIsScrolled,
+                  bottom: TabBar(
+                    controller: tabController,
+                    indicatorSize: TabBarIndicatorSize.label,
+                    tabs: [
+                      Tab(
+                        icon: Icon(Icons.shutter_speed),
+                        text: 'CPU',
+                      ),
+                      Tab(
+                        icon: Icon(Icons.memory),
+                        text: 'Memory',
+                      ),
+                      Tab(icon: Icon(Icons.info), text: 'Info'),
+                    ],
+                  ),
+                )
+              ];
+            },
+            body: TabBarView(
+              controller: tabController,
+              children: <Widget>[
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: CpuTab(),
                 ),
-              ),
-              SliverFillRemaining(
-                hasScrollBody: true,
-                child: TabBarView(
-                  controller: controller,
-                  children: <Widget>[
-                    CpuTab(),
-                    Text("Tab two"),
-                    Text("Tab three"),
-                  ],
-                ),
-              ),
-            ],
+                Text("Tab two"),
+                Text("Tab three"),
+              ],
+            ),
           );
         });
   }
