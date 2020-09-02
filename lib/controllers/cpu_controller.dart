@@ -9,14 +9,14 @@ class CpuController extends GetxController {
   CpuInfo cpuInfo;
   AndroidDeviceInfo deviceInfo;
   int overallUsage = 0;
-  Stream<Map<int, int>> stream = CpuReader.cpuStream(500).asBroadcastStream();
+  Stream<CpuInfo> stream = CpuReader.cpuStream(500).asBroadcastStream();
 
   @override
   onInit() async {
     cpuInfo = await CpuReader.cpuInfo;
     deviceInfo = await deviceInfoPlugin.androidInfo;
-    stream.listen((currentFreq) {
-      overallUsage = _calculateOverallUsage(currentFreq);
+    stream.listen((cpuInfo) {
+      overallUsage = _calculateOverallUsage(cpuInfo.currentFrequencies);
       update();
     });
     update();

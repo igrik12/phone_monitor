@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:phone_monitor/controllers/cpu_controller.dart';
-import 'package:phone_monitor/widgets/chart.dart';
+import 'package:phone_monitor/widgets/cpuChart.dart';
+import 'package:phone_monitor/widgets/tempChart.dart';
 
 class CpuTab extends StatelessWidget {
   CpuTab({Key key}) : super(key: key);
@@ -63,7 +64,7 @@ class CpuTab extends StatelessWidget {
                           ),
                           RichText(
                               text: TextSpan(
-                                  text: '35 C',
+                                  text: '35 °C',
                                   style: TextStyle(
                                       fontSize: 26,
                                       color: Colors.blue,
@@ -137,6 +138,15 @@ class CpuTab extends StatelessWidget {
               childCount: cpuController.cpuInfo?.numberOfCores ?? 0,
             ),
           ),
+          SliverToBoxAdapter(
+              child: SizedBox(
+            height: 25,
+          )),
+          SliverToBoxAdapter(
+            child: TemperatureChart(
+              stream: cpuController.stream,
+            ),
+          )
         ],
       ),
     );

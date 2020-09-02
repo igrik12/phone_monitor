@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:cpu_reader/cpuinfo.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mp_chart/mp/chart/line_chart.dart';
@@ -8,7 +9,7 @@ import 'package:phone_monitor/widgets/chartController.dart';
 
 class CpuChart extends StatefulWidget {
   final int index;
-  final Stream<Map<int, int>> stream;
+  final Stream<CpuInfo> stream;
 
   CpuChart({@required this.index, @required this.stream});
 
@@ -28,7 +29,7 @@ class _CpuChartState extends State<CpuChart> {
     final cpuController = Get.find<CpuController>();
     chartController = ChartController();
     _streamSubscription = widget.stream.listen((cpuData) {
-      var currentFreq = cpuData[widget.index].toDouble();
+      var currentFreq = cpuData.currentFrequencies[widget.index].toDouble();
       var max = cpuController.cpuInfo.minMaxFrequencies[widget.index].max;
       chartController.addEntry(currentFreq);
       setState(() {
@@ -49,17 +50,19 @@ class _CpuChartState extends State<CpuChart> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Wrap(
-          spacing: 14.0,
-          alignment: WrapAlignment.spaceBetween,
-          direction: Axis.horizontal,
-          children: [
-            Text(
-              utilisation,
-              style: TextStyle(color: Colors.blue),
-            ),
-            Text(currentOutOfMax)
-          ],
+        Container(
+          width: double.infinity,
+          child: Wrap(
+            alignment: WrapAlignment.spaceBetween,
+            direction: Axis.horizontal,
+            children: [
+              Text(
+                utilisation,
+                style: TextStyle(color: Colors.blue),
+              ),
+              Text(currentOutOfMax)
+            ],
+          ),
         ),
         SizedBox(
           height: 5,
