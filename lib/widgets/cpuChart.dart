@@ -27,7 +27,9 @@ class _CpuChartState extends State<CpuChart> {
   void initState() {
     super.initState();
     final cpuController = Get.find<CpuController>();
-    chartController = ChartController();
+    chartController = ChartController(
+        configuration: ChartControllerConfiguration(
+            backgroundColor: Color.fromRGBO(242, 246, 247, 1)));
     _streamSubscription = widget.stream.listen((cpuData) {
       var currentFreq = cpuData.currentFrequencies[widget.index].toDouble();
       var max = cpuController.cpuInfo.minMaxFrequencies[widget.index].max;
@@ -69,7 +71,7 @@ class _CpuChartState extends State<CpuChart> {
         ),
         Expanded(
             child: ClipRRect(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(5),
                 child: LineChart(chartController.controller)))
       ],
     );

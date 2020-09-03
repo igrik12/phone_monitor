@@ -6,10 +6,11 @@ import 'package:get/get.dart';
 DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
 
 class CpuController extends GetxController {
-  CpuInfo cpuInfo;
+  CpuInfo cpuInfo = CpuInfo()..numberOfCores = 0;
   AndroidDeviceInfo deviceInfo;
   int overallUsage = 0;
-  Stream<CpuInfo> stream = CpuReader.cpuStream(500).asBroadcastStream();
+  double cpuTemperature = 0.0;
+  Stream<CpuInfo> stream = CpuReader.cpuStream(1500).asBroadcastStream();
 
   @override
   onInit() async {
@@ -17,6 +18,7 @@ class CpuController extends GetxController {
     deviceInfo = await deviceInfoPlugin.androidInfo;
     stream.listen((cpuInfo) {
       overallUsage = _calculateOverallUsage(cpuInfo.currentFrequencies);
+      cpuTemperature = cpuInfo.cpuTemperature;
       update();
     });
     update();

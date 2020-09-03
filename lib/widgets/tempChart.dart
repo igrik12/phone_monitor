@@ -2,13 +2,13 @@ import 'dart:async';
 
 import 'package:cpu_reader/cpuinfo.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:mp_chart/mp/chart/line_chart.dart';
 
 import 'chartController.dart';
 
 class TemperatureChart extends StatefulWidget {
   final Stream<CpuInfo> stream;
+
   TemperatureChart({Key key, this.stream}) : super(key: key);
 
   @override
@@ -23,7 +23,9 @@ class _TemperatureChartState extends State<TemperatureChart> {
   @override
   void initState() {
     super.initState();
-    chartController = ChartController();
+    chartController = ChartController(
+        configuration: ChartControllerConfiguration(
+            backgroundColor: Colors.white, minY: 10, maxY: 75));
     _streamSubscription = widget.stream.listen((cpuData) {
       var currentTemperature = cpuData.cpuTemperature;
       chartController.addEntry(currentTemperature);
@@ -42,34 +44,42 @@ class _TemperatureChartState extends State<TemperatureChart> {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Container(
-          width: double.infinity,
-          child: Wrap(
-            alignment: WrapAlignment.spaceBetween,
-            direction: Axis.horizontal,
-            children: [
-              Text(
-                "Cpu Temparature",
-                style: TextStyle(color: Colors.blue, fontSize: 18),
+    return Card(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      child: Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: Column(
+          children: [
+            Container(
+              width: double.infinity,
+              child: Wrap(
+                alignment: WrapAlignment.spaceBetween,
+                direction: Axis.horizontal,
+                children: [
+                  Text(
+                    "Cpu Temparature",
+                    style: TextStyle(color: Colors.blue, fontSize: 18),
+                  ),
+                  Text(
+                    '$temperature °C',
+                    style: TextStyle(color: Colors.blue, fontSize: 20),
+                  ),
+                ],
               ),
-              Text(
-                '$temperature °C',
-                style: TextStyle(color: Colors.blue, fontSize: 20),
-              ),
-            ],
-          ),
+            ),
+            SizedBox(
+              height: 5,
+            ),
+            Container(
+                height: 150,
+                child: ClipRRect(
+                    borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(10),
+                        bottomRight: Radius.circular(10)),
+                    child: LineChart(chartController.controller)))
+          ],
         ),
-        SizedBox(
-          height: 5,
-        ),
-        Container(
-            height: 150,
-            child: ClipRRect(
-                borderRadius: BorderRadius.circular(10),
-                child: LineChart(chartController.controller)))
-      ],
+      ),
     );
   }
 }

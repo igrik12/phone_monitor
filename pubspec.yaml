@@ -24,6 +24,7 @@ dependencies:
   flutter:
     sdk: flutter
   get:
+  get_storage:
   device_info: ^0.4.2+7
   cpu_reader: ^1.0.2
   mp_chart:

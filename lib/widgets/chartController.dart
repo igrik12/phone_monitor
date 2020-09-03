@@ -14,12 +14,30 @@ import 'package:mp_chart/mp/core/fill_formatter/i_fill_formatter.dart';
 import 'package:mp_chart/mp/core/highlight/highlight.dart';
 import 'package:mp_chart/mp/core/utils/color_utils.dart';
 
+class ChartControllerConfiguration {
+  final double initialValue;
+  final double maxY;
+  final double minY;
+  final Color backgroundColor;
+  final double unitVisibleCount;
+
+  ChartControllerConfiguration(
+      {this.unitVisibleCount = 50,
+      this.initialValue = 0,
+      this.minY,
+      this.maxY,
+      this.backgroundColor});
+}
+
 class ChartController implements OnChartValueSelectedListener {
-  static const int VISIBLE_COUNT = 60;
-  LineChartController controller;
   int _removalCounter = 0;
 
-  ChartController() {
+  LineChartController controller;
+  final ChartControllerConfiguration configuration;
+
+  ChartController({
+    this.configuration,
+  }) {
     initController();
   }
 
@@ -34,7 +52,7 @@ class ChartController implements OnChartValueSelectedListener {
     if (data != null) {
       ILineDataSet set0 = data.getDataSetByIndex(0);
       _addWithRemove(set0, data, y0);
-      controller.setVisibleXRangeMaximum(VISIBLE_COUNT.toDouble());
+      controller.setVisibleXRangeMaximum(configuration.unitVisibleCount);
       controller.moveViewToX(data.getEntryCount().toDouble());
       controller.state?.setStateIfNotDispose();
     }
@@ -49,7 +67,7 @@ class ChartController implements OnChartValueSelectedListener {
         ),
         0);
     //remove entry which is out of visible range
-    if (set0.getEntryCount() > VISIBLE_COUNT) {
+    if (set0.getEntryCount() > configuration.unitVisibleCount) {
       data.removeEntry2(_removalCounter.toDouble(), 0);
       _removalCounter++;
     }
@@ -81,21 +99,28 @@ class ChartController implements OnChartValueSelectedListener {
           axisLeft
             ..setLabelCount2(2, false)
             ..textColor = Colors.transparent
-            ..position = (YAxisLabelPosition.INSIDE_CHART)
-            ..drawGridLines = (false)
-            ..axisLineColor = (ColorUtils.WHITE);
+            ..position = YAxisLabelPosition.INSIDE_CHART
+            ..drawGridLines = false
+            ..axisLineColor = configuration.backgroundColor;
+
+          if (configuration.minY != null) {
+            axisLeft.setAxisMinValue(configuration.minY);
+          }
+          if (configuration.maxY != null) {
+            axisLeft.setAxisMaxValue(configuration.maxY);
+          }
         },
         axisRightSettingFunction: (axisRight, controller) {
           axisRight.enabled = (false);
         },
-        drawGridBackground: true,
-        dragXEnabled: true,
-        dragYEnabled: true,
-        scaleXEnabled: true,
-        scaleYEnabled: true,
+        drawGridBackground: false,
+        dragXEnabled: false,
+        dragYEnabled: false,
+        scaleXEnabled: false,
+        scaleYEnabled: false,
         pinchZoomEnabled: false,
-        gridBackColor: Color.fromARGB(255, 104, 241, 175),
-        backgroundColor: Color.fromARGB(255, 104, 241, 175),
+        gridBackColor: configuration.backgroundColor,
+        backgroundColor: configuration.backgroundColor,
         description: desc);
 
     LineData data = controller?.data;
@@ -108,8 +133,8 @@ class ChartController implements OnChartValueSelectedListener {
         if (set0 == null) {
           set0 = _createSet(0);
           data.addDataSet(set0);
-          for (var nn = 0; nn < VISIBLE_COUNT; nn++) {
-            _addWithRemove(set0, data, 50);
+          for (var nn = 0; nn < configuration.unitVisibleCount; nn++) {
+            _addWithRemove(set0, data, configuration.initialValue);
             //controller.moveViewToX(data.getEntryCount().toDouble());
           }
         }
@@ -125,10 +150,10 @@ class ChartController implements OnChartValueSelectedListener {
     set.setDrawFilled(true);
     set.setDrawCircles(false);
     set.setDrawValues(false);
-    set.setLineWidth(1.8);
-    set.setHighLightColor(Color.fromARGB(255, 244, 117, 117));
-    set.setColor1(ColorUtils.WHITE);
-    set.setFillColor(ColorUtils.WHITE);
+    set.setLineWidth(1.6);
+    set.setHighLightColor(Colors.blue);
+    set.setColor1(Colors.blue);
+    set.setFillColor(Colors.blue);
     set.setFillAlpha(100);
     set.setDrawHorizontalHighlightIndicator(false);
     set.setFillFormatter(A());
