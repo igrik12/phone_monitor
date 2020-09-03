@@ -1,15 +1,13 @@
 import 'dart:async';
 
-import 'package:cpu_reader/cpuinfo.dart';
 import 'package:flutter/material.dart';
 import 'package:mp_chart/mp/chart/line_chart.dart';
+import 'package:phone_monitor/controllers/cpu_controller.dart';
 
 import 'chartController.dart';
 
 class TemperatureChart extends StatefulWidget {
-  final Stream<CpuInfo> stream;
-
-  TemperatureChart({Key key, this.stream}) : super(key: key);
+  TemperatureChart({Key key}) : super(key: key);
 
   @override
   _TemperatureChartState createState() => _TemperatureChartState();
@@ -26,7 +24,7 @@ class _TemperatureChartState extends State<TemperatureChart> {
     chartController = ChartController(
         configuration: ChartControllerConfiguration(
             backgroundColor: Colors.white, minY: 10, maxY: 75));
-    _streamSubscription = widget.stream.listen((cpuData) {
+    _streamSubscription = CpuController.to.stream.listen((cpuData) {
       var currentTemperature = cpuData.cpuTemperature;
       chartController.addEntry(currentTemperature);
       setState(() {

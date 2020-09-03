@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:phone_monitor/controllers/cpu_controller.dart';
 import 'package:phone_monitor/controllers/themeController.dart';
-import 'package:phone_monitor/tabs/cpu.dart';
+import 'package:phone_monitor/tabs/cpu/cpu.dart';
 import 'package:phone_monitor/widgets/progressBar.dart';
 
 class Home extends StatefulWidget {
@@ -49,40 +49,47 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 controller: tabController,
                 indicatorColor: Colors.white,
                 indicatorSize: TabBarIndicatorSize.label,
-                tabs: [
-                  Tab(
-                    icon: Icon(Icons.shutter_speed),
-                    text: 'CPU',
-                  ),
-                  Tab(
-                    icon: Icon(Icons.memory),
-                    text: 'Memory',
-                  ),
-                  Tab(icon: Icon(Icons.info), text: 'Info'),
-                ],
+                tabs: _getTabs(),
               )),
           body: TabBarView(
             controller: tabController,
-            children: <Widget>[
-              Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: CpuTab(),
-              ),
-              ListView.builder(
-                itemBuilder: (context, _) => ListTile(
-                  leading: Text('Hello'),
-                ),
-                itemCount: 30,
-              ),
-              GetBuilder<CpuController>(
-                builder: (_) => CustomProgressIndicator(
-                  title: 'Testing',
-                  type: ProgressIndicatorType.linear,
-                  value: _.overallUsage.toDouble() / 100,
-                ),
-              ),
-            ],
+            children: getTabViewTabs(),
           ),
         ));
+  }
+
+  List<Widget> getTabViewTabs() {
+    return <Widget>[
+      Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: CpuTab(),
+      ),
+      ListView.builder(
+        itemBuilder: (context, _) => ListTile(
+          leading: Text('Hello'),
+        ),
+        itemCount: 30,
+      ),
+      GetBuilder<CpuController>(
+        builder: (_) => CustomProgressIndicator(
+          type: ProgressIndicatorType.linear,
+          value: _.overallUsage.toDouble() / 100,
+        ),
+      ),
+    ];
+  }
+
+  List<Widget> _getTabs() {
+    return [
+      Tab(
+        icon: Icon(Icons.shutter_speed),
+        text: 'CPU',
+      ),
+      Tab(
+        icon: Icon(Icons.memory),
+        text: 'Memory',
+      ),
+      Tab(icon: Icon(Icons.info), text: 'Info'),
+    ];
   }
 }

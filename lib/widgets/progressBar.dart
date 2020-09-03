@@ -6,11 +6,10 @@ enum ProgressIndicatorType {
 }
 
 class CustomProgressIndicator extends StatefulWidget {
-  const CustomProgressIndicator({Key key, this.type, this.title, this.value})
+  const CustomProgressIndicator({Key key, this.type, this.value})
       : super(key: key);
 
   final ProgressIndicatorType type;
-  final String title;
   final double value;
 
   @override

@@ -6,6 +6,8 @@ import 'package:get/get.dart';
 DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
 
 class CpuController extends GetxController {
+  static CpuController get to => Get.find();
+
   CpuInfo cpuInfo = CpuInfo()..numberOfCores = 0;
   AndroidDeviceInfo deviceInfo;
   int overallUsage = 0;
