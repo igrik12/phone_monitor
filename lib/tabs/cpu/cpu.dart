@@ -24,27 +24,19 @@ class _CpuTabState extends State<CpuTab> {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      controller: _mainScrollController,
-      slivers: [
-        SliverToBoxAdapter(child: CpuOverview()),
-        SliverToBoxAdapter(
-            child: SizedBox(
-          height: 25,
-        )),
-        SliverToBoxAdapter(
-          child: Charts(
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          CpuOverview(),
+          SizedBox(
+            height: 25,
+          ),
+          Charts(
             chartsScrollController: _chartsScrollController,
           ),
-        ),
-        SliverToBoxAdapter(
-            child: SizedBox(
-          height: 25,
-        )),
-        SliverToBoxAdapter(
-          child: TemperatureChart(),
-        )
-      ],
+          TemperatureChart()
+        ],
+      ),
     );
   }
 
