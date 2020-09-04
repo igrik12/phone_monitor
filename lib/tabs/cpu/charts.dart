@@ -12,53 +12,42 @@ class Charts extends GetView<CpuController> {
   @override
   Widget build(BuildContext context) {
     return GetX<CpuController>(builder: (cpuController) {
-      var boxConstraints = BoxConstraints(
-          maxHeight: calcMaxHeight(cpuController.cpuInfo.numberOfCores) + 40);
-      return ConstrainedBox(
-        constraints: boxConstraints,
-        child: Card(
-          shape:
-              RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
-          child: Padding(
-            padding:
-                const EdgeInsets.symmetric(vertical: 12.0, horizontal: 12.0),
-            child: CustomScrollView(
-              controller: chartsScrollController,
-              physics: ScrollPhysics(),
-              slivers: [
-                SliverPadding(
-                  sliver: SliverToBoxAdapter(
-                      child: Text('Cpu Frequency Charts',
-                          style: TextStyle(fontSize: 16))),
-                  padding: EdgeInsets.only(bottom: 20),
+      return Card(
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 12.0),
+          child: CustomScrollView(
+            shrinkWrap: true,
+            controller: chartsScrollController,
+            slivers: [
+              SliverPadding(
+                sliver: SliverToBoxAdapter(
+                    child: Text('Cpu Frequency Charts',
+                        style: TextStyle(fontSize: 16))),
+                padding: EdgeInsets.only(bottom: 20),
+              ),
+              SliverGrid(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: Get.context.isLandscape ? 4 : 2,
+                  mainAxisSpacing: 12.0,
+                  crossAxisSpacing: 12.0,
+                  childAspectRatio: 1.8,
                 ),
-                SliverGrid(
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: Get.context.isLandscape ? 4 : 2,
-                    mainAxisSpacing: 12.0,
-                    crossAxisSpacing: 12.0,
-                    childAspectRatio: 1.8,
-                  ),
-                  delegate: SliverChildBuilderDelegate(
-                    (BuildContext context, int index) {
-                      return CpuChart(
-                        minMax: cpuController.cpuInfo.minMaxFrequencies[index],
-                        index: index,
-                        stream: cpuController.stream,
-                      );
-                    },
-                    childCount: cpuController.cpuInfo?.numberOfCores ?? 0,
-                  ),
-                )
-              ],
-            ),
+                delegate: SliverChildBuilderDelegate(
+                  (BuildContext context, int index) {
+                    return CpuChart(
+                      minMax: cpuController.cpuInfo.minMaxFrequencies[index],
+                      index: index,
+                      stream: cpuController.stream,
+                    );
+                  },
+                  childCount: cpuController.cpuInfo?.numberOfCores ?? 0,
+                ),
+              )
+            ],
           ),
         ),
       );
     });
   }
-}
-
-double calcMaxHeight(int numberOfCores) {
-  return (numberOfCores / 2) * Get.height * 0.13;
 }
