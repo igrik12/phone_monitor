@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:phone_monitor/controllers/cpu_controller.dart';
 import 'package:phone_monitor/tabs/cpu/charts.dart';
 import 'package:phone_monitor/tabs/cpu/cpu_overview.dart';
 import 'package:phone_monitor/widgets/tempChart.dart';

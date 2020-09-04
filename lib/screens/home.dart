@@ -70,10 +70,15 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         ),
         itemCount: 30,
       ),
-      GetBuilder<CpuController>(
-        builder: (_) => CustomProgressIndicator(
-          type: ProgressIndicatorType.linear,
-          value: _.overallUsage.toDouble() / 100,
+      GetX<CpuController>(
+        builder: (_) => Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Center(
+            child: CustomProgressIndicator(
+              type: ProgressIndicatorType.linear,
+              value: _.overallUsage.toDouble() / 100,
+            ),
+          ),
         ),
       ),
     ];

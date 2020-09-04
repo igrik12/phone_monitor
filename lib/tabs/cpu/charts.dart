@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:phone_monitor/controllers/cpu_controller.dart';
 import 'package:phone_monitor/widgets/cpuChart.dart';
 
-class Charts extends StatelessWidget {
+class Charts extends GetView<CpuController> {
   final chartsScrollController;
 
   const Charts({Key key, @required this.chartsScrollController})
@@ -11,7 +11,7 @@ class Charts extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetBuilder<CpuController>(builder: (cpuController) {
+    return GetX<CpuController>(builder: (cpuController) {
       var boxConstraints = BoxConstraints(
           maxHeight: calcMaxHeight(cpuController.cpuInfo.numberOfCores) + 40);
       return ConstrainedBox(
@@ -24,6 +24,7 @@ class Charts extends StatelessWidget {
                 const EdgeInsets.symmetric(vertical: 12.0, horizontal: 12.0),
             child: CustomScrollView(
               controller: chartsScrollController,
+              physics: ScrollPhysics(),
               slivers: [
                 SliverPadding(
                   sliver: SliverToBoxAdapter(
@@ -34,13 +35,14 @@ class Charts extends StatelessWidget {
                 SliverGrid(
                   gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: Get.context.isLandscape ? 4 : 2,
-                    mainAxisSpacing: 15.0,
-                    crossAxisSpacing: 15.0,
+                    mainAxisSpacing: 12.0,
+                    crossAxisSpacing: 12.0,
                     childAspectRatio: 1.8,
                   ),
                   delegate: SliverChildBuilderDelegate(
                     (BuildContext context, int index) {
                       return CpuChart(
+                        minMax: cpuController.cpuInfo.minMaxFrequencies[index],
                         index: index,
                         stream: cpuController.stream,
                       );

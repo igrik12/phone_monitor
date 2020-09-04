@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       initialBinding: InitialBinding(),
       debugShowCheckedModeBanner: false,
+      themeMode: ThemeMode.light,
       darkTheme: ThemeData.dark().copyWith(
           appBarTheme: AppBarTheme(color: Colors.orange),
           primaryColor: Colors.green,

@@ -8,15 +8,35 @@ DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
 class CpuController extends GetxController {
   static CpuController get to => Get.find();
 
-  CpuInfo cpuInfo = CpuInfo()..numberOfCores = 0;
-  AndroidDeviceInfo deviceInfo;
-  int overallUsage = 0;
-  double cpuTemperature = 0.0;
+  // CPU information object
+  Rx<CpuInfo> _cpuInfo = CpuInfo().obs..value.numberOfCores = 0;
+  CpuInfo get cpuInfo => _cpuInfo.value;
+
+  // Overall CPU usage in percentage
+  var _overallUsage = 0.obs;
+  int get overallUsage => _overallUsage.value;
+  set overallUsage(int value) {
+    _overallUsage.value = value;
+  }
+
+  // Overall CPU temperature
+  var _cpuTemperature = 0.0.obs;
+  double get cpuTemperature => _cpuTemperature.value;
+  set cpuTemperature(double value) {
+    _cpuTemperature.value = value;
+  }
+
+  Rx<AndroidDeviceInfo> _deviceInfo = Rx<AndroidDeviceInfo>();
+  AndroidDeviceInfo get deviceInfo => _deviceInfo.value;
+  set deviceInfo(AndroidDeviceInfo value) {
+    _deviceInfo.value = value;
+  }
+
   Stream<CpuInfo> stream = CpuReader.cpuStream(1500).asBroadcastStream();
 
   @override
   onInit() async {
-    cpuInfo = await CpuReader.cpuInfo;
+    _cpuInfo.value = await CpuReader.cpuInfo;
     deviceInfo = await deviceInfoPlugin.androidInfo;
     stream.listen((cpuInfo) {
       overallUsage = _calculateOverallUsage(cpuInfo.currentFrequencies);
@@ -27,7 +47,7 @@ class CpuController extends GetxController {
   }
 
   @override
-  void onClose() {
+  Future<void> onClose() async {
     super.onClose();
   }
 
