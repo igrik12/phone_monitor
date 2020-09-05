@@ -60,15 +60,15 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
   List<Widget> getTabViewTabs() {
     return <Widget>[
-      Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: CpuTab(),
-      ),
       ListView.builder(
         itemBuilder: (context, _) => ListTile(
           leading: Text('Hello'),
         ),
         itemCount: 30,
+      ),
+      Padding(
+        padding: const EdgeInsets.all(12.0),
+        child: CpuTab(),
       ),
       GetX<CpuController>(
         builder: (_) => Padding(
@@ -86,6 +86,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
   List<Widget> _getTabs() {
     return [
+      Tab(icon: Icon(Icons.dashboard), text: 'Dashboard'),
       Tab(
         icon: Icon(Icons.shutter_speed),
         text: 'CPU',
@@ -94,7 +95,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         icon: Icon(Icons.memory),
         text: 'Memory',
       ),
-      Tab(icon: Icon(Icons.info), text: 'Info'),
     ];
   }
 }

@@ -95,8 +95,6 @@ class CpuOverview extends GetView<CpuController> {
                                 'N/A',
                           ))
                     ]),
-                Row(),
-                Row()
               ],
             )));
   }

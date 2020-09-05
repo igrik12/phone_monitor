@@ -32,7 +32,7 @@ class CpuController extends GetxController {
     _deviceInfo.value = value;
   }
 
-  Stream<CpuInfo> stream = CpuReader.cpuStream(1500).asBroadcastStream();
+  Stream<CpuInfo> stream = CpuReader.cpuStream(2000).asBroadcastStream();
 
   @override
   onInit() async {
@@ -51,12 +51,11 @@ class CpuController extends GetxController {
     super.onClose();
   }
 
-  int _calculateOverallUsage(Map<int, int> currentFreq) {
-    var totalCurrentUsageInMhz =
-        currentFreq.values.reduce((value, element) => value + element);
-    var totalMax = cpuInfo.minMaxFrequencies.values
-        .map((e) => e.max)
-        .reduce((value, element) => value + element);
-    return totalCurrentUsageInMhz * 100 ~/ totalMax;
-  }
+int _calculateOverallUsage(CpuInfo info) {
+  var totalCurrentUsageInMhz = info.currentFrequencies.values
+      .reduce((value, element) => value + element);
+  var totalMax = info.minMaxFrequencies.values
+      .map((e) => e.max)
+      .reduce((value, element) => value + element);
+  return totalCurrentUsageInMhz * 100 ~/ totalMax;
 }
