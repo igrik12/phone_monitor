@@ -2,9 +2,7 @@ import 'dart:developer';
 
 import 'package:cpu_reader/cpu_reader.dart';
 import 'package:cpu_reader/cpuinfo.dart';
-import 'package:cpu_reader/minMaxFreq.dart';
 import 'package:device_info/device_info.dart';
-import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
 DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
@@ -36,7 +34,7 @@ class CpuController extends GetxController {
     _deviceInfo.value = value;
   }
 
-  Stream<CpuInfo> stream = CpuReader.cpuStream(1500).asBroadcastStream();
+  Stream<CpuInfo> stream = CpuReader.cpuStream(500).asBroadcastStream();
 
   @override
   onInit() async {
