@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:phone_monitor/controllers/cpu_controller.dart';
-import 'package:phone_monitor/widgets/progressBar.dart';
+import 'package:phone_monitor/widgets/customProgressIndicator.dart';
+import 'package:system_info/system_info.dart';
 
 class CpuOverview extends GetView<CpuController> {
   const CpuOverview({Key key}) : super(key: key);
@@ -70,10 +71,9 @@ class CpuOverview extends GetView<CpuController> {
                         Text('Cpu Hardware'),
                       ],
                     ),
-                    Obx(() => Text(
-                          controller.deviceInfo?.hardware?.toUpperCase() ??
-                              'N/A',
-                        ))
+                    Text(
+                      SysInfo.processors.first.vendor ?? 'N/A',
+                    )
                   ],
                 ),
                 SizedBox(height: 10),
@@ -95,8 +95,6 @@ class CpuOverview extends GetView<CpuController> {
                                 'N/A',
                           ))
                     ]),
-                Row(),
-                Row()
               ],
             )));
   }

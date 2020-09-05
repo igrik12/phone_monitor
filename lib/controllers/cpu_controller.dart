@@ -1,9 +1,8 @@
-import 'dart:developer';
-
 import 'package:cpu_reader/cpu_reader.dart';
 import 'package:cpu_reader/cpuinfo.dart';
 import 'package:device_info/device_info.dart';
 import 'package:get/get.dart';
+import 'package:system_info/system_info.dart';
 
 DeviceInfoPlugin deviceInfoPlugin = DeviceInfoPlugin();
 
@@ -28,18 +27,11 @@ class CpuController extends GetxController {
     _cpuTemperature.value = value;
   }
 
-  Rx<AndroidDeviceInfo> _deviceInfo = Rx<AndroidDeviceInfo>();
-  AndroidDeviceInfo get deviceInfo => _deviceInfo.value;
-  set deviceInfo(AndroidDeviceInfo value) {
-    _deviceInfo.value = value;
-  }
-
-  Stream<CpuInfo> stream = CpuReader.cpuStream(500).asBroadcastStream();
+  Stream<CpuInfo> stream = CpuReader.cpuStream(2000).asBroadcastStream();
 
   @override
   onInit() async {
     _cpuInfo.value = await CpuReader.cpuInfo;
-    deviceInfo = await deviceInfoPlugin.androidInfo;
     stream.listen((cpuInfo) async {
       overallUsage = _calculateOverallUsage(cpuInfo);
       cpuTemperature = cpuInfo.cpuTemperature;
@@ -55,12 +47,10 @@ class CpuController extends GetxController {
 }
 
 int _calculateOverallUsage(CpuInfo info) {
-  Timeline.startSync("Started computation");
   var totalCurrentUsageInMhz = info.currentFrequencies.values
       .reduce((value, element) => value + element);
   var totalMax = info.minMaxFrequencies.values
       .map((e) => e.max)
       .reduce((value, element) => value + element);
-  Timeline.finishSync();
   return totalCurrentUsageInMhz * 100 ~/ totalMax;
 }

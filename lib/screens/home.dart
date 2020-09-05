@@ -3,7 +3,8 @@ import 'package:get/get.dart';
 import 'package:phone_monitor/controllers/cpu_controller.dart';
 import 'package:phone_monitor/controllers/themeController.dart';
 import 'package:phone_monitor/tabs/cpu/cpu.dart';
-import 'package:phone_monitor/widgets/progressBar.dart';
+import 'package:phone_monitor/tabs/dashboard/dashboard.dart';
+import 'package:phone_monitor/widgets/customProgressIndicator.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -60,15 +61,10 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
   List<Widget> getTabViewTabs() {
     return <Widget>[
+      Dashboard(),
       Padding(
         padding: const EdgeInsets.all(12.0),
         child: CpuTab(),
-      ),
-      ListView.builder(
-        itemBuilder: (context, _) => ListTile(
-          leading: Text('Hello'),
-        ),
-        itemCount: 30,
       ),
       GetX<CpuController>(
         builder: (_) => Padding(
@@ -86,6 +82,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
   List<Widget> _getTabs() {
     return [
+      Tab(icon: Icon(Icons.dashboard), text: 'Dashboard'),
       Tab(
         icon: Icon(Icons.shutter_speed),
         text: 'CPU',
@@ -94,7 +91,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         icon: Icon(Icons.memory),
         text: 'Memory',
       ),
-      Tab(icon: Icon(Icons.info), text: 'Info'),
     ];
   }
 }
