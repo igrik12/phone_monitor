@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:phone_monitor/controllers/cpu_controller.dart';
 import 'package:system_info/system_info.dart';
+import "package:collection/collection.dart";
 
 class CpuOverview extends StatelessWidget {
   const CpuOverview({Key key}) : super(key: key);
@@ -17,13 +18,27 @@ class CpuOverview extends StatelessWidget {
             padding: EdgeInsets.all(15),
             child: Column(
               children: [
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    'CPU Overview',
-                    textScaleFactor: 1.3,
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'CPU Overview',
+                      textScaleFactor: 1.3,
+                    ),
+                    GetX<CpuController>(
+                        builder: (controller) => controller.cpuTemperature != -1
+                            ? Text(
+                                "${controller.cpuTemperature} °C",
+                                style: TextStyle(color: Colors.blue),
+                                textScaleFactor: 1.4,
+                              )
+                            : SizedBox())
+                  ],
                 ),
+                // Align(
+                //   alignment: Alignment.centerLeft,
+                //   child: ,
+                // ),
                 Divider(
                   height: 15,
                 ),
@@ -109,7 +124,44 @@ class CpuOverview extends StatelessWidget {
                         ),
                       )
                     ]),
+                SizedBox(height: 10),
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Icon(Icons.flash_on),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Text('Frequencies'),
+                        ],
+                      ),
+                      GetX<CpuController>(
+                        builder: (cpuController) => ConstrainedBox(
+                          constraints:
+                              BoxConstraints(maxWidth: Get.width * 0.4),
+                          child: Text(
+                            _getGroupedFreq(cpuController),
+                            textAlign: TextAlign.right,
+                          ),
+                        ),
+                      )
+                    ]),
               ],
             )));
+  }
+
+  String _getGroupedFreq(CpuController cpuController) {
+    if (cpuController.cpuInfo == null) return "";
+    var groupedByMax = groupBy(
+        cpuController.cpuInfo.minMaxFrequencies.values, (obj) => obj.max);
+
+    var joined = groupedByMax.entries
+        .map((entry) => "${entry.value.length} x ${entry.key} Mhz")
+        .join(', ');
+
+    return joined;
   }
 }

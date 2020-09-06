@@ -1,22 +1,46 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="4fc786a1-d1ec-4116-be9c-d2c2d3e427e5" name="Default Changelist" comment="" />
+    <list default="true" id="4fc786a1-d1ec-4116-be9c-d2c2d3e427e5" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/.project" beforeDir="false" afterPath="$PROJECT_DIR$/android/.project" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/app/src/main/kotlin/com/example/phone_monitor/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/kotlin/com/example/phone_monitor/MainActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/android/phone_monitor_android.iml" beforeDir="false" afterPath="$PROJECT_DIR$/android/phone_monitor_android.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/controllers/dashboard_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/controllers/dashboard_controller.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/tabs/cpu/cpu.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/tabs/cpu/cpu.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/tabs/cpu/cpuProgessGrid.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/tabs/cpu/cpuProgessGrid.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/tabs/cpu/cpu_overview.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/tabs/cpu/cpu_overview.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/tabs/dashboard/dashboard.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/tabs/dashboard/dashboard.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/widgets/tempChart.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/widgets/tempChart.dart" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_2_API_30" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1gpYHDu4dDjj4ar2uRYkX5UFreA" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
-    <option name="showExcludedFiles" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
     <property name="dart.analysis.tool.window.force.activate" value="false" />
+    <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../plugins/cpu_reader" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
   <component name="SvnConfiguration">
@@ -29,8 +53,13 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1598812910607</updated>
+      <workItem from="1599415834077" duration="4178000" />
+      <workItem from="1599420728886" duration="1641000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
   </component>
   <component name="WindowStateProjectService">
     <state x="1822" y="311" key="FileChooserDialogImpl" timestamp="1598817575661">
@@ -53,5 +82,9 @@
       <screen x="0" y="0" width="2752" height="1112" />
     </state>
     <state width="1362" height="329" key="GridCell.Tab.0.right/3440.205.1536.824/0.0.2752.1112@0.0.2752.1112" timestamp="1598817580850" />
+    <state x="885" y="201" key="SettingsEditor" timestamp="1599415902194">
+      <screen x="0" y="0" width="2752" height="1112" />
+    </state>
+    <state x="885" y="201" key="SettingsEditor/3440.205.1536.824/0.0.2752.1112@0.0.2752.1112" timestamp="1599415902194" />
   </component>
 </project>

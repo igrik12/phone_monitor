@@ -11,14 +11,36 @@ class CpuProgressGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetX<CpuController>(
-        builder: (controller) => Container(
-              child: GridView.count(
-                controller: chartsScrollController,
-                crossAxisSpacing: 10,
-                childAspectRatio: 3.5,
-                shrinkWrap: true,
-                crossAxisCount: 2,
-                children: _buildCpuGrid(controller),
+        builder: (controller) => Card(
+              elevation: 2,
+              shadowColor: Colors.white,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15)),
+              child: Padding(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  children: [
+                    Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text(
+                          "CPU Core Usage",
+                          textScaleFactor: 1.4,
+                        )),
+                    Divider(
+                      height: 15,
+                    ),
+                    Container(
+                      child: GridView.count(
+                        controller: chartsScrollController,
+                        crossAxisSpacing: 10,
+                        childAspectRatio: 3.5,
+                        shrinkWrap: true,
+                        crossAxisCount: 2,
+                        children: _buildCpuGrid(controller),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ));
   }

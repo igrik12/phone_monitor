@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:phone_monitor/controllers/cpu_controller.dart';
 import 'package:phone_monitor/tabs/cpu/charts.dart';
 import 'package:phone_monitor/tabs/cpu/cpuProgessGrid.dart';
 import 'package:phone_monitor/tabs/cpu/cpu_overview.dart';
@@ -29,21 +31,16 @@ class _CpuTabState extends State<CpuTab> {
       child: Column(
         children: [
           CpuOverview(),
-          Card(
-            elevation: 2,
-            shadowColor: Colors.white,
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
-            child: Padding(
-                padding: EdgeInsets.all(16),
-                child: CpuProgressGrid(
-                  chartsScrollController: _chartsScrollController,
-                )),
+          CpuProgressGrid(
+            chartsScrollController: _chartsScrollController,
           ),
           Charts(
             chartsScrollController: _chartsScrollController,
           ),
-          TemperatureChart()
+          GetX<CpuController>(
+            builder: (_) =>
+                _.cpuTemperature != -1 ? TemperatureChart() : SizedBox(),
+          )
         ],
       ),
     );

@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:mp_chart/mp/chart/line_chart.dart';
 import 'package:phone_monitor/controllers/cpu_controller.dart';
+import 'package:phone_monitor/utils/constants.dart';
 
 import 'chartController.dart';
 
@@ -56,12 +57,10 @@ class _TemperatureChartState extends State<TemperatureChart> {
                 children: [
                   Text(
                     "Cpu Temparature",
-                    style: TextStyle(color: Colors.blue),
                     textScaleFactor: 1.4,
                   ),
                   Text(
                     '$temperature °C',
-                    style: TextStyle(color: Colors.blue),
                     textScaleFactor: 1.4,
                   ),
                 ],

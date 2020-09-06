@@ -23,20 +23,25 @@ class Dashboard extends GetView<DashboardController> {
                     const EdgeInsets.symmetric(vertical: 26, horizontal: 10),
                 child: Column(
                   children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        UsageProgressDisplay(title: "RAM", value: 0.75),
-                        UsageProgressDisplay(
-                          title: "Memory",
-                          value: 0.65,
-                        ),
-                        UsageProgressDisplay(
-                          title: "Storage",
-                          value: 1,
-                        )
-                      ],
-                    ),
+                    Obx(() => Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            UsageProgressDisplay(
+                                title: "Memory",
+                                value: controller.wrapper.value.totalRamUsage
+                                        .toDouble() /
+                                    100),
+                            UsageProgressDisplay(
+                              title: "Battery",
+                              value: controller.wrapper.value.battery / 100,
+                            ),
+                            UsageProgressDisplay(
+                              title: "Storage",
+                              value:
+                                  controller.wrapper.value.diskSpaceUsed / 100,
+                            )
+                          ],
+                        )),
                     Divider(
                       height: 30,
                     ),
