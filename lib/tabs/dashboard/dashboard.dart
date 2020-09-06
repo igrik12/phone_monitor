@@ -2,8 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:phone_monitor/controllers/cpu_controller.dart';
 import 'package:phone_monitor/controllers/dashboard_controller.dart';
+import 'package:phone_monitor/widgets/customProgressIndicator.dart';
 import 'package:phone_monitor/widgets/progressWithPercentage.dart';
 import 'package:phone_monitor/widgets/usageProgressDisplay.dart';
+
+import 'storage_card.dart';
 
 class Dashboard extends GetView<DashboardController> {
   @override
@@ -37,8 +40,9 @@ class Dashboard extends GetView<DashboardController> {
                             ),
                             UsageProgressDisplay(
                               title: "Storage",
-                              value:
-                                  controller.wrapper.value.diskSpaceUsed / 100,
+                              value: controller
+                                      .wrapper.value.diskSpaceUsedInPersent /
+                                  100,
                             )
                           ],
                         )),
@@ -105,6 +109,7 @@ class Dashboard extends GetView<DashboardController> {
                 ),
               ),
             ),
+            StorageCard()
           ],
         ),
       ),

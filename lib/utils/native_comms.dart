@@ -2,13 +2,13 @@ import 'package:flutter/services.dart';
 
 class NativeComms {
   static const _channel = const MethodChannel('native_comms');
-  static int _totalPhysicalMemory;
+  static double _totalPhysicalMemory;
 
   /// Get total physical memory in MB
-  static Future<int> getTotalPhysicalMemory() async {
+  static Future<double> getTotalPhysicalMemory() async {
     try {
       return _totalPhysicalMemory ??=
-          await _channel.invokeMethod("getTotalPhysicalMemory") ~/ 1024;
+          await _channel.invokeMethod("getTotalPhysicalMemory") / 1024;
     } on PlatformException catch (e) {
       print("Failed to get total physical memory. ${e.message}");
       return -1;
@@ -16,10 +16,10 @@ class NativeComms {
   }
 
   /// Gets virtual memory size in MB
-  static Future<int> getVirtualMemorySize() async {
+  static Future<double> getVirtualMemorySize() async {
     try {
       int memoryInKb = await _channel.invokeMethod("getVirtualMemorySize");
-      return memoryInKb ~/ 1024;
+      return memoryInKb / 1024;
     } on PlatformException catch (e) {
       print("Failed to get total physical memory. ${e.message}");
       return -1;

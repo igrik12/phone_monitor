@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:device_info/device_info.dart';
 import 'package:disk_space/disk_space.dart';
 import 'package:get/get.dart';
+import 'package:phone_monitor/models/dashboard_wrapper.dart';
 import 'package:phone_monitor/utils/native_comms.dart';
 
 class DashboardController extends GetxController {
@@ -14,31 +15,50 @@ class DashboardController extends GetxController {
   }
 
   Timer _timer;
-  int totalPhysicalMemory;
+  double totalPhysicalMemory = 0;
+  double totalDiskSpace = 0;
+
   // Memory wrapper observable
   final wrapper = DashboardInfoWrapper().obs
     ..value.totalRamUsage = 100
     ..value.battery = 100
-    ..value.diskSpaceUsed = 100;
+    ..value.diskSpaceUsedInPersent = 100;
 
   @override
   void onInit() async {
     super.onInit();
-    totalPhysicalMemory = await NativeComms.getTotalPhysicalMemory();
-    print(pid);
-    _timer = Timer.periodic(Duration(seconds: 1), (timer) async {
-      var totalVirtual = await NativeComms.getVirtualMemorySize();
-      var totalUsedInPersent =
-          calcMemoryUsage(totalPhysicalMemory, totalVirtual);
-      var diskSpaceUsed = await calcDiskSpaceUsed();
-      var battery = await NativeComms.getBatteryLevel();
-      wrapper.update((value) {
-        value.totalRamUsage = totalUsedInPersent;
-        value.battery = battery;
-        value.diskSpaceUsed = diskSpaceUsed;
-      });
-    });
     deviceInfo = await deviceInfoPlugin;
+    totalPhysicalMemory = await NativeComms.getTotalPhysicalMemory();
+    totalDiskSpace = (await DiskSpace.getTotalDiskSpace / 1024).toPrecision(2);
+    print(pid);
+    _timer = Timer.periodic(Duration(seconds: 1), dashboardHandler);
+  }
+
+  /// This handles the retrieval of the Dashboard relevant information,
+  /// such as RAM memory, storage and battery life
+  void dashboardHandler(timer) async {
+    var totalVirtual = await NativeComms.getVirtualMemorySize();
+    var totalMemoryUsedInPersent =
+        calcMemoryUsage(totalPhysicalMemory, totalVirtual);
+    final totalDiskSpaceAvailable =
+        (await DiskSpace.getFreeDiskSpace / 1024).toPrecision(2);
+    var diskSpaceUsedInPersent =
+        await calcDiskSpaceUsed(totalDiskSpace, totalDiskSpaceAvailable);
+    var battery = await NativeComms.getBatteryLevel();
+
+    /// Runs an update on the [DashboardWrapper.obs]
+    wrapper.update((value) {
+      // RAM memory
+      value.totalRamUsage = totalMemoryUsedInPersent;
+      value.totalSpaceAvailable = totalPhysicalMemory;
+
+      // Disk space
+      value.diskSpaceUsed = totalDiskSpace - totalDiskSpaceAvailable;
+      value.diskSpaceUsedInPersent = diskSpaceUsedInPersent;
+      value.totalDiskSpaceAvailable = totalDiskSpaceAvailable;
+
+      value.battery = battery;
+    });
   }
 
   @override
@@ -49,19 +69,13 @@ class DashboardController extends GetxController {
   }
 }
 
-Future<int> calcDiskSpaceUsed() async {
-  final free = await DiskSpace.getFreeDiskSpace;
-  final total = await DiskSpace.getTotalDiskSpace;
+/// Calculate disk space used from [total] and [free]
+Future<int> calcDiskSpaceUsed(double total, double free) async {
   final used = total - free;
   return used * 100 ~/ total;
 }
 
-int calcMemoryUsage(int totalPhysicalMemory, int virtualMemory) {
+/// Calculate current memory usagr from [totalPhysicalMemory] and [virtualMemory]
+int calcMemoryUsage(double totalPhysicalMemory, double virtualMemory) {
   return virtualMemory * 100 ~/ totalPhysicalMemory;
-}
-
-class DashboardInfoWrapper {
-  int totalRamUsage = 100;
-  int battery = 100;
-  int diskSpaceUsed = 100;
 }
