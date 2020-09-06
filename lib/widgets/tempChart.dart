@@ -56,11 +56,13 @@ class _TemperatureChartState extends State<TemperatureChart> {
                 children: [
                   Text(
                     "Cpu Temparature",
-                    style: TextStyle(color: Colors.blue, fontSize: 18),
+                    style: TextStyle(color: Colors.blue),
+                    textScaleFactor: 1.4,
                   ),
                   Text(
                     '$temperature °C',
-                    style: TextStyle(color: Colors.blue, fontSize: 20),
+                    style: TextStyle(color: Colors.blue),
+                    textScaleFactor: 1.4,
                   ),
                 ],
               ),

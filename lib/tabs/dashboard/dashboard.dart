@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:phone_monitor/controllers/cpu_controller.dart';
+import 'package:phone_monitor/controllers/dashboard_controller.dart';
+import 'package:phone_monitor/widgets/progressWithPercentage.dart';
 import 'package:phone_monitor/widgets/usageProgressDisplay.dart';
 
-class Dashboard extends StatelessWidget {
+class Dashboard extends GetView<DashboardController> {
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -23,12 +27,18 @@ class Dashboard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         UsageProgressDisplay(title: "RAM", value: 0.75),
-                        UsageProgressDisplay(title: "Memory", value: 0.65),
-                        UsageProgressDisplay(title: "Storage", value: 1)
+                        UsageProgressDisplay(
+                          title: "Memory",
+                          value: 0.65,
+                        ),
+                        UsageProgressDisplay(
+                          title: "Storage",
+                          value: 1,
+                        )
                       ],
                     ),
-                    SizedBox(
-                      height: 20,
+                    Divider(
+                      height: 30,
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -43,10 +53,10 @@ class Dashboard extends StatelessWidget {
                             SizedBox(
                               height: 5,
                             ),
-                            Text(
-                              'One Plus 7T',
-                              textScaleFactor: 1.5,
-                            )
+                            Obx(() => Text(
+                                  controller.deviceInfo?.device ?? "",
+                                  textScaleFactor: 1.5,
+                                ))
                           ],
                         ),
                         Column(
@@ -59,18 +69,37 @@ class Dashboard extends StatelessWidget {
                             SizedBox(
                               height: 5,
                             ),
-                            Text(
-                              'Android 10 Q',
-                              textScaleFactor: 1.5,
-                            )
+                            Obx(() => Text(
+                                  "Android ${controller.deviceInfo?.version?.release}" ??
+                                      "",
+                                  textScaleFactor: 1.5,
+                                ))
                           ],
-                        )
+                        ),
+                      ],
+                    ),
+                    Divider(
+                      height: 30,
+                    ),
+                    Row(
+                      children: [
+                        Flexible(
+                            child: GetX<CpuController>(
+                          builder: (cpuController) => Padding(
+                            padding: const EdgeInsets.symmetric(horizontal: 10),
+                            child: ProgressWithPercentage(
+                              value: cpuController.overallUsage?.overAll ?? 0.0,
+                              title: "Overall Cpu Usage",
+                              height: 16,
+                            ),
+                          ),
+                        )),
                       ],
                     )
                   ],
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),

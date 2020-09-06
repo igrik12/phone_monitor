@@ -72,7 +72,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           child: Center(
             child: CustomProgressIndicator(
               type: ProgressIndicatorType.linear,
-              value: _.overallUsage.toDouble() / 100,
+              value: _.overallUsage.overAll / 100,
             ),
           ),
         ),

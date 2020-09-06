@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:phone_monitor/controllers/cpu_controller.dart';
-import 'package:phone_monitor/widgets/customProgressIndicator.dart';
 import 'package:system_info/system_info.dart';
 
-class CpuOverview extends GetView<CpuController> {
+class CpuOverview extends StatelessWidget {
   const CpuOverview({Key key}) : super(key: key);
 
   @override
@@ -17,47 +17,16 @@ class CpuOverview extends GetView<CpuController> {
             padding: EdgeInsets.all(15),
             child: Column(
               children: [
-                Row(
-                  children: [
-                    Flexible(
-                      child: Column(
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text('Overall Cpu Usage',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                  )),
-                              Obx(() => Text('${controller.overallUsage}%',
-                                  style: TextStyle(
-                                    fontSize: 16,
-                                  )))
-                            ],
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Obx(() => CustomProgressIndicator(
-                                type: ProgressIndicatorType.linear,
-                                value: controller.overallUsage.toDouble() / 100,
-                              )),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Obx(() => RichText(
-                        text: TextSpan(
-                            text: '${controller.cpuTemperature} °C',
-                            style: TextStyle(
-                                fontSize: 26,
-                                color: Colors.blue,
-                                fontWeight: FontWeight.w600))))
-                  ],
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: Text(
+                    'CPU Overview',
+                    textScaleFactor: 1.3,
+                  ),
                 ),
-                SizedBox(height: 20),
+                Divider(
+                  height: 15,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -90,10 +59,55 @@ class CpuOverview extends GetView<CpuController> {
                           Text('Cpu Cores'),
                         ],
                       ),
-                      Obx(() => Text(
-                            controller.cpuInfo.numberOfCores.toString() ??
-                                'N/A',
-                          ))
+                      GetX<CpuController>(
+                          builder: (controller) => Text(
+                                controller.cpuInfo?.numberOfCores?.toString() ??
+                                    'N/A',
+                              ))
+                    ]),
+                SizedBox(height: 10),
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            width: 3,
+                          ),
+                          SvgPicture.asset(
+                            'assets/icons/cpu_hardware.svg',
+                            height: 20,
+                          ),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Text('Architecture'),
+                        ],
+                      ),
+                      Text(
+                        SysInfo.processors.first.architecture.name ?? 'N/A',
+                      )
+                    ]),
+                SizedBox(height: 10),
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Icon(Icons.code),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Text('ABIs'),
+                        ],
+                      ),
+                      GetX<CpuController>(
+                        builder: (cpuController) => Text(
+                          cpuController.deviceInfo.supportedAbis.join(', '),
+                        ),
+                      )
                     ]),
               ],
             )));

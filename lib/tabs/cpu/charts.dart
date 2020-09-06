@@ -20,11 +20,15 @@ class Charts extends GetView<CpuController> {
             shrinkWrap: true,
             controller: chartsScrollController,
             slivers: [
-              SliverPadding(
-                sliver: SliverToBoxAdapter(
-                    child: Text('Cpu Frequency Charts',
-                        style: TextStyle(fontSize: 16))),
-                padding: EdgeInsets.only(bottom: 20),
+              SliverToBoxAdapter(
+                  child: Text(
+                'Cpu Frequency Charts',
+                textScaleFactor: 1.4,
+              )),
+              SliverToBoxAdapter(
+                child: Divider(
+                  height: 15,
+                ),
               ),
               SliverGrid(
                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(

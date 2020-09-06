@@ -1,29 +1,26 @@
 import 'dart:math';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:phone_monitor/widgets/customProgressIndicator.dart';
 
 class UsageProgressDisplay extends StatelessWidget {
   final String title;
   final double value;
-  final double height;
-  final double width;
 
-  UsageProgressDisplay(
-      {Key key,
-      @required this.title,
-      @required this.value,
-      this.height = 100,
-      this.width = 100})
-      : super(key: key);
+  UsageProgressDisplay({
+    Key key,
+    @required this.title,
+    @required this.value,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
         Container(
-          width: this.width,
-          height: this.height,
+          width: Get.width * 0.25,
+          height: Get.width * 0.25,
           child: Stack(
             fit: StackFit.expand,
             children: [
