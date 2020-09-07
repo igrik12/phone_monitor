@@ -1,5 +1,6 @@
 import 'package:flutter/services.dart';
 import 'package:phone_monitor/models/battery_info.dart';
+import 'package:phone_monitor/models/display_info.dart';
 
 class NativeComms {
   static const _channel =
@@ -53,7 +54,17 @@ class NativeComms {
       var retrieved = await _channel.invokeMethod('getBatteryData');
       return BatteryInfo.fromJson(Map.from(retrieved));
     } on PlatformException catch (e) {
-      print("Failed to retrieve battery level. ${e.message}");
+      print("Failed to retrieve battery data. ${e.message}");
+      return null;
+    }
+  }
+
+  static Future<DisplayInfo> getDisplayData() async {
+    try {
+      var retrieved = await _channel.invokeMethod('getDisplayData');
+      return DisplayInfo.fromJson(Map.from(retrieved));
+    } on PlatformException catch (e) {
+      print("Failed to retrieve display data. ${e.message}");
       return null;
     }
   }
