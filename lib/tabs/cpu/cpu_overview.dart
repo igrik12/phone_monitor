@@ -1,107 +1,165 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:phone_monitor/controllers/cpu_controller.dart';
-import 'package:phone_monitor/widgets/progressBar.dart';
+import 'package:phone_monitor/widgets/custom_card.dart';
+import 'package:system_info/system_info.dart';
+import "package:collection/collection.dart";
 
 class CpuOverview extends StatelessWidget {
   const CpuOverview({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-        elevation: 2,
-        shadowColor: Colors.white,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+    return CustomCard(
         child: Container(
-          padding: EdgeInsets.all(15),
-          child: GetBuilder<CpuController>(
-              builder: (cpuController) => Column(
+            padding: EdgeInsets.all(15),
+            child: Column(
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'CPU Overview',
+                      textScaleFactor: 1.3,
+                    ),
+                    GetX<CpuController>(
+                        builder: (controller) => controller.cpuTemperature != -1
+                            ? Text(
+                                "${controller.cpuTemperature} °C",
+                                style: TextStyle(color: Colors.blue),
+                                textScaleFactor: 1.4,
+                              )
+                            : SizedBox())
+                  ],
+                ),
+                // Align(
+                //   alignment: Alignment.centerLeft,
+                //   child: ,
+                // ),
+                Divider(
+                  height: 15,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      children: [
+                        Icon(Icons.blur_circular),
+                        SizedBox(
+                          width: 5,
+                        ),
+                        Text('Cpu Hardware'),
+                      ],
+                    ),
+                    Text(
+                      SysInfo.processors.first.vendor ?? 'N/A',
+                    )
+                  ],
+                ),
+                SizedBox(height: 10),
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Flexible(
-                            child: Column(
-                              children: [
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text('Overall Cpu Usage',
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                        )),
-                                    Text('${cpuController.overallUsage}%',
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                        ))
-                                  ],
-                                ),
-                                SizedBox(
-                                  height: 10,
-                                ),
-                                CustomProgressIndicator(
-                                  type: ProgressIndicatorType.linear,
-                                  value: cpuController.overallUsage.toDouble() /
-                                      100,
-                                ),
-                              ],
-                            ),
+                          Icon(Icons.blur_on),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Text('Cpu Cores'),
+                        ],
+                      ),
+                      GetX<CpuController>(
+                          builder: (controller) => Text(
+                                controller.cpuInfo?.numberOfCores?.toString() ??
+                                    'N/A',
+                              ))
+                    ]),
+                SizedBox(height: 10),
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            width: 3,
+                          ),
+                          SvgPicture.asset(
+                            'assets/icons/cpu_hardware.svg',
+                            height: 20,
                           ),
                           SizedBox(
-                            width: 20,
+                            width: 5,
                           ),
-                          RichText(
-                              text: TextSpan(
-                                  text: '${cpuController.cpuTemperature} °C',
-                                  style: TextStyle(
-                                      fontSize: 26,
-                                      color: Colors.blue,
-                                      fontWeight: FontWeight.w600)))
+                          Text('Architecture'),
                         ],
                       ),
-                      SizedBox(height: 20),
+                      Text(
+                        SysInfo.processors.first.architecture.name ?? 'N/A',
+                      )
+                    ]),
+                SizedBox(height: 10),
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
                       Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              Icon(Icons.blur_circular),
-                              SizedBox(
-                                width: 5,
-                              ),
-                              Text('Cpu Hardware'),
-                            ],
+                          Icon(Icons.code),
+                          SizedBox(
+                            width: 5,
                           ),
-                          Text(
-                            cpuController.deviceInfo?.hardware?.toUpperCase() ??
-                                'N/A',
-                          )
+                          Text('ABIs'),
                         ],
                       ),
-                      SizedBox(height: 10),
+                      GetX<CpuController>(
+                        builder: (cpuController) => Text(
+                          cpuController.deviceInfo.supportedAbis.join(', '),
+                        ),
+                      )
+                    ]),
+                SizedBox(height: 10),
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
                       Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                Icon(Icons.blur_on),
-                                SizedBox(
-                                  width: 5,
-                                ),
-                                Text('Cpu Cores'),
-                              ],
-                            ),
-                            Text(
-                              cpuController.cpuInfo.numberOfCores?.toString() ??
-                                  'N/A',
-                            )
-                          ]),
-                      Row(),
-                      Row()
-                    ],
-                  )),
-        ));
+                        mainAxisAlignment: MainAxisAlignment.start,
+                        children: [
+                          Icon(Icons.flash_on),
+                          SizedBox(
+                            width: 5,
+                          ),
+                          Text('Frequencies'),
+                        ],
+                      ),
+                      GetX<CpuController>(
+                        builder: (cpuController) => ConstrainedBox(
+                          constraints:
+                              BoxConstraints(maxWidth: Get.width * 0.4),
+                          child: Text(
+                            _getGroupedFreq(cpuController),
+                            textAlign: TextAlign.right,
+                          ),
+                        ),
+                      )
+                    ]),
+              ],
+            )));
+  }
+
+  String _getGroupedFreq(CpuController cpuController) {
+    if (cpuController.cpuInfo == null) return "";
+    var groupedByMax = groupBy(
+        cpuController.cpuInfo.minMaxFrequencies.values, (obj) => obj.max);
+
+    var joined = groupedByMax.entries
+        .map((entry) => "${entry.value.length} x ${entry.key} Mhz")
+        .join(', ');
+
+    return joined;
   }
 }

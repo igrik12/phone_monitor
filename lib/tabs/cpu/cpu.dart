@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:phone_monitor/controllers/cpu_controller.dart';
 import 'package:phone_monitor/tabs/cpu/charts.dart';
+import 'package:phone_monitor/tabs/cpu/cpuProgessGrid.dart';
 import 'package:phone_monitor/tabs/cpu/cpu_overview.dart';
 import 'package:phone_monitor/widgets/tempChart.dart';
 
@@ -26,27 +27,22 @@ class _CpuTabState extends State<CpuTab> {
 
   @override
   Widget build(BuildContext context) {
-    return CustomScrollView(
-      controller: _mainScrollController,
-      slivers: [
-        SliverToBoxAdapter(child: CpuOverview()),
-        SliverToBoxAdapter(
-            child: SizedBox(
-          height: 25,
-        )),
-        SliverToBoxAdapter(
-          child: Charts(
+    return SingleChildScrollView(
+      child: Column(
+        children: [
+          CpuOverview(),
+          CpuProgressGrid(
             chartsScrollController: _chartsScrollController,
           ),
-        ),
-        SliverToBoxAdapter(
-            child: SizedBox(
-          height: 25,
-        )),
-        SliverToBoxAdapter(
-          child: TemperatureChart(),
-        )
-      ],
+          Charts(
+            chartsScrollController: _chartsScrollController,
+          ),
+          GetX<CpuController>(
+            builder: (_) =>
+                _.cpuTemperature != -1 ? TemperatureChart() : SizedBox(),
+          )
+        ],
+      ),
     );
   }
 

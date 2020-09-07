@@ -3,8 +3,10 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:mp_chart/mp/chart/line_chart.dart';
 import 'package:phone_monitor/controllers/cpu_controller.dart';
+import 'package:phone_monitor/utils/constants.dart';
 
 import 'chartController.dart';
+import 'custom_card.dart';
 
 class TemperatureChart extends StatefulWidget {
   TemperatureChart({Key key}) : super(key: key);
@@ -42,8 +44,7 @@ class _TemperatureChartState extends State<TemperatureChart> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+    return CustomCard(
       child: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Column(
@@ -56,11 +57,11 @@ class _TemperatureChartState extends State<TemperatureChart> {
                 children: [
                   Text(
                     "Cpu Temparature",
-                    style: TextStyle(color: Colors.blue, fontSize: 18),
+                    textScaleFactor: 1.4,
                   ),
                   Text(
                     '$temperature °C',
-                    style: TextStyle(color: Colors.blue, fontSize: 20),
+                    textScaleFactor: 1.4,
                   ),
                 ],
               ),
