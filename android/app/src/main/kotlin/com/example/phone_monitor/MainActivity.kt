@@ -8,11 +8,16 @@ import android.content.IntentFilter
 import android.os.BatteryManager
 import android.os.Build.VERSION
 import android.os.Build.VERSION_CODES
+import android.view.WindowManager
+import android.util.DisplayMetrics
+import android.view.Display
 import androidx.annotation.NonNull
+import io.flutter.Log
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
 import java.io.RandomAccessFile
+
 
 class MainActivity : FlutterActivity() {
     private val channel = "com.twarkapps.phone_monitor/device_info"
@@ -25,6 +30,7 @@ class MainActivity : FlutterActivity() {
                 "getAvailableMemory" -> result.success(getAvailableMemory())
                 "getTotalMemory" -> result.success(getTotalMemory())
                 "getBatteryData" -> result.success(getBatteryData())
+                "getDisplayData" -> result.success(getDisplayData())
                 else -> {
                     result.notImplemented()
                 }
@@ -38,6 +44,29 @@ class MainActivity : FlutterActivity() {
         } catch (e: Exception) {
             -1L
         }
+    }
+
+
+    private fun getDisplayData(): Map<String, Any> {
+        val display: Display = (getSystemService(Context.WINDOW_SERVICE) as WindowManager).getDefaultDisplay()
+        val metrics = getResources().getDisplayMetrics()
+        display.getRealMetrics(metrics)
+        val density = metrics.density
+        val densityDpi = metrics.densityDpi
+        val heightPixels = metrics.heightPixels
+        val scaledDensity = metrics.scaledDensity
+        val widthPixels = metrics.widthPixels
+        val xdpi = metrics.xdpi
+        val ydpi = metrics.ydpi
+        return mapOf(
+                "density" to density,
+                "densityDpi" to densityDpi,
+                "heightPixels" to heightPixels,
+                "scaledDensity" to scaledDensity,
+                "widthPixels" to widthPixels,
+                "xdpi" to xdpi,
+                "ydpi" to ydpi
+        )
     }
 
     private fun getAvailableMemory(): Long {
@@ -55,6 +84,7 @@ class MainActivity : FlutterActivity() {
     }
 
     private fun getBatteryData(): Map<String, Any> {
+
         val filter = IntentFilter(Intent.ACTION_BATTERY_CHANGED)
         val intent: Intent = this.registerReceiver(null, filter)
         val status: Int = intent.getIntExtra(BatteryManager.EXTRA_STATUS, -1)
