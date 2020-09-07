@@ -1,3 +1,4 @@
+import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -6,9 +7,11 @@ import 'package:phone_monitor/screens/home.dart';
 import 'package:phone_monitor/utils/constants.dart';
 
 import 'controllers/bindings.dart';
+import 'utils/ad_manager.dart';
 
 void main() async {
   await GetStorage.init();
+  Admob.initialize(AdManager.appId);
   runApp(MyApp());
 }
 

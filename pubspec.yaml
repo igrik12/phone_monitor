@@ -24,6 +24,7 @@ dependencies:
   flutter:
     sdk: flutter
   disk_space:
+  admob_flutter: ^0.3.4
   flutter_launcher_icons: ^0.7.5
   flutter_svg: ^0.18.1
   get: 3.8.0

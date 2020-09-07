@@ -1,9 +1,10 @@
+import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:phone_monitor/controllers/cpu_controller.dart';
 import 'package:phone_monitor/controllers/dashboard_controller.dart';
 import 'package:phone_monitor/tabs/dashboard/battery_card.dart';
-import 'package:phone_monitor/widgets/customProgressIndicator.dart';
+import 'package:phone_monitor/utils/ad_manager.dart';
 import 'package:phone_monitor/widgets/custom_card.dart';
 import 'package:phone_monitor/widgets/progressWithPercentage.dart';
 import 'package:phone_monitor/widgets/usageProgressDisplay.dart';
@@ -110,7 +111,7 @@ class Dashboard extends GetView<DashboardController> {
               ),
             ),
             StorageCard(),
-            BatteryCard()
+            BatteryCard(),
           ],
         ),
       ),
