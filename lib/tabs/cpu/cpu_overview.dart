@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:phone_monitor/controllers/cpu_controller.dart';
+import 'package:phone_monitor/widgets/custom_card.dart';
 import 'package:system_info/system_info.dart';
 import "package:collection/collection.dart";
 
@@ -10,10 +11,7 @@ class CpuOverview extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-        elevation: 2,
-        shadowColor: Colors.white,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15)),
+    return CustomCard(
         child: Container(
             padding: EdgeInsets.all(15),
             child: Column(

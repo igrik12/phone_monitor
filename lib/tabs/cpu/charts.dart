@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:phone_monitor/controllers/cpu_controller.dart';
 import 'package:phone_monitor/widgets/cpuChart.dart';
+import 'package:phone_monitor/widgets/custom_card.dart';
 
 class Charts extends GetView<CpuController> {
   final chartsScrollController;
@@ -12,8 +13,7 @@ class Charts extends GetView<CpuController> {
   @override
   Widget build(BuildContext context) {
     return GetX<CpuController>(builder: (cpuController) {
-      return Card(
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+      return CustomCard(
         child: Padding(
           padding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 12.0),
           child: CustomScrollView(

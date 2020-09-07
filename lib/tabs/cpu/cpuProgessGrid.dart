@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:phone_monitor/controllers/cpu_controller.dart';
+import 'package:phone_monitor/widgets/custom_card.dart';
 import 'package:phone_monitor/widgets/progressWithPercentage.dart';
 
 class CpuProgressGrid extends StatelessWidget {
@@ -11,11 +12,7 @@ class CpuProgressGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetX<CpuController>(
-        builder: (controller) => Card(
-              elevation: 2,
-              shadowColor: Colors.white,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15)),
+        builder: (controller) => CustomCard(
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: Column(

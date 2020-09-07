@@ -93,6 +93,13 @@
             </list>
           </value>
         </entry>
+        <entry key="disk_space">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/disk_space-0.0.3/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="fake_async">
           <value>
             <list>
@@ -403,6 +410,7 @@
       <root url="file://$PROJECT_DIR$/../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/crypto-2.1.5/lib" />
       <root url="file://$PROJECT_DIR$/../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/device_info-0.4.2+7/lib" />
       <root url="file://$PROJECT_DIR$/../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/device_info_platform_interface-1.0.0/lib" />
+      <root url="file://$PROJECT_DIR$/../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/disk_space-0.0.3/lib" />
       <root url="file://$PROJECT_DIR$/../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/fake_async-1.1.0/lib" />
       <root url="file://$PROJECT_DIR$/../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/file-5.2.1/lib" />
       <root url="file://$PROJECT_DIR$/../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/file_utils-0.1.4/lib" />

@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:phone_monitor/controllers/dashboard_controller.dart';
 import 'package:phone_monitor/widgets/customProgressIndicator.dart';
 import 'package:phone_monitor/widgets/custom_card.dart';
 
-class StorageCard extends GetView<DashboardController> {
-  const StorageCard({Key key}) : super(key: key);
+class BatteryCard extends GetView<DashboardController> {
+  const BatteryCard({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,10 +18,12 @@ class StorageCard extends GetView<DashboardController> {
           children: [
             Column(
               children: [
-                Icon(
-                  Icons.sd_storage,
-                  color: Colors.blue,
-                  size: 35,
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                  child: SvgPicture.asset(
+                    'assets/icons/battery.svg',
+                    height: 35,
+                  ),
                 )
               ],
             ),
@@ -32,7 +35,7 @@ class StorageCard extends GetView<DashboardController> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Internal Storage",
+                        "Battery (${controller.wrapper.value.battery?.isCharging ?? false ? "Charging" : "Discharging"})",
                         textScaleFactor: 1.3,
                       ),
                       SizedBox(
@@ -46,7 +49,7 @@ class StorageCard extends GetView<DashboardController> {
                             child: CustomProgressIndicator(
                               type: ProgressIndicatorType.linear,
                               value: controller
-                                      .wrapper.value.diskSpaceUsedInPersent /
+                                      .wrapper.value.battery.batteryLevel /
                                   100,
                             ),
                           ),
@@ -54,7 +57,7 @@ class StorageCard extends GetView<DashboardController> {
                             width: 10,
                           ),
                           Text(
-                            "${controller.wrapper.value.diskSpaceUsedInPersent}%",
+                            "${controller.wrapper.value.battery.batteryLevel}%",
                             textScaleFactor: 1.3,
                           )
                         ],
@@ -63,7 +66,7 @@ class StorageCard extends GetView<DashboardController> {
                         height: 5,
                       ),
                       Text(
-                          "Used: ${controller.wrapper.value.diskSpaceUsed} GB, Total: ${controller.totalDiskSpace} GB")
+                          "Voltage: ${controller.wrapper.value.battery.voltage}mV, Temperature: ${controller.wrapper.value.battery.temperature} °C")
                     ],
                   )),
             )

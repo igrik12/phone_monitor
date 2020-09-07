@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:phone_monitor/controllers/cpu_controller.dart';
 import 'package:phone_monitor/controllers/dashboard_controller.dart';
+import 'package:phone_monitor/tabs/dashboard/battery_card.dart';
 import 'package:phone_monitor/widgets/customProgressIndicator.dart';
+import 'package:phone_monitor/widgets/custom_card.dart';
 import 'package:phone_monitor/widgets/progressWithPercentage.dart';
 import 'package:phone_monitor/widgets/usageProgressDisplay.dart';
 
@@ -16,11 +18,7 @@ class Dashboard extends GetView<DashboardController> {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            Card(
-              elevation: 2,
-              shadowColor: Colors.white,
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15)),
+            CustomCard(
               child: Padding(
                 padding:
                     const EdgeInsets.symmetric(vertical: 26, horizontal: 10),
@@ -36,7 +34,9 @@ class Dashboard extends GetView<DashboardController> {
                                     100),
                             UsageProgressDisplay(
                               title: "Battery",
-                              value: controller.wrapper.value.battery / 100,
+                              value: controller
+                                      .wrapper.value.battery.batteryLevel /
+                                  100,
                             ),
                             UsageProgressDisplay(
                               title: "Storage",
@@ -109,7 +109,8 @@ class Dashboard extends GetView<DashboardController> {
                 ),
               ),
             ),
-            StorageCard()
+            StorageCard(),
+            BatteryCard()
           ],
         ),
       ),

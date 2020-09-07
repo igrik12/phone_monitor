@@ -6,6 +6,7 @@ import 'package:phone_monitor/controllers/cpu_controller.dart';
 import 'package:phone_monitor/utils/constants.dart';
 
 import 'chartController.dart';
+import 'custom_card.dart';
 
 class TemperatureChart extends StatefulWidget {
   TemperatureChart({Key key}) : super(key: key);
@@ -43,8 +44,7 @@ class _TemperatureChartState extends State<TemperatureChart> {
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+    return CustomCard(
       child: Padding(
         padding: const EdgeInsets.all(12.0),
         child: Column(
