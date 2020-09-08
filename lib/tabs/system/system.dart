@@ -128,6 +128,7 @@ class System extends GetView<CpuController> {
 Future<Map<String, String>> readAndroidBuildData() async {
   var build = await DeviceInfoPlugin().androidInfo;
   return <String, String>{
+    'Security Patch': build.version.securityPatch,
     'Manufacturer': build.manufacturer,
     'Model': build.model,
     'Brand': build.brand,

@@ -3,14 +3,15 @@
   <component name="ChangeListManager">
     <list default="true" id="4fc786a1-d1ec-4116-be9c-d2c2d3e427e5" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.flutter-plugins-dependencies" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins-dependencies" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Flutter_Plugins.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/android/app/src/main/kotlin/com/example/phone_monitor/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/kotlin/com/example/phone_monitor/MainActivity.kt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/controllers/cpu_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/controllers/cpu_controller.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/controllers/dashboard_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/controllers/dashboard_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/models/dashboard_wrapper.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/models/dashboard_wrapper.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/tabs/dashboard/dashboard.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/tabs/dashboard/dashboard.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/tabs/cpu/cpu_overview.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/tabs/cpu/cpu_overview.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/tabs/system/system.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/tabs/system/system.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/utils/constants.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/constants.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/utils/native_comms.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/native_comms.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/widgets/constants.dart" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,6 +40,11 @@
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\SourceCode\Mobile\phone_monitor\android\app\src\main\kotlin\com\example\phone_monitor" />
+    </key>
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -51,7 +57,7 @@
       <updated>1598812910607</updated>
       <workItem from="1599415834077" duration="4178000" />
       <workItem from="1599420728886" duration="1641000" />
-      <workItem from="1599466263574" duration="15920000" />
+      <workItem from="1599466263574" duration="26492000" />
     </task>
     <servers />
   </component>

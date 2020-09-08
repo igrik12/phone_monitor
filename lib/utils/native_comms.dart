@@ -5,6 +5,9 @@ import 'package:phone_monitor/models/display_info.dart';
 class NativeComms {
   static const _channel =
       const MethodChannel('com.twarkapps.phone_monitor/device_info');
+  static const eventChannel =
+      EventChannel('com.twarkapps.phone_monitor/sensor_stream');
+
   static double _totalPhysicalMemory;
 
   /// Get total physical memory in MB
@@ -66,6 +69,16 @@ class NativeComms {
     } on PlatformException catch (e) {
       print("Failed to retrieve display data. ${e.message}");
       return null;
+    }
+  }
+
+  static Future<Map<dynamic, dynamic>> getSensors() async {
+    try {
+      var res = await _channel.invokeMethod("getSensorsList");
+      return res;
+    } on Exception catch (e) {
+      print(e.toString());
+      return Map<dynamic, dynamic>();
     }
   }
 }
