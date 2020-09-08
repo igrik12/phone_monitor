@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:phone_monitor/widgets/custom_card.dart';
 
 class SensorInfoHolder {
   SensorInfoHolder(
@@ -66,13 +67,12 @@ class SensorInfoHolder {
         children: <Widget>[
           Text(
             this.name,
-            style: TextStyle(
-                color: Colors.cyanAccent, fontStyle: FontStyle.italic),
+            style: TextStyle(color: Colors.blue, fontStyle: FontStyle.italic),
           ),
           Text(
             this.vendorName,
             style: TextStyle(
-                color: Colors.greenAccent, fontWeight: FontWeight.bold),
+                color: Colors.greenAccent[400], fontWeight: FontWeight.bold),
           )
         ],
       ),
@@ -258,11 +258,10 @@ class Accelerometer {
   String x;
   String y;
   String z;
-  Card getCard() {
-    return Card(
+  Widget getCard() {
+    return CustomCard(
       // Accelerometer
-      margin: EdgeInsets.only(top: 6.0, bottom: 6.0, left: 4.0, right: 4.0),
-      elevation: 8.0,
+
       child: Container(
         child: Column(
           children: this.sensor.appendThem([
@@ -289,14 +288,6 @@ class Accelerometer {
             )
           ]),
         ),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8.0),
-          border: Border.all(
-            color: Colors.white,
-            width: 0.7,
-            style: BorderStyle.solid,
-          ),
-        ),
         padding:
             EdgeInsets.only(left: 10.0, right: 10.0, top: 12.0, bottom: 12.0),
       ),
@@ -321,11 +312,10 @@ class UncalibratedAccelerometer {
   String estimatedXBias;
   String estimatedYBias;
   String estimatedZBias;
-  Card getCard() {
-    return Card(
+  Widget getCard() {
+    return CustomCard(
       // Uncalibrated Accelerometer
-      margin: EdgeInsets.only(top: 6.0, bottom: 6.0, left: 4.0, right: 4.0),
-      elevation: 8.0,
+
       child: Container(
         child: Column(
           children: this.sensor.appendThem([
@@ -373,14 +363,6 @@ class UncalibratedAccelerometer {
             ),
           ]),
         ),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8.0),
-          border: Border.all(
-            color: Colors.white,
-            width: 0.7,
-            style: BorderStyle.solid,
-          ),
-        ),
         padding:
             EdgeInsets.only(left: 10.0, right: 10.0, top: 12.0, bottom: 12.0),
       ),
@@ -395,11 +377,10 @@ class Gravity {
   String x;
   String y;
   String z;
-  Card getCard() {
-    return Card(
+  Widget getCard() {
+    return CustomCard(
       // Gravity
-      margin: EdgeInsets.only(top: 6.0, bottom: 6.0, left: 4.0, right: 4.0),
-      elevation: 8.0,
+
       child: Container(
         child: Column(
           children: this.sensor.appendThem([
@@ -425,14 +406,6 @@ class Gravity {
               ],
             ),
           ]),
-        ),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8.0),
-          border: Border.all(
-            color: Colors.white,
-            width: 0.7,
-            style: BorderStyle.solid,
-          ),
         ),
         padding:
             EdgeInsets.only(left: 10.0, right: 10.0, top: 12.0, bottom: 12.0),
@@ -448,11 +421,10 @@ class LinearAcceleration {
   String x;
   String y;
   String z;
-  Card getCard() {
-    return Card(
+  Widget getCard() {
+    return CustomCard(
       // Linear Acceleration
-      margin: EdgeInsets.only(top: 6.0, bottom: 6.0, left: 4.0, right: 4.0),
-      elevation: 8.0,
+
       child: Container(
         child: Column(
           children: this.sensor.appendThem([
@@ -479,14 +451,6 @@ class LinearAcceleration {
             ),
           ]),
         ),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8.0),
-          border: Border.all(
-            color: Colors.white,
-            width: 0.7,
-            style: BorderStyle.solid,
-          ),
-        ),
         padding:
             EdgeInsets.only(left: 10.0, right: 10.0, top: 12.0, bottom: 12.0),
       ),
@@ -501,11 +465,9 @@ class MagneticField {
   String x;
   String y;
   String z;
-  Card getCard() {
-    return Card(
+  Widget getCard() {
+    return CustomCard(
       // Magnetic Field
-      margin: EdgeInsets.only(top: 6.0, bottom: 6.0, left: 4.0, right: 4.0),
-      elevation: 8.0,
       child: Container(
         child: Column(
           children: this.sensor.appendThem([
@@ -532,14 +494,6 @@ class MagneticField {
             ),
           ]),
         ),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8.0),
-          border: Border.all(
-            color: Colors.white,
-            width: 0.7,
-            style: BorderStyle.solid,
-          ),
-        ),
         padding:
             EdgeInsets.only(left: 10.0, right: 10.0, top: 12.0, bottom: 12.0),
       ),
@@ -554,11 +508,10 @@ class OrientationSensor {
   String azimuth;
   String pitch;
   String roll;
-  Card getCard() {
-    return Card(
+  Widget getCard() {
+    return CustomCard(
       // Orientation Sensor
-      margin: EdgeInsets.only(top: 6.0, bottom: 6.0, left: 4.0, right: 4.0),
-      elevation: 8.0,
+
       child: Container(
         child: Column(
           children: this.sensor.appendThem([
@@ -585,14 +538,6 @@ class OrientationSensor {
             ),
           ]),
         ),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8.0),
-          border: Border.all(
-            color: Colors.white,
-            width: 0.7,
-            style: BorderStyle.solid,
-          ),
-        ),
         padding:
             EdgeInsets.only(left: 10.0, right: 10.0, top: 12.0, bottom: 12.0),
       ),
@@ -608,11 +553,10 @@ class Gyroscope {
   String angularSpeedAroundX;
   String angularSpeedAroundY;
   String angularSpeedAroundZ;
-  Card getCard() {
-    return Card(
+  Widget getCard() {
+    return CustomCard(
       // Gyroscope
-      margin: EdgeInsets.only(top: 6.0, bottom: 6.0, left: 4.0, right: 4.0),
-      elevation: 8.0,
+
       child: Container(
         child: Column(
           children: this.sensor.appendThem([
@@ -639,14 +583,6 @@ class Gyroscope {
             ),
           ]),
         ),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8.0),
-          border: Border.all(
-            color: Colors.white,
-            width: 0.7,
-            style: BorderStyle.solid,
-          ),
-        ),
         padding:
             EdgeInsets.only(left: 10.0, right: 10.0, top: 12.0, bottom: 12.0),
       ),
@@ -671,11 +607,10 @@ class UncalibratedGyroscope {
   String estimatedDriftAroundX;
   String estimatedDriftAroundY;
   String estimatedDriftAroundZ;
-  Card getCard() {
-    return Card(
+  Widget getCard() {
+    return CustomCard(
       // Uncalibrated Gyroscope
-      margin: EdgeInsets.only(top: 6.0, bottom: 6.0, left: 4.0, right: 4.0),
-      elevation: 8.0,
+
       child: Container(
         child: Column(
           children: this.sensor.appendThem([
@@ -723,14 +658,6 @@ class UncalibratedGyroscope {
             ),
           ]),
         ),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8.0),
-          border: Border.all(
-            color: Colors.white,
-            width: 0.7,
-            style: BorderStyle.solid,
-          ),
-        ),
         padding:
             EdgeInsets.only(left: 10.0, right: 10.0, top: 12.0, bottom: 12.0),
       ),
@@ -743,11 +670,10 @@ class HeartBeat {
   HeartBeat(this.sensor, this.confidence);
   SensorInfoHolder sensor;
   String confidence;
-  Card getCard() {
-    return Card(
+  Widget getCard() {
+    return CustomCard(
       // HeartBeat Sensor
-      margin: EdgeInsets.only(top: 6.0, bottom: 6.0, left: 4.0, right: 4.0),
-      elevation: 8.0,
+
       child: Container(
         child: Column(
           children: this.sensor.appendThem([
@@ -759,14 +685,6 @@ class HeartBeat {
               ],
             ),
           ]),
-        ),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8.0),
-          border: Border.all(
-            color: Colors.white,
-            width: 0.7,
-            style: BorderStyle.solid,
-          ),
         ),
         padding:
             EdgeInsets.only(left: 10.0, right: 10.0, top: 12.0, bottom: 12.0),
@@ -780,11 +698,10 @@ class AmbientLight {
   AmbientLight(this.sensor, this.level);
   SensorInfoHolder sensor;
   String level;
-  Card getCard() {
-    return Card(
+  Widget getCard() {
+    return CustomCard(
       // Ambient Light Sensor
-      margin: EdgeInsets.only(top: 6.0, bottom: 6.0, left: 4.0, right: 4.0),
-      elevation: 8.0,
+
       child: Container(
         child: Column(
           children: this.sensor.appendThem([
@@ -796,14 +713,6 @@ class AmbientLight {
               ],
             ),
           ]),
-        ),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8.0),
-          border: Border.all(
-            color: Colors.white,
-            width: 0.7,
-            style: BorderStyle.solid,
-          ),
         ),
         padding:
             EdgeInsets.only(left: 10.0, right: 10.0, top: 12.0, bottom: 12.0),
@@ -817,11 +726,10 @@ class AtmosphericPressure {
   AtmosphericPressure(this.sensor, this.pressure);
   SensorInfoHolder sensor;
   String pressure;
-  Card getCard() {
-    return Card(
+  Widget getCard() {
+    return CustomCard(
       // Atmospheric Pressure
-      margin: EdgeInsets.only(top: 6.0, bottom: 6.0, left: 4.0, right: 4.0),
-      elevation: 8.0,
+
       child: Container(
         child: Column(
           children: this.sensor.appendThem([
@@ -833,14 +741,6 @@ class AtmosphericPressure {
               ],
             ),
           ]),
-        ),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8.0),
-          border: Border.all(
-            color: Colors.white,
-            width: 0.7,
-            style: BorderStyle.solid,
-          ),
         ),
         padding:
             EdgeInsets.only(left: 10.0, right: 10.0, top: 12.0, bottom: 12.0),
@@ -854,11 +754,10 @@ class Proximity {
   Proximity(this.sensor, this.distance);
   SensorInfoHolder sensor;
   String distance;
-  Card getCard() {
-    return Card(
+  Widget getCard() {
+    return CustomCard(
       // Proximity Sensor
-      margin: EdgeInsets.only(top: 6.0, bottom: 6.0, left: 4.0, right: 4.0),
-      elevation: 8.0,
+
       child: Container(
         child: Column(
           children: this.sensor.appendThem([
@@ -870,14 +769,6 @@ class Proximity {
               ],
             ),
           ]),
-        ),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8.0),
-          border: Border.all(
-            color: Colors.white,
-            width: 0.7,
-            style: BorderStyle.solid,
-          ),
         ),
         padding:
             EdgeInsets.only(left: 10.0, right: 10.0, top: 12.0, bottom: 12.0),
@@ -896,11 +787,10 @@ class RotationVector {
   String z;
   String someVal;
   String estimatedHeadingAccuracy;
-  Card getCard() {
-    return Card(
+  Widget getCard() {
+    return CustomCard(
       // Rotation Vector Sensor
-      margin: EdgeInsets.only(top: 6.0, bottom: 6.0, left: 4.0, right: 4.0),
-      elevation: 8.0,
+
       child: Container(
         child: Column(
           children: this.sensor.appendThem([
@@ -940,14 +830,6 @@ class RotationVector {
               ],
             ),
           ]),
-        ),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8.0),
-          border: Border.all(
-            color: Colors.white,
-            width: 0.7,
-            style: BorderStyle.solid,
-          ),
         ),
         padding:
             EdgeInsets.only(left: 10.0, right: 10.0, top: 12.0, bottom: 12.0),
@@ -966,11 +848,10 @@ class GameRotationVector {
   String z;
   String someVal;
   String estimatedHeadingAccuracy;
-  Card getCard() {
-    return Card(
+  Widget getCard() {
+    return CustomCard(
       // Game Rotation Vector Sensor
-      margin: EdgeInsets.only(top: 6.0, bottom: 6.0, left: 4.0, right: 4.0),
-      elevation: 8.0,
+
       child: Container(
         child: Column(
           children: this.sensor.appendThem([
@@ -1010,14 +891,6 @@ class GameRotationVector {
               ],
             ),
           ]),
-        ),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8.0),
-          border: Border.all(
-            color: Colors.white,
-            width: 0.7,
-            style: BorderStyle.solid,
-          ),
         ),
         padding:
             EdgeInsets.only(left: 10.0, right: 10.0, top: 12.0, bottom: 12.0),
@@ -1036,11 +909,10 @@ class GeoMagneticRotationVector {
   String z;
   String someVal;
   String estimatedHeadingAccuracy;
-  Card getCard() {
-    return Card(
+  Widget getCard() {
+    return CustomCard(
       // Geomagnetic Rotation Vector Sensor
-      margin: EdgeInsets.only(top: 6.0, bottom: 6.0, left: 4.0, right: 4.0),
-      elevation: 8.0,
+
       child: Container(
         child: Column(
           children: this.sensor.appendThem([
@@ -1081,14 +953,6 @@ class GeoMagneticRotationVector {
             ),
           ]),
         ),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8.0),
-          border: Border.all(
-            color: Colors.white,
-            width: 0.7,
-            style: BorderStyle.solid,
-          ),
-        ),
         padding:
             EdgeInsets.only(left: 10.0, right: 10.0, top: 12.0, bottom: 12.0),
       ),
@@ -1101,11 +965,10 @@ class RelativeHumidity {
   RelativeHumidity(this.sensor, this.humidity);
   SensorInfoHolder sensor;
   String humidity;
-  Card getCard() {
-    return Card(
+  Widget getCard() {
+    return CustomCard(
       // Relative Humidity
-      margin: EdgeInsets.only(top: 6.0, bottom: 6.0, left: 4.0, right: 4.0),
-      elevation: 8.0,
+
       child: Container(
         child: Column(
           children: this.sensor.appendThem([
@@ -1117,14 +980,6 @@ class RelativeHumidity {
               ],
             ),
           ]),
-        ),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8.0),
-          border: Border.all(
-            color: Colors.white,
-            width: 0.7,
-            style: BorderStyle.solid,
-          ),
         ),
         padding:
             EdgeInsets.only(left: 10.0, right: 10.0, top: 12.0, bottom: 12.0),
@@ -1138,11 +993,10 @@ class AmbientRoomTemperature {
   AmbientRoomTemperature(this.sensor, this.temperature);
   SensorInfoHolder sensor;
   String temperature;
-  Card getCard() {
-    return Card(
+  Widget getCard() {
+    return CustomCard(
       // Gravity
-      margin: EdgeInsets.only(top: 6.0, bottom: 6.0, left: 4.0, right: 4.0),
-      elevation: 8.0,
+
       child: Container(
         child: Column(
           children: this.sensor.appendThem([
@@ -1154,14 +1008,6 @@ class AmbientRoomTemperature {
               ],
             ),
           ]),
-        ),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8.0),
-          border: Border.all(
-            color: Colors.white,
-            width: 0.7,
-            style: BorderStyle.solid,
-          ),
         ),
         padding:
             EdgeInsets.only(left: 10.0, right: 10.0, top: 12.0, bottom: 12.0),
@@ -1180,11 +1026,10 @@ class LowLatencyOffBodyDetect {
     return this.offBodyState == '1.0' ? 'Device on-body' : 'Device off-body';
   }
 
-  Card getCard() {
-    return Card(
+  Widget getCard() {
+    return CustomCard(
       // Low latency off body detect sensor
-      margin: EdgeInsets.only(top: 6.0, bottom: 6.0, left: 4.0, right: 4.0),
-      elevation: 8.0,
+
       child: Container(
         child: Column(
           children: this.sensor.appendThem([
@@ -1196,14 +1041,6 @@ class LowLatencyOffBodyDetect {
               ],
             ),
           ]),
-        ),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8.0),
-          border: Border.all(
-            color: Colors.white,
-            width: 0.7,
-            style: BorderStyle.solid,
-          ),
         ),
         padding:
             EdgeInsets.only(left: 10.0, right: 10.0, top: 12.0, bottom: 12.0),
@@ -1243,11 +1080,10 @@ class MotionDetect {
         : 'Device not in Motion';
   }
 
-  Card getCard() {
-    return Card(
+  Widget getCard() {
+    return CustomCard(
       // Motion detect sensor
-      margin: EdgeInsets.only(top: 6.0, bottom: 6.0, left: 4.0, right: 4.0),
-      elevation: 8.0,
+
       child: Container(
         child: Column(
           children: this.sensor.appendThem([
@@ -1259,14 +1095,6 @@ class MotionDetect {
               ],
             ),
           ]),
-        ),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8.0),
-          border: Border.all(
-            color: Colors.white,
-            width: 0.7,
-            style: BorderStyle.solid,
-          ),
         ),
         padding:
             EdgeInsets.only(left: 10.0, right: 10.0, top: 12.0, bottom: 12.0),
@@ -1287,11 +1115,10 @@ class StationaryDetect {
         : 'Device not in Stationary State';
   }
 
-  Card getCard() {
-    return Card(
+  Widget getCard() {
+    return CustomCard(
       // Motion detect sensor
-      margin: EdgeInsets.only(top: 6.0, bottom: 6.0, left: 4.0, right: 4.0),
-      elevation: 8.0,
+
       child: Container(
         child: Column(
           children: this.sensor.appendThem([
@@ -1303,14 +1130,6 @@ class StationaryDetect {
               ],
             ),
           ]),
-        ),
-        decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(8.0),
-          border: Border.all(
-            color: Colors.white,
-            width: 0.7,
-            style: BorderStyle.solid,
-          ),
         ),
         padding:
             EdgeInsets.only(left: 10.0, right: 10.0, top: 12.0, bottom: 12.0),
