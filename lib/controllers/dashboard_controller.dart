@@ -4,6 +4,7 @@ import 'package:disk_space/disk_space.dart';
 import 'package:get/get.dart';
 import 'package:phone_monitor/models/battery_info.dart';
 import 'package:phone_monitor/models/dashboard_wrapper.dart';
+import 'package:phone_monitor/models/display_info.dart';
 import 'package:phone_monitor/utils/native_comms.dart';
 
 class DashboardController extends GetxController {
@@ -22,6 +23,7 @@ class DashboardController extends GetxController {
   final wrapper = DashboardInfoWrapper().obs
     ..value.totalRamUsage = 100
     ..value.battery = BatteryInfo()
+    ..value.display = DisplayInfo()
     ..value.diskSpaceUsedInPersent = 100
     ..value.totalDiskSpaceAvailable = 0.0;
 
@@ -45,6 +47,7 @@ class DashboardController extends GetxController {
     var diskSpaceUsedInPersent =
         await calcDiskSpaceUsed(totalDiskSpace, totalDiskSpaceAvailable);
     var battery = await NativeComms.getBatteryData();
+    var display = await NativeComms.getDisplayData();
 
     /// Runs an update on the [DashboardWrapper.obs]
     wrapper.update((value) {
@@ -60,6 +63,9 @@ class DashboardController extends GetxController {
 
       // Battery
       value.battery = battery;
+
+      // Display
+      value.display = display;
     });
   }
 
