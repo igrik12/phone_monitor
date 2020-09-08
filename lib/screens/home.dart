@@ -4,6 +4,7 @@ import 'package:phone_monitor/controllers/cpu_controller.dart';
 import 'package:phone_monitor/controllers/themeController.dart';
 import 'package:phone_monitor/tabs/cpu/cpu.dart';
 import 'package:phone_monitor/tabs/dashboard/dashboard.dart';
+import 'package:phone_monitor/tabs/system/system.dart';
 import 'package:phone_monitor/widgets/customProgressIndicator.dart';
 
 class Home extends StatefulWidget {
@@ -66,17 +67,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         padding: const EdgeInsets.all(12.0),
         child: CpuTab(),
       ),
-      GetX<CpuController>(
-        builder: (_) => Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Center(
-            child: CustomProgressIndicator(
-              type: ProgressIndicatorType.linear,
-              value: _.overallUsage.overAll / 100,
-            ),
-          ),
-        ),
-      ),
+      System(),
     ];
   }
 
@@ -88,8 +79,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         text: 'CPU',
       ),
       Tab(
-        icon: Icon(Icons.memory),
-        text: 'Memory',
+        icon: Icon(Icons.perm_device_information),
+        text: 'System',
       ),
     ];
   }
