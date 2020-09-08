@@ -1,3 +1,6 @@
+import 'dart:collection';
+import 'dart:math';
+
 import 'package:cpu_reader/cpu_reader.dart';
 import 'package:cpu_reader/cpuinfo.dart';
 import 'package:device_info/device_info.dart';
@@ -5,6 +8,7 @@ import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
 final androidInfo = DeviceInfoPlugin().androidInfo;
+var cache = Map<int, Queue<double>>().obs;
 
 class CpuController extends GetxController {
   static CpuController get to => Get.find();
@@ -34,7 +38,7 @@ class CpuController extends GetxController {
     _cpuTemperature.value = value;
   }
 
-  Stream<CpuInfo> stream = CpuReader.cpuStream(2000).asBroadcastStream();
+  Stream<CpuInfo> stream = CpuReader.cpuStream(1000).asBroadcastStream();
 
   @override
   onInit() async {
@@ -54,6 +58,13 @@ class CpuController extends GetxController {
   }
 }
 
+class PointData<T> {
+  int id;
+  List<Point> points = List.empty();
+  PointData({this.id, this.points});
+}
+
+// Calculate overall CPU usage for all cores
 OverallUsage _calculateOverallUsage(CpuInfo info) {
   Map<int, double> overAllPerCore = Map<int, double>();
   var frequencies = info.currentFrequencies;
