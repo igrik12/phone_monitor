@@ -4,6 +4,7 @@ import 'package:phone_monitor/controllers/cpu_controller.dart';
 import 'package:phone_monitor/controllers/themeController.dart';
 import 'package:phone_monitor/tabs/cpu/cpu.dart';
 import 'package:phone_monitor/tabs/dashboard/dashboard.dart';
+import 'package:phone_monitor/tabs/sensors/sensors.dart';
 import 'package:phone_monitor/tabs/system/system.dart';
 import 'package:phone_monitor/widgets/customProgressIndicator.dart';
 
@@ -20,7 +21,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   void initState() {
     super.initState();
     tabController = TabController(
-      length: 3,
+      length: _getTabs().length,
       vsync: this,
     );
     scrollController = ScrollController();
@@ -29,7 +30,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-        length: 3,
+        length: _getTabs().length,
         child: Scaffold(
           appBar: AppBar(
               shape: ContinuousRectangleBorder(
@@ -68,6 +69,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         child: CpuTab(),
       ),
       System(),
+      Sensors()
     ];
   }
 
@@ -82,6 +84,10 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         icon: Icon(Icons.perm_device_information),
         text: 'System',
       ),
+      Tab(
+        icon: Icon(Icons.gps_fixed),
+        text: 'Sensors',
+      )
     ];
   }
 }
