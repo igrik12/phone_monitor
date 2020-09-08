@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:collection';
 
 import 'package:cpu_reader/cpuinfo.dart';
 import 'package:cpu_reader/minMaxFreq.dart';
@@ -13,7 +14,13 @@ class CpuChart extends StatefulWidget {
   final Stream<CpuInfo> stream;
   final MinMaxFrequency minMax;
 
-  CpuChart({@required this.index, @required this.stream, this.minMax});
+  final int cacheCount;
+
+  CpuChart(
+      {@required this.index,
+      @required this.stream,
+      this.minMax,
+      this.cacheCount = 50});
 
   @override
   _CpuChartState createState() => _CpuChartState();
@@ -24,6 +31,7 @@ class _CpuChartState extends State<CpuChart> {
   StreamSubscription _streamSubscription;
   var utilisation = '0%';
   var currentOutOfMax = 'N/A';
+  var initRun = true;
 
   @override
   void initState() {
@@ -37,9 +45,24 @@ class _CpuChartState extends State<CpuChart> {
             backgroundColor: Color.fromRGBO(242, 246, 247, 1)));
 
     _streamSubscription = widget.stream.listen((cpuData) {
+      if (initRun) {
+        if (cache[widget.index] == null) {
+          cache[widget.index] = Queue<double>();
+        } else {
+          cache[widget.index].forEach((freq) {
+            chartController.addEntry(freq);
+          });
+        }
+        initRun = false;
+      }
       var currentFreq = cpuData.currentFrequencies[widget.index].toDouble();
-      var max = cpuController.cpuInfo.minMaxFrequencies[widget.index].max;
+
+      while (cache[widget.index].length >= widget.cacheCount) {
+        cache[widget.index].removeFirst();
+      }
       chartController.addEntry(currentFreq);
+      var max = cpuController.cpuInfo.minMaxFrequencies[widget.index].max;
+      cache[widget.index].addLast(currentFreq);
       setState(() {
         utilisation = '${(currentFreq * 100 / max).truncate()}%';
         currentOutOfMax = '${currentFreq.truncate()} mhz / $max mhz';

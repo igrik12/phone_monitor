@@ -33,10 +33,6 @@ class CpuOverview extends StatelessWidget {
                             : SizedBox())
                   ],
                 ),
-                // Align(
-                //   alignment: Alignment.centerLeft,
-                //   child: ,
-                // ),
                 Divider(
                   height: 15,
                 ),
@@ -54,7 +50,9 @@ class CpuOverview extends StatelessWidget {
                       ],
                     ),
                     Text(
-                      SysInfo.processors.first.vendor ?? 'N/A',
+                      SysInfo.processors.first.vendor.isEmpty
+                          ? 'N/A'
+                          : SysInfo.processors.first.vendor,
                     )
                   ],
                 ),
