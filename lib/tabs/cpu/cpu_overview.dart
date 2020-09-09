@@ -26,7 +26,7 @@ class CpuOverview extends StatelessWidget {
                     GetX<CpuController>(
                         builder: (controller) => controller.cpuTemperature != -1
                             ? Text(
-                                "${controller.cpuTemperature} °C",
+                                "${controller.overallUsage.overAll}%",
                                 style: TextStyle(color: Colors.blue),
                                 textScaleFactor: 1.4,
                               )
@@ -42,7 +42,8 @@ class CpuOverview extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Icon(Icons.blur_circular),
+                        Icon(Icons.blur_circular,
+                            color: Theme.of(context).accentColor),
                         SizedBox(
                           width: 5,
                         ),
@@ -63,7 +64,8 @@ class CpuOverview extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Icon(Icons.blur_on),
+                          Icon(Icons.blur_on,
+                              color: Theme.of(context).accentColor),
                           SizedBox(
                             width: 5,
                           ),
@@ -89,6 +91,7 @@ class CpuOverview extends StatelessWidget {
                           SvgPicture.asset(
                             'assets/icons/cpu_hardware.svg',
                             height: 20,
+                            color: Theme.of(context).accentColor,
                           ),
                           SizedBox(
                             width: 5,
@@ -107,7 +110,8 @@ class CpuOverview extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Icon(Icons.code),
+                          Icon(Icons.code,
+                              color: Theme.of(context).accentColor),
                           SizedBox(
                             width: 5,
                           ),
@@ -127,7 +131,8 @@ class CpuOverview extends StatelessWidget {
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          Icon(Icons.flash_on),
+                          Icon(Icons.flash_on,
+                              color: Theme.of(context).accentColor),
                           SizedBox(
                             width: 5,
                           ),

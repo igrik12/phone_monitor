@@ -304,7 +304,7 @@ class _SensorsState extends State<Sensors> {
     } on PlatformException {}
     setState(() {
       // UI rebuilding is done here
-      _isFirstUIBuildDone = true;
+      _mounted = true;
     });
   }
 
@@ -337,7 +337,7 @@ class _SensorsState extends State<Sensors> {
 
   void _onData(dynamic event) {
     // on sensor data reception, update data holders of different supported sensor types
-    if (!_isFirstUIBuildDone || !_mounted) return;
+    if (!_mounted) return;
     Map<String, String> receivedData = Map<String, String>.from(event);
     switch (receivedData['type']) {
       case '1':

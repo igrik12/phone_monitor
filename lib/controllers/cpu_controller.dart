@@ -45,7 +45,7 @@ class CpuController extends GetxController {
     _cpuInfo.value = await CpuReader.cpuInfo;
     deviceInfo = await androidInfo;
     stream.listen((cpuInfo) async {
-      overallUsage = await compute(_calculateOverallUsage, cpuInfo);
+      overallUsage = _calculateOverallUsage(cpuInfo);
       cpuTemperature = cpuInfo.cpuTemperature;
       update();
     });

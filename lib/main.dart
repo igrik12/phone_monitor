@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:phone_monitor/controllers/themeController.dart';
 import 'package:phone_monitor/screens/home.dart';
-import 'package:phone_monitor/utils/constants.dart';
 
 import 'controllers/bindings.dart';
 import 'utils/ad_manager.dart';
@@ -31,14 +30,13 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       themeMode: ThemeController.to.themeMode,
       darkTheme: ThemeData.dark().copyWith(
-          appBarTheme: AppBarTheme(color: Colors.orange),
-          primaryColor: Colors.green,
+          primaryColor: Colors.amber,
+          accentColor: Colors.amber,
           visualDensity: VisualDensity.adaptivePlatformDensity,
           textTheme: TextTheme(
               bodyText2: TextStyle(fontWeight: FontWeight.w500, fontSize: 12))),
       theme: ThemeData(
-          primaryColor: kPrimaryColor,
-          appBarTheme: AppBarTheme(color: kPrimaryColor),
+          primaryColor: Colors.blueAccent,
           scaffoldBackgroundColor: Color.fromRGBO(242, 246, 247, 1),
           visualDensity: VisualDensity.adaptivePlatformDensity,
           textTheme: TextTheme(
