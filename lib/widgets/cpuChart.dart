@@ -38,11 +38,7 @@ class _CpuChartState extends State<CpuChart> {
     super.initState();
     final cpuController = Get.find<CpuController>();
     var minMaxFreq = widget.minMax;
-    chartController = ChartController(
-        configuration: ChartControllerConfiguration(
-            minY: 0,
-            maxY: minMaxFreq.max.toDouble() + 150,
-            backgroundColor: Color.fromRGBO(242, 246, 247, 1)));
+    chartController = _initCharts(minMaxFreq);
 
     _streamSubscription = widget.stream.listen((cpuData) {
       if (initRun) {
@@ -77,6 +73,15 @@ class _CpuChartState extends State<CpuChart> {
     super.dispose();
   }
 
+  ChartController _initCharts(MinMaxFrequency minMaxFreq) {
+    return ChartController(
+        configuration: ChartControllerConfiguration(
+            minY: 0,
+            maxY: minMaxFreq.max.toDouble() + 150,
+            backgroundColor: Get.theme.scaffoldBackgroundColor,
+            chartsColor: Get.theme.primaryColor));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -89,7 +94,6 @@ class _CpuChartState extends State<CpuChart> {
             children: [
               Text(
                 utilisation,
-                style: TextStyle(color: Colors.blue),
               ),
               Text(currentOutOfMax)
             ],

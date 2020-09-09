@@ -23,7 +23,7 @@ class Charts extends GetView<CpuController> {
               SliverToBoxAdapter(
                   child: Text(
                 'Cpu Frequency Charts',
-                textScaleFactor: 1.4,
+                style: Get.theme.textTheme.subtitle1,
               )),
               SliverToBoxAdapter(
                 child: Divider(

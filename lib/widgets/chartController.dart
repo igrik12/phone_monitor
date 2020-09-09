@@ -1,5 +1,7 @@
+import 'package:cpu_reader/minMaxFreq.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:mp_chart/mp/controller/line_chart_controller.dart';
 import 'package:mp_chart/mp/core/common_interfaces.dart';
 import 'package:mp_chart/mp/core/data/line_data.dart';
@@ -19,6 +21,7 @@ class ChartControllerConfiguration {
   double minY;
   final double initialValue;
   final Color backgroundColor;
+  final Color chartsColor;
   final double unitVisibleCount;
 
   ChartControllerConfiguration(
@@ -26,7 +29,8 @@ class ChartControllerConfiguration {
       this.initialValue = 0,
       this.minY,
       this.maxY,
-      this.backgroundColor});
+      this.backgroundColor,
+      this.chartsColor = Colors.blue});
 }
 
 class ChartController implements OnChartValueSelectedListener {
@@ -151,9 +155,9 @@ class ChartController implements OnChartValueSelectedListener {
     set.setDrawCircles(false);
     set.setDrawValues(false);
     set.setLineWidth(1.6);
-    set.setHighLightColor(Colors.blue);
-    set.setColor1(Colors.blue);
-    set.setFillColor(Colors.blue);
+    set.setHighLightColor(configuration.chartsColor);
+    set.setColor1(configuration.chartsColor);
+    set.setFillColor(configuration.chartsColor);
     set.setFillAlpha(100);
     set.setDrawHorizontalHighlightIndicator(false);
     set.setFillFormatter(A());

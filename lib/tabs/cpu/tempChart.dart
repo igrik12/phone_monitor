@@ -1,12 +1,12 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:mp_chart/mp/chart/line_chart.dart';
 import 'package:phone_monitor/controllers/cpu_controller.dart';
-import 'package:phone_monitor/utils/constants.dart';
 
-import 'chartController.dart';
-import 'custom_card.dart';
+import '../../widgets/chartController.dart';
+import '../../widgets/custom_card.dart';
 
 class TemperatureChart extends StatefulWidget {
   TemperatureChart({Key key}) : super(key: key);
@@ -23,9 +23,7 @@ class _TemperatureChartState extends State<TemperatureChart> {
   @override
   void initState() {
     super.initState();
-    chartController = ChartController(
-        configuration: ChartControllerConfiguration(
-            backgroundColor: Colors.white, minY: 10, maxY: 75));
+    chartController = _initCharts();
     _streamSubscription = CpuController.to.stream.listen((cpuData) {
       var currentTemperature = cpuData.cpuTemperature;
       chartController.addEntry(currentTemperature);
@@ -33,6 +31,15 @@ class _TemperatureChartState extends State<TemperatureChart> {
         temperature = currentTemperature;
       });
     });
+  }
+
+  ChartController _initCharts() {
+    return ChartController(
+        configuration: ChartControllerConfiguration(
+            backgroundColor: Get.theme.scaffoldBackgroundColor,
+            chartsColor: Get.theme.primaryColor,
+            minY: 10,
+            maxY: 75));
   }
 
   @override
@@ -57,24 +64,24 @@ class _TemperatureChartState extends State<TemperatureChart> {
                 children: [
                   Text(
                     "Cpu Temparature",
-                    textScaleFactor: 1.4,
+                    style: Get.theme.textTheme.subtitle1,
                   ),
                   Text(
                     '$temperature °C',
-                    textScaleFactor: 1.4,
+                    style: Get.theme.textTheme.subtitle1,
                   ),
                 ],
               ),
             ),
-            SizedBox(
-              height: 5,
+            Divider(
+              height: 20,
             ),
             Container(
                 height: 150,
                 child: ClipRRect(
-                    borderRadius: BorderRadius.only(
-                        bottomLeft: Radius.circular(10),
-                        bottomRight: Radius.circular(10)),
+                    borderRadius: BorderRadius.all(
+                      Radius.circular(10),
+                    ),
                     child: LineChart(chartController.controller)))
           ],
         ),

@@ -35,7 +35,11 @@ class MyApp extends StatelessWidget {
           accentColor: Colors.amber,
           visualDensity: VisualDensity.adaptivePlatformDensity,
           textTheme: TextTheme(
-              bodyText2: TextStyle(fontWeight: FontWeight.w500, fontSize: 12))),
+              subtitle1: TextStyle(color: Colors.amber, fontSize: 18),
+              bodyText2: TextStyle(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 12,
+                  color: Colors.grey[400]))),
       theme: ThemeData(
           primaryColor: Colors.blueAccent,
           scaffoldBackgroundColor: Color.fromRGBO(242, 246, 247, 1),
