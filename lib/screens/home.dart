@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:phone_monitor/controllers/cpu_controller.dart';
 import 'package:phone_monitor/controllers/themeController.dart';
 import 'package:phone_monitor/tabs/cpu/cpu.dart';
 import 'package:phone_monitor/tabs/dashboard/dashboard.dart';
 import 'package:phone_monitor/tabs/sensors/sensors.dart';
 import 'package:phone_monitor/tabs/system/system.dart';
-import 'package:phone_monitor/widgets/customProgressIndicator.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -21,7 +19,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   void initState() {
     super.initState();
     tabController = TabController(
-      length: _getTabs().length,
+      length: 4,
       vsync: this,
     );
     scrollController = ScrollController();
@@ -29,49 +27,54 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return DefaultTabController(
-        length: _getTabs().length,
-        child: Scaffold(
-          appBar: AppBar(
-              shape: ContinuousRectangleBorder(
-                  borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(20),
-                      bottomRight: Radius.circular(20))),
-              title: Text('Phone Monitor'),
-              actions: [
-                GetBuilder<ThemeController>(
-                    builder: (themeController) => IconButton(
-                        icon: Icon(Icons.settings),
-                        onPressed: () {
-                          themeController.setThemeMode(Get.isDarkMode
-                              ? ThemeMode.light
-                              : ThemeMode.dark);
-                        }))
-              ],
-              bottom: TabBar(
-                controller: tabController,
-                indicatorColor: Colors.white,
-                indicatorSize: TabBarIndicatorSize.label,
-                tabs: _getTabs(),
-              )),
-          body: TabBarView(
+    return Scaffold(
+      appBar: AppBar(
+          shape: ContinuousRectangleBorder(
+              borderRadius: BorderRadius.only(
+                  bottomLeft: Radius.circular(20),
+                  bottomRight: Radius.circular(20))),
+          title: Text('Phone Monitor'),
+          actions: [
+            GetBuilder<ThemeController>(
+                builder: (themeController) => IconButton(
+                    icon: Icon(Icons.settings),
+                    onPressed: () {
+                      themeController.setThemeMode(
+                          Get.isDarkMode ? ThemeMode.light : ThemeMode.dark);
+                    }))
+          ],
+          bottom: TabBar(
             controller: tabController,
-            children: getTabViewTabs(),
+            indicatorColor: Colors.white,
+            indicatorSize: TabBarIndicatorSize.label,
+            tabs: _getTabs(),
+          )),
+      body: TabBarView(
+        controller: tabController,
+        children: [
+          Dashboard(),
+          Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: CpuTab(),
           ),
-        ));
+          System(),
+          Sensors()
+        ],
+      ),
+    );
   }
 
-  List<Widget> getTabViewTabs() {
-    return <Widget>[
-      Dashboard(),
-      Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: CpuTab(),
-      ),
-      System(),
-      Sensors()
-    ];
-  }
+  // List<Widget> getTabViewTabs() {
+  //   return <Widget>[
+  //     Dashboard(),
+  //     Padding(
+  //       padding: const EdgeInsets.all(12.0),
+  //       child: CpuTab(),
+  //     ),
+  //     System(),
+  //     Sensors()
+  //   ];
+  // }
 
   List<Widget> _getTabs() {
     return [

@@ -40,8 +40,6 @@ class MainActivity : FlutterActivity() {
     override fun configureFlutterEngine(@NonNull flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
-        eventChannel = EventChannel(flutterEngine.dartExecutor.binaryMessenger, eventChannelName)
-        initSensorEventListener()
         MethodChannel(flutterEngine.dartExecutor.binaryMessenger, channel).setMethodCallHandler { call, result ->
             when (call.method) {
                 "getTotalPhysicalMemory" -> result.success(getTotalPhysicalMemory())
@@ -50,6 +48,8 @@ class MainActivity : FlutterActivity() {
                 "getBatteryData" -> result.success(getBatteryData())
                 "getDisplayData" -> result.success(getDisplayData())
                 "getSensorsList" -> {
+                    eventChannel = EventChannel(flutterEngine.dartExecutor.binaryMessenger, eventChannelName)
+                    initSensorEventListener()
                     result.success(getSensorsList())
                 }
                 else -> {

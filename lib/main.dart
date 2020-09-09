@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:phone_monitor/controllers/themeController.dart';
 import 'package:phone_monitor/screens/home.dart';
 import 'package:phone_monitor/utils/constants.dart';
 
@@ -11,6 +12,7 @@ import 'utils/ad_manager.dart';
 
 void main() async {
   await GetStorage.init();
+  Get.lazyPut<ThemeController>(() => ThemeController());
   Admob.initialize(AdManager.appId);
   runApp(MyApp());
 }
@@ -23,10 +25,11 @@ class MyApp extends StatelessWidget {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
+    ThemeController.to.getThemeModeFromPreferences();
     return GetMaterialApp(
       initialBinding: InitialBinding(),
       debugShowCheckedModeBanner: false,
-      themeMode: ThemeMode.light,
+      themeMode: ThemeController.to.themeMode,
       darkTheme: ThemeData.dark().copyWith(
           appBarTheme: AppBarTheme(color: Colors.orange),
           primaryColor: Colors.green,
