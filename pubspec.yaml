@@ -34,6 +34,7 @@ dependencies:
   get: 3.8.0
   get_storage:
   mp_chart:
+  settings_ui: ^0.4.0
   system_info: ^0.1.3
 
 dev_dependencies:

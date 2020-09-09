@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:phone_monitor/controllers/themeController.dart';
 import 'package:phone_monitor/screens/home.dart';
+import 'package:phone_monitor/screens/settings.dart';
 
 import 'controllers/bindings.dart';
 import 'utils/ad_manager.dart';
@@ -44,6 +45,9 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
         body: Home(),
       ),
+      getPages: [
+        GetPage(name: '/settings', page: () => SettingsScreen()),
+      ],
     );
   }
 }

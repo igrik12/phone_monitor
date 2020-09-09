@@ -2,7 +2,6 @@ import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
-import 'package:phone_monitor/controllers/themeController.dart';
 import 'package:phone_monitor/tabs/cpu/cpu.dart';
 import 'package:phone_monitor/tabs/dashboard/dashboard.dart';
 import 'package:phone_monitor/tabs/sensors/sensors.dart';
@@ -30,7 +29,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     setState(() {
       bottomSelectedIndex = index;
       pageController.animateToPage(index,
-          duration: Duration(milliseconds: 500), curve: Curves.ease);
+          duration: Duration(milliseconds: 600), curve: Curves.ease);
     });
   }
 
@@ -51,13 +50,11 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         appBar: AppBar(
           title: Text('Phone Monitor'),
           actions: [
-            GetBuilder<ThemeController>(
-                builder: (themeController) => IconButton(
-                    icon: Icon(Icons.settings),
-                    onPressed: () {
-                      themeController.setThemeMode(
-                          Get.isDarkMode ? ThemeMode.light : ThemeMode.dark);
-                    }))
+            IconButton(
+                icon: Icon(Icons.settings),
+                onPressed: () {
+                  Get.toNamed("/settings");
+                }),
           ],
         ),
         body: PageView(
@@ -113,25 +110,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
       ),
       System(),
       Sensors()
-    ];
-  }
-
-  List<BottomNavigationBarItem> _getNavbarItems() {
-    return [
-      BottomNavigationBarItem(
-          icon: Icon(Icons.dashboard), title: Text('Dashboard')),
-      BottomNavigationBarItem(
-        icon: Icon(Icons.shutter_speed),
-        title: Text('CPU'),
-      ),
-      BottomNavigationBarItem(
-        icon: Icon(Icons.perm_device_information),
-        title: Text('System'),
-      ),
-      BottomNavigationBarItem(
-        icon: Icon(Icons.gps_fixed),
-        title: Text('Sensors'),
-      )
     ];
   }
 }

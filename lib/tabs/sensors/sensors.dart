@@ -303,7 +303,6 @@ class _SensorsState extends State<Sensors> {
       });
     } on PlatformException {}
     setState(() {
-      // UI rebuilding is done here
       _mounted = true;
     });
   }
@@ -314,10 +313,12 @@ class _SensorsState extends State<Sensors> {
     super.initState();
     getSensorsList();
     _mounted = true;
-    _eventChannel = EventChannel('com.twarkapps.phone_monitor/sensor_stream');
-    _subscription = _eventChannel
-        .receiveBroadcastStream()
-        .listen(_onData, onError: _onError);
+    Future.delayed(Duration(milliseconds: 100), () {
+      _eventChannel = EventChannel('com.twarkapps.phone_monitor/sensor_stream');
+      _subscription = _eventChannel
+          .receiveBroadcastStream()
+          .listen(_onData, onError: _onError);
+    });
   }
 
   @override
