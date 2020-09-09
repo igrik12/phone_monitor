@@ -9,7 +9,7 @@ class SettingsScreen extends StatefulWidget {
 }
 
 class _SettingsScreenState extends State<SettingsScreen> {
-  bool lockInBackground = true;
+  bool lockInBackground = Get.isDarkMode;
   String theme = Get.isDarkMode ? 'Dark Theme' : 'Light Theme';
 
   @override

@@ -19,9 +19,9 @@ import 'package:mp_chart/mp/core/utils/color_utils.dart';
 class ChartControllerConfiguration {
   double maxY;
   double minY;
+  Color backgroundColor;
+  Color chartsColor;
   final double initialValue;
-  final Color backgroundColor;
-  final Color chartsColor;
   final double unitVisibleCount;
 
   ChartControllerConfiguration(

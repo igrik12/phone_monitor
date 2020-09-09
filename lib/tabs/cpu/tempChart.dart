@@ -9,8 +9,6 @@ import '../../widgets/chartController.dart';
 import '../../widgets/custom_card.dart';
 
 class TemperatureChart extends StatefulWidget {
-  TemperatureChart({Key key}) : super(key: key);
-
   @override
   _TemperatureChartState createState() => _TemperatureChartState();
 }
@@ -19,18 +17,35 @@ class _TemperatureChartState extends State<TemperatureChart> {
   ChartController chartController;
   StreamSubscription _streamSubscription;
   var temperature = 0.0;
+  var initRun = true;
 
   @override
   void initState() {
     super.initState();
     chartController = _initCharts();
     _streamSubscription = CpuController.to.stream.listen((cpuData) {
+      if (initRun) {
+        tempCache.forEach((freq) {
+          chartController.addEntry(freq);
+        });
+        initRun = false;
+      }
       var currentTemperature = cpuData.cpuTemperature;
+      while (tempCache.length >= 100) {
+        tempCache.removeFirst();
+      }
       chartController.addEntry(currentTemperature);
+      tempCache.addLast(currentTemperature);
       setState(() {
         temperature = currentTemperature;
       });
     });
+  }
+
+  @override
+  void didUpdateWidget(Widget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    chartController = _initCharts();
   }
 
   ChartController _initCharts() {

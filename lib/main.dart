@@ -25,7 +25,6 @@ class MyApp extends StatelessWidget {
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
-    ThemeController.to.getThemeModeFromPreferences();
     return GetMaterialApp(
       initialBinding: InitialBinding(),
       debugShowCheckedModeBanner: false,

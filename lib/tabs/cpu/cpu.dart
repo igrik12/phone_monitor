@@ -37,10 +37,9 @@ class _CpuTabState extends State<CpuTab> {
           Charts(
             chartsScrollController: _chartsScrollController,
           ),
-          GetX<CpuController>(
-            builder: (_) =>
-                _.cpuTemperature != -1 ? TemperatureChart() : SizedBox(),
-          )
+          CpuController.to.cpuInfo.cpuTemperature != -1
+              ? TemperatureChart()
+              : SizedBox()
         ],
       ),
     );

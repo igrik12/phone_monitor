@@ -31,7 +31,6 @@ SensorInfoHolder getMeAnInstanceOfSensorInfoHolder(Map<String, String> data) {
 
 class _SensorsState extends State<Sensors> {
   EventChannel _eventChannel;
-  bool _isFirstUIBuildDone = false;
   List<Accelerometer> _listAccelerometer = [];
   List<UncalibratedAccelerometer> _listUncalibratedAccelerometer = [];
   List<Gravity> _listGravity = [];
@@ -313,7 +312,7 @@ class _SensorsState extends State<Sensors> {
     super.initState();
     getSensorsList();
     _mounted = true;
-    Future.delayed(Duration(milliseconds: 100), () {
+    Future.delayed(Duration(milliseconds: 500), () {
       _eventChannel = EventChannel('com.twarkapps.phone_monitor/sensor_stream');
       _subscription = _eventChannel
           .receiveBroadcastStream()

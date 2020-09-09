@@ -4,11 +4,11 @@ import 'dart:math';
 import 'package:cpu_reader/cpu_reader.dart';
 import 'package:cpu_reader/cpuinfo.dart';
 import 'package:device_info/device_info.dart';
-import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
 final androidInfo = DeviceInfoPlugin().androidInfo;
-var cache = Map<int, Queue<double>>().obs;
+final cache = Map<int, Queue<double>>();
+final tempCache = Queue<double>();
 
 class CpuController extends GetxController {
   static CpuController get to => Get.find();
