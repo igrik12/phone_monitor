@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:phone_monitor/controllers/cpu_controller.dart';
+import 'package:phone_monitor/controllers/themeController.dart';
 import 'package:phone_monitor/widgets/cpuChart.dart';
 import 'package:phone_monitor/widgets/custom_card.dart';
 
@@ -23,7 +24,7 @@ class Charts extends GetView<CpuController> {
               SliverToBoxAdapter(
                   child: Text(
                 'Cpu Frequency Charts',
-                textScaleFactor: 1.4,
+                style: Get.theme.textTheme.subtitle1,
               )),
               SliverToBoxAdapter(
                 child: Divider(
@@ -39,11 +40,14 @@ class Charts extends GetView<CpuController> {
                 ),
                 delegate: SliverChildBuilderDelegate(
                   (BuildContext context, int index) {
-                    return CpuChart(
-                      minMax: cpuController.cpuInfo.minMaxFrequencies[index],
-                      index: index,
-                      stream: cpuController.stream,
-                    );
+                    return GetBuilder<ThemeController>(
+                        builder: (themeController) => CpuChart(
+                              minMax: cpuController
+                                  .cpuInfo.minMaxFrequencies[index],
+                              index: index,
+                              stream: cpuController.stream,
+                              themMode: themeController.themeMode,
+                            ));
                   },
                   childCount: cpuController.cpuInfo?.numberOfCores ?? 0,
                 ),

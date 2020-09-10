@@ -21,7 +21,7 @@ class CpuProgressGrid extends StatelessWidget {
                         alignment: Alignment.centerLeft,
                         child: Text(
                           "CPU Core Usage",
-                          textScaleFactor: 1.4,
+                          style: Get.theme.textTheme.subtitle1,
                         )),
                     Divider(
                       height: 15,

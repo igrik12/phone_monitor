@@ -21,22 +21,17 @@ class CpuOverview extends StatelessWidget {
                   children: [
                     Text(
                       'CPU Overview',
-                      textScaleFactor: 1.3,
+                      style: Get.theme.textTheme.subtitle1,
                     ),
                     GetX<CpuController>(
                         builder: (controller) => controller.cpuTemperature != -1
                             ? Text(
-                                "${controller.cpuTemperature} °C",
-                                style: TextStyle(color: Colors.blue),
-                                textScaleFactor: 1.4,
+                                "${controller.overallUsage.overAll}%",
+                                style: Get.theme.textTheme.subtitle1,
                               )
                             : SizedBox())
                   ],
                 ),
-                // Align(
-                //   alignment: Alignment.centerLeft,
-                //   child: ,
-                // ),
                 Divider(
                   height: 15,
                 ),
@@ -54,7 +49,9 @@ class CpuOverview extends StatelessWidget {
                       ],
                     ),
                     Text(
-                      SysInfo.processors.first.vendor ?? 'N/A',
+                      SysInfo.processors.first.vendor.isEmpty
+                          ? 'N/A'
+                          : SysInfo.processors.first.vendor,
                     )
                   ],
                 ),
@@ -88,10 +85,10 @@ class CpuOverview extends StatelessWidget {
                           SizedBox(
                             width: 3,
                           ),
-                          SvgPicture.asset(
-                            'assets/icons/cpu_hardware.svg',
-                            height: 20,
-                          ),
+                          SvgPicture.asset('assets/icons/cpu_hardware.svg',
+                              height: 20,
+                              color:
+                                  Get.isDarkMode ? Colors.white : Colors.black),
                           SizedBox(
                             width: 5,
                           ),

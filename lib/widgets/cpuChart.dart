@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:collection';
 
 import 'package:cpu_reader/cpuinfo.dart';
 import 'package:cpu_reader/minMaxFreq.dart';
@@ -13,7 +14,15 @@ class CpuChart extends StatefulWidget {
   final Stream<CpuInfo> stream;
   final MinMaxFrequency minMax;
 
-  CpuChart({@required this.index, @required this.stream, this.minMax});
+  final int cacheCount;
+  final ThemeMode themMode;
+
+  CpuChart(
+      {@required this.index,
+      @required this.stream,
+      this.minMax,
+      this.cacheCount = 50,
+      this.themMode});
 
   @override
   _CpuChartState createState() => _CpuChartState();
@@ -22,24 +31,53 @@ class CpuChart extends StatefulWidget {
 class _CpuChartState extends State<CpuChart> {
   ChartController chartController;
   StreamSubscription _streamSubscription;
+  ChartControllerConfiguration _chartControllerConfiguration;
   var utilisation = '0%';
   var currentOutOfMax = 'N/A';
+  var initRun = true;
+
+  @override
+  void didUpdateWidget(Widget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    _chartControllerConfiguration
+      ..backgroundColor = Get.theme.scaffoldBackgroundColor
+      ..chartsColor = Get.theme.primaryColor;
+    chartController = _initCharts(_chartControllerConfiguration);
+  }
 
   @override
   void initState() {
     super.initState();
     final cpuController = Get.find<CpuController>();
     var minMaxFreq = widget.minMax;
-    chartController = ChartController(
-        configuration: ChartControllerConfiguration(
-            minY: 0,
-            maxY: minMaxFreq.max.toDouble() + 150,
-            backgroundColor: Color.fromRGBO(242, 246, 247, 1)));
+
+    _chartControllerConfiguration = ChartControllerConfiguration(
+        minY: 0,
+        maxY: minMaxFreq.max.toDouble() + 150,
+        backgroundColor: Get.theme.scaffoldBackgroundColor,
+        chartsColor: Get.theme.primaryColor);
+
+    chartController = _initCharts(_chartControllerConfiguration);
 
     _streamSubscription = widget.stream.listen((cpuData) {
+      if (initRun) {
+        if (cache[widget.index] == null) {
+          cache[widget.index] = Queue<double>();
+        } else {
+          cache[widget.index].forEach((freq) {
+            chartController.addEntry(freq);
+          });
+        }
+        initRun = false;
+      }
       var currentFreq = cpuData.currentFrequencies[widget.index].toDouble();
-      var max = cpuController.cpuInfo.minMaxFrequencies[widget.index].max;
+
+      while (cache[widget.index].length >= widget.cacheCount) {
+        cache[widget.index].removeFirst();
+      }
       chartController.addEntry(currentFreq);
+      var max = cpuController.cpuInfo.minMaxFrequencies[widget.index].max;
+      cache[widget.index].addLast(currentFreq);
       setState(() {
         utilisation = '${(currentFreq * 100 / max).truncate()}%';
         currentOutOfMax = '${currentFreq.truncate()} mhz / $max mhz';
@@ -54,6 +92,10 @@ class _CpuChartState extends State<CpuChart> {
     super.dispose();
   }
 
+  ChartController _initCharts(ChartControllerConfiguration config) {
+    return ChartController(configuration: config);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -66,7 +108,6 @@ class _CpuChartState extends State<CpuChart> {
             children: [
               Text(
                 utilisation,
-                style: TextStyle(color: Colors.blue),
               ),
               Text(currentOutOfMax)
             ],

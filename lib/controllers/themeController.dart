@@ -7,6 +7,12 @@ class ThemeController extends GetxController {
   static ThemeController get to => Get.find();
   final box = GetStorage();
 
+  @override
+  void onInit() {
+    super.onInit();
+    getThemeModeFromPreferences();
+  }
+
   ThemeMode _themeMode;
   ThemeMode get themeMode => _themeMode;
 
@@ -17,7 +23,7 @@ class ThemeController extends GetxController {
     box.write('theme', themeMode.toString().split('.')[1]);
   }
 
-  getThemeModeFromPreferences() async {
+  getThemeModeFromPreferences() {
     ThemeMode themeMode;
     String themeText = box.read('theme') ?? 'system';
     try {

@@ -1,0 +1,41 @@
+{
+  "project_info": {
+    "project_number": "1098351934781",
+    "firebase_url": "https://phone-monitor-8a516.firebaseio.com",
+    "project_id": "phone-monitor-8a516",
+    "storage_bucket": "phone-monitor-8a516.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1098351934781:android:ff3ba54dc3b5b1d56f5954",
+        "android_client_info": {
+          "package_name": "com.twarkapps.phone_monitor"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1098351934781-0d44h9hi1hjrase0bs7flormei4fcvv6.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDob6UaDNX3tTLsMKle_6UMx0fMFMO5nrM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1098351934781-0d44h9hi1hjrase0bs7flormei4fcvv6.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      },
+      "admob_app_id": "ca-app-pub-8553583576390987~6421066446"
+    }
+  ],
+  "configuration_version": "1"
+}

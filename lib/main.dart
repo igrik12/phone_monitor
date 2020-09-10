@@ -1,14 +1,19 @@
+import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:phone_monitor/controllers/themeController.dart';
 import 'package:phone_monitor/screens/home.dart';
-import 'package:phone_monitor/utils/constants.dart';
+import 'package:phone_monitor/screens/settings.dart';
 
 import 'controllers/bindings.dart';
+import 'utils/ad_manager.dart';
 
 void main() async {
   await GetStorage.init();
+  Get.lazyPut<ThemeController>(() => ThemeController());
+  Admob.initialize(AdManager.appId);
   runApp(MyApp());
 }
 
@@ -23,23 +28,30 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       initialBinding: InitialBinding(),
       debugShowCheckedModeBanner: false,
-      themeMode: ThemeMode.light,
+      themeMode: ThemeController.to.themeMode,
       darkTheme: ThemeData.dark().copyWith(
-          appBarTheme: AppBarTheme(color: Colors.orange),
-          primaryColor: Colors.green,
+          primaryColor: Colors.amber,
+          accentColor: Colors.amber,
           visualDensity: VisualDensity.adaptivePlatformDensity,
           textTheme: TextTheme(
-              bodyText2: TextStyle(fontWeight: FontWeight.w500, fontSize: 12))),
+              subtitle1: TextStyle(color: Colors.amber, fontSize: 18),
+              bodyText2: TextStyle(
+                  fontWeight: FontWeight.w500,
+                  fontSize: 12,
+                  color: Colors.grey[400]))),
       theme: ThemeData(
-          primaryColor: kPrimaryColor,
-          appBarTheme: AppBarTheme(color: kPrimaryColor),
+          primaryColor: Colors.blueAccent,
           scaffoldBackgroundColor: Color.fromRGBO(242, 246, 247, 1),
           visualDensity: VisualDensity.adaptivePlatformDensity,
           textTheme: TextTheme(
+              subtitle1: TextStyle(fontSize: 18),
               bodyText2: TextStyle(fontWeight: FontWeight.w500, fontSize: 12))),
       home: Scaffold(
         body: Home(),
       ),
+      getPages: [
+        GetPage(name: '/settings', page: () => SettingsScreen()),
+      ],
     );
   }
 }
