@@ -1,5 +1,6 @@
 import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:phone_monitor/tabs/cpu/cpu.dart';
@@ -75,14 +76,14 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               color: Theme.of(context).accentColor,
               //color: Colors.black,
             ),
-            Icon(
-              FontAwesomeIcons.microchip,
-              size: 25.0,
+            SvgPicture.asset(
+              'assets/icons/cpu_hardware.svg',
+              height: 25,
               color: Theme.of(context).accentColor,
             ),
-            Icon(
-              Icons.perm_device_information,
-              size: 25.0,
+            SvgPicture.asset(
+              'assets/icons/system_info.svg',
+              height: 25,
               color: Theme.of(context).accentColor,
             ),
             Icon(
@@ -90,9 +91,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               size: 25.0,
               color: Theme.of(context).accentColor,
             ),
-            Icon(
-              Icons.gps_fixed,
-              size: 25.0,
+            SvgPicture.asset(
+              'assets/icons/gyroscope.svg',
+              height: 25,
               color: Theme.of(context).accentColor,
             ),
           ],
