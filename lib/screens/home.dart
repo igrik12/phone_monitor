@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:phone_monitor/tabs/cpu/cpu.dart';
+import 'package:phone_monitor/tabs/dashboard/applications.dart';
 import 'package:phone_monitor/tabs/dashboard/dashboard.dart';
 import 'package:phone_monitor/tabs/sensors/sensors.dart';
 import 'package:phone_monitor/tabs/system/system.dart';
@@ -85,6 +86,11 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               color: Theme.of(context).accentColor,
             ),
             Icon(
+              Icons.apps,
+              size: 25.0,
+              color: Theme.of(context).accentColor,
+            ),
+            Icon(
               Icons.gps_fixed,
               size: 25.0,
               color: Theme.of(context).accentColor,
@@ -109,6 +115,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         child: CpuTab(),
       ),
       System(),
+      Applications(),
       Sensors()
     ];
   }
