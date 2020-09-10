@@ -15,12 +15,14 @@ class CpuChart extends StatefulWidget {
   final MinMaxFrequency minMax;
 
   final int cacheCount;
+  final ThemeMode themMode;
 
   CpuChart(
       {@required this.index,
       @required this.stream,
       this.minMax,
-      this.cacheCount = 50});
+      this.cacheCount = 50,
+      this.themMode});
 
   @override
   _CpuChartState createState() => _CpuChartState();
@@ -29,20 +31,33 @@ class CpuChart extends StatefulWidget {
 class _CpuChartState extends State<CpuChart> {
   ChartController chartController;
   StreamSubscription _streamSubscription;
+  ChartControllerConfiguration _chartControllerConfiguration;
   var utilisation = '0%';
   var currentOutOfMax = 'N/A';
   var initRun = true;
+
+  @override
+  void didUpdateWidget(Widget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    _chartControllerConfiguration
+      ..backgroundColor = Get.theme.scaffoldBackgroundColor
+      ..chartsColor = Get.theme.primaryColor;
+    chartController = _initCharts(_chartControllerConfiguration);
+  }
 
   @override
   void initState() {
     super.initState();
     final cpuController = Get.find<CpuController>();
     var minMaxFreq = widget.minMax;
-    chartController = ChartController(
-        configuration: ChartControllerConfiguration(
-            minY: 0,
-            maxY: minMaxFreq.max.toDouble() + 150,
-            backgroundColor: Color.fromRGBO(242, 246, 247, 1)));
+
+    _chartControllerConfiguration = ChartControllerConfiguration(
+        minY: 0,
+        maxY: minMaxFreq.max.toDouble() + 150,
+        backgroundColor: Get.theme.scaffoldBackgroundColor,
+        chartsColor: Get.theme.primaryColor);
+
+    chartController = _initCharts(_chartControllerConfiguration);
 
     _streamSubscription = widget.stream.listen((cpuData) {
       if (initRun) {
@@ -77,6 +92,10 @@ class _CpuChartState extends State<CpuChart> {
     super.dispose();
   }
 
+  ChartController _initCharts(ChartControllerConfiguration config) {
+    return ChartController(configuration: config);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -89,7 +108,6 @@ class _CpuChartState extends State<CpuChart> {
             children: [
               Text(
                 utilisation,
-                style: TextStyle(color: Colors.blue),
               ),
               Text(currentOutOfMax)
             ],

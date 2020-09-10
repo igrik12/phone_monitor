@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 enum ProgressIndicatorType {
   circular,
@@ -72,9 +73,12 @@ class _CustomProgressIndicatorState extends State<CustomProgressIndicator>
           borderRadius: BorderRadius.circular(20),
           child: LinearProgressIndicator(
             minHeight: 10,
-            backgroundColor: Colors.blue[50],
+            backgroundColor: Get.isDarkMode
+                ? Get.theme.scaffoldBackgroundColor
+                : Colors.blue[50],
             value: _animation.evaluate(_controller),
-            valueColor: new AlwaysStoppedAnimation<Color>(Colors.blue),
+            valueColor:
+                new AlwaysStoppedAnimation<Color>(Get.theme.primaryColor),
           ),
         );
       default:

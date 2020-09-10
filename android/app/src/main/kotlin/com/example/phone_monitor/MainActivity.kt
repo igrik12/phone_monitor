@@ -40,8 +40,6 @@ class MainActivity : FlutterActivity() {
     override fun configureFlutterEngine(@NonNull flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
         sensorManager = getSystemService(Context.SENSOR_SERVICE) as SensorManager
-        eventChannel = EventChannel(flutterEngine.dartExecutor.binaryMessenger, eventChannelName)
-        initSensorEventListener()
         MethodChannel(flutterEngine.dartExecutor.binaryMessenger, channel).setMethodCallHandler { call, result ->
             when (call.method) {
                 "getTotalPhysicalMemory" -> result.success(getTotalPhysicalMemory())
@@ -50,6 +48,8 @@ class MainActivity : FlutterActivity() {
                 "getBatteryData" -> result.success(getBatteryData())
                 "getDisplayData" -> result.success(getDisplayData())
                 "getSensorsList" -> {
+                    eventChannel = EventChannel(flutterEngine.dartExecutor.binaryMessenger, eventChannelName)
+                    initSensorEventListener()
                     result.success(getSensorsList())
                 }
                 else -> {
@@ -62,12 +62,16 @@ class MainActivity : FlutterActivity() {
     private fun initSensorEventListener() {
         eventChannel.setStreamHandler(
                 object : EventChannel.StreamHandler {
-                    override fun onCancel(p0: Any?) {}
+                    private lateinit var  listener: CustomSensorListener
+                    override fun onCancel(p0: Any?) {
+                        sensorManager.unregisterListener(listener)
+                    }
 
                     override fun onListen(p0: Any?, p1: EventChannel.EventSink?) {
                         if (p1 != null) {
+                            listener = CustomSensorListener(p1)
                             sensorManager.getSensorList(Sensor.TYPE_ALL).forEach {
-                                sensorManager.registerListener(CustomSensorListener(p1), it, SensorManager.SENSOR_DELAY_NORMAL)
+                                sensorManager.registerListener(listener, it, SensorManager.SENSOR_DELAY_NORMAL)
                             }
                         }
                     }
@@ -93,16 +97,6 @@ class MainActivity : FlutterActivity() {
                 "fifoReservedEventCount" to if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) sensor.fifoReservedEventCount.toString() else "NA",
                 "fifoMaxEventCount" to if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) sensor.fifoMaxEventCount.toString() else "NA"
         )
-    }
-
-    private fun getTemperatureSensor(): List<Map<String, String>> {
-        val tmp = mutableListOf<Map<String, String>>()
-        if (sensorManager.getSensorList(Sensor.TYPE_AMBIENT_TEMPERATURE) != null) {
-            sensorManager.getSensorList(Sensor.TYPE_AMBIENT_TEMPERATURE).forEach {
-                tmp.add(extractSensorInfo(it))
-            }
-        }
-        return tmp
     }
 
     private fun getSensorsList(): Map<String, List<Map<String, String>>> {

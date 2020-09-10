@@ -30,7 +30,7 @@ SensorInfoHolder getMeAnInstanceOfSensorInfoHolder(Map<String, String> data) {
 }
 
 class _SensorsState extends State<Sensors> {
-  bool _isFirstUIBuildDone = false;
+  EventChannel _eventChannel;
   List<Accelerometer> _listAccelerometer = [];
   List<UncalibratedAccelerometer> _listUncalibratedAccelerometer = [];
   List<Gravity> _listGravity = [];
@@ -53,6 +53,7 @@ class _SensorsState extends State<Sensors> {
   List<StationaryDetect> _listStationaryDetect = [];
 
   StreamSubscription _subscription;
+  bool _mounted = false;
 
   Future<void> getSensorsList() async {
     Map<String, List<dynamic>> sensorCount;
@@ -301,8 +302,7 @@ class _SensorsState extends State<Sensors> {
       });
     } on PlatformException {}
     setState(() {
-      // UI rebuilding is done here
-      _isFirstUIBuildDone = true;
+      _mounted = true;
     });
   }
 
@@ -311,15 +311,20 @@ class _SensorsState extends State<Sensors> {
     // stateful widget initialization done here
     super.initState();
     getSensorsList();
-    _subscription = NativeComms.eventChannel
-        .receiveBroadcastStream()
-        .listen(_onData, onError: _onError);
+    _mounted = true;
+    Future.delayed(Duration(milliseconds: 500), () {
+      _eventChannel = EventChannel('com.twarkapps.phone_monitor/sensor_stream');
+      _subscription = _eventChannel
+          .receiveBroadcastStream()
+          .listen(_onData, onError: _onError);
+    });
   }
 
   @override
   void dispose() {
+    _mounted = false;
     super.dispose();
-    _subscription.cancel();
+    _subscription?.cancel();
     _subscription = null;
   }
 
@@ -332,13 +337,14 @@ class _SensorsState extends State<Sensors> {
 
   void _onData(dynamic event) {
     // on sensor data reception, update data holders of different supported sensor types
-    if (!_isFirstUIBuildDone) return;
+    if (!_mounted) return;
     Map<String, String> receivedData = Map<String, String>.from(event);
     switch (receivedData['type']) {
       case '1':
         _listAccelerometer.forEach((item) {
           if (isAMatch(item.sensor, receivedData)) {
             List<String> sensorFeed = receivedData['values'].split(';');
+            if (!mounted) return;
             setState(() {
               item.x = sensorFeed[0];
               item.y = sensorFeed[1];
@@ -351,6 +357,7 @@ class _SensorsState extends State<Sensors> {
         _listUncalibratedAccelerometer.forEach((item) {
           if (isAMatch(item.sensor, receivedData)) {
             List<String> sensorFeed = receivedData['values'].split(';');
+            if (!mounted) return;
             setState(() {
               item.xUncalib = sensorFeed[0];
               item.yUncalib = sensorFeed[1];
@@ -366,6 +373,7 @@ class _SensorsState extends State<Sensors> {
         _listGravity.forEach((item) {
           if (isAMatch(item.sensor, receivedData)) {
             List<String> sensorFeed = receivedData['values'].split(';');
+            if (!mounted) return;
             setState(() {
               item.x = sensorFeed[0];
               item.y = sensorFeed[1];
@@ -378,6 +386,7 @@ class _SensorsState extends State<Sensors> {
         _listLinearAcceleration.forEach((item) {
           if (isAMatch(item.sensor, receivedData)) {
             List<String> sensorFeed = receivedData['values'].split(';');
+            if (!mounted) return;
             setState(() {
               item.x = sensorFeed[0];
               item.y = sensorFeed[1];
@@ -390,6 +399,7 @@ class _SensorsState extends State<Sensors> {
         _listMagneticField.forEach((item) {
           if (isAMatch(item.sensor, receivedData)) {
             List<String> sensorFeed = receivedData['values'].split(';');
+            if (!mounted) return;
             setState(() {
               item.x = sensorFeed[0];
               item.y = sensorFeed[1];
@@ -402,6 +412,7 @@ class _SensorsState extends State<Sensors> {
         _listOrientationSensor.forEach((item) {
           if (isAMatch(item.sensor, receivedData)) {
             List<String> sensorFeed = receivedData['values'].split(';');
+            if (!mounted) return;
             setState(() {
               item.azimuth = sensorFeed[0];
               item.pitch = sensorFeed[1];
@@ -414,6 +425,7 @@ class _SensorsState extends State<Sensors> {
         _listGyroscope.forEach((item) {
           if (isAMatch(item.sensor, receivedData)) {
             List<String> sensorFeed = receivedData['values'].split(';');
+            if (!mounted) return;
             setState(() {
               item.angularSpeedAroundX = sensorFeed[0];
               item.angularSpeedAroundY = sensorFeed[1];
@@ -426,6 +438,7 @@ class _SensorsState extends State<Sensors> {
         _listUncalibratedGyroscope.forEach((item) {
           if (isAMatch(item.sensor, receivedData)) {
             List<String> sensorFeed = receivedData['values'].split(';');
+            if (!mounted) return;
             setState(() {
               item.angularSpeedAroundX = sensorFeed[0];
               item.angularSpeedAroundY = sensorFeed[1];
@@ -441,6 +454,7 @@ class _SensorsState extends State<Sensors> {
         _listHeartBeat.forEach((item) {
           if (isAMatch(item.sensor, receivedData)) {
             List<String> sensorFeed = receivedData['values'].split(';');
+            if (!mounted) return;
             setState(() {
               item.confidence = sensorFeed[0];
             });
@@ -451,6 +465,7 @@ class _SensorsState extends State<Sensors> {
         _listAmbientLight.forEach((item) {
           if (isAMatch(item.sensor, receivedData)) {
             List<String> sensorFeed = receivedData['values'].split(';');
+            if (!mounted) return;
             setState(() {
               item.level = sensorFeed[0];
             });
@@ -461,6 +476,7 @@ class _SensorsState extends State<Sensors> {
         _listAtmosphericPressure.forEach((item) {
           if (isAMatch(item.sensor, receivedData)) {
             List<String> sensorFeed = receivedData['values'].split(';');
+            if (!mounted) return;
             setState(() {
               item.pressure = sensorFeed[0];
             });
@@ -471,6 +487,7 @@ class _SensorsState extends State<Sensors> {
         _listProximity.forEach((item) {
           if (isAMatch(item.sensor, receivedData)) {
             List<String> sensorFeed = receivedData['values'].split(';');
+            if (!mounted) return;
             setState(() {
               item.distance = sensorFeed[0];
             });
@@ -481,6 +498,7 @@ class _SensorsState extends State<Sensors> {
         _listRotationVector.forEach((item) {
           if (isAMatch(item.sensor, receivedData)) {
             List<String> sensorFeed = receivedData['values'].split(';');
+            if (!mounted) return;
             setState(() {
               item.x = sensorFeed[0];
               item.y = sensorFeed[1];
@@ -497,6 +515,7 @@ class _SensorsState extends State<Sensors> {
         _listGameRotationVector.forEach((item) {
           if (isAMatch(item.sensor, receivedData)) {
             List<String> sensorFeed = receivedData['values'].split(';');
+            if (!mounted) return;
             setState(() {
               item.x = sensorFeed[0];
               item.y = sensorFeed[1];
@@ -513,6 +532,7 @@ class _SensorsState extends State<Sensors> {
         _listGeoMagneticRotationVector.forEach((item) {
           if (isAMatch(item.sensor, receivedData)) {
             List<String> sensorFeed = receivedData['values'].split(';');
+            if (!mounted) return;
             setState(() {
               item.x = sensorFeed[0];
               item.y = sensorFeed[1];
@@ -529,6 +549,7 @@ class _SensorsState extends State<Sensors> {
         _listRelativeHumidity.forEach((item) {
           if (isAMatch(item.sensor, receivedData)) {
             List<String> sensorFeed = receivedData['values'].split(';');
+            if (!mounted) return;
             setState(() {
               item.humidity = sensorFeed[0];
             });
@@ -539,6 +560,7 @@ class _SensorsState extends State<Sensors> {
         _listAmbientRoomTemperature.forEach((item) {
           if (isAMatch(item.sensor, receivedData)) {
             List<String> sensorFeed = receivedData['values'].split(';');
+            if (!mounted) return;
             setState(() {
               item.temperature = sensorFeed[0];
             });
@@ -549,6 +571,7 @@ class _SensorsState extends State<Sensors> {
         _listStationaryDetect.forEach((item) {
           if (isAMatch(item.sensor, receivedData)) {
             List<String> sensorFeed = receivedData['values'].split(';');
+            if (!mounted) return;
             setState(() {
               item.isImmobile = sensorFeed[0];
             });
@@ -559,6 +582,7 @@ class _SensorsState extends State<Sensors> {
         _listMotionDetect.forEach((item) {
           if (isAMatch(item.sensor, receivedData)) {
             List<String> sensorFeed = receivedData['values'].split(';');
+            if (!mounted) return;
             setState(() {
               item.isInMotion = sensorFeed[0];
             });
@@ -569,6 +593,7 @@ class _SensorsState extends State<Sensors> {
         _listLowLatencyOffBodyDetect.forEach((item) {
           if (isAMatch(item.sensor, receivedData)) {
             List<String> sensorFeed = receivedData['values'].split(';');
+            if (!mounted) return;
             setState(() {
               item.offBodyState = sensorFeed[0];
             });

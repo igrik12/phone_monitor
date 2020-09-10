@@ -5,8 +5,7 @@ import 'package:phone_monitor/models/display_info.dart';
 class NativeComms {
   static const _channel =
       const MethodChannel('com.twarkapps.phone_monitor/device_info');
-  static const eventChannel =
-      EventChannel('com.twarkapps.phone_monitor/sensor_stream');
+
 
   static double _totalPhysicalMemory;
 

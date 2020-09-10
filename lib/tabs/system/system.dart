@@ -90,8 +90,6 @@ class System extends GetView<CpuController> {
                                             "${systemInfoMap[key]}",
                                             textAlign: TextAlign.left,
                                             textScaleFactor: 1.2,
-                                            style:
-                                                TextStyle(color: Colors.blue),
                                           ),
                                         ),
                                       ],
