@@ -58,12 +58,6 @@ class CpuController extends GetxController {
   }
 }
 
-class PointData<T> {
-  int id;
-  List<Point> points = List.empty();
-  PointData({this.id, this.points});
-}
-
 // Calculate overall CPU usage for all cores
 OverallUsage _calculateOverallUsage(CpuInfo info) {
   Map<int, double> overAllPerCore = Map<int, double>();
