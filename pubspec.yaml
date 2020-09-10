@@ -26,6 +26,7 @@ dependencies:
   admob_flutter: ^0.3.4
   curved_navigation_bar: ^0.3.3
   cpu_reader: ^2.0.0
+  device_apps: ^1.2.0
   device_info: ^0.4.2+7
   disk_space:
   font_awesome_flutter: ^8.8.1

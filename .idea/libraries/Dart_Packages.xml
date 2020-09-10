@@ -324,6 +324,13 @@
             </list>
           </value>
         </entry>
+        <entry key="settings_ui">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/settings_ui-0.4.0/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="sky_engine">
           <value>
             <list>
@@ -462,6 +469,7 @@
       <root url="file://$PROJECT_DIR$/../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/plugin_platform_interface-1.0.2/lib" />
       <root url="file://$PROJECT_DIR$/../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/process-3.0.13/lib" />
       <root url="file://$PROJECT_DIR$/../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/screenshot-0.1.1/lib" />
+      <root url="file://$PROJECT_DIR$/../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/settings_ui-0.4.0/lib" />
       <root url="file://$PROJECT_DIR$/../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/source_span-1.7.0/lib" />
       <root url="file://$PROJECT_DIR$/../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/stack_trace-1.9.5/lib" />
       <root url="file://$PROJECT_DIR$/../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/stream_channel-2.0.0/lib" />

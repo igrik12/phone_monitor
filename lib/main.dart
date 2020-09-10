@@ -44,6 +44,7 @@ class MyApp extends StatelessWidget {
           scaffoldBackgroundColor: Color.fromRGBO(242, 246, 247, 1),
           visualDensity: VisualDensity.adaptivePlatformDensity,
           textTheme: TextTheme(
+              subtitle1: TextStyle(fontSize: 18),
               bodyText2: TextStyle(fontWeight: FontWeight.w500, fontSize: 12))),
       home: Scaffold(
         body: Home(),
