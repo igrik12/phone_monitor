@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:launch_review/launch_review.dart';
+import 'package:package_info/package_info.dart';
 import 'package:phone_monitor/controllers/themeController.dart';
+import 'package:phone_monitor/widgets/custom_card.dart';
 import 'package:settings_ui/settings_ui.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -40,10 +43,16 @@ class _SettingsScreenState extends State<SettingsScreen> {
             title: 'Misc',
             tiles: [
               SettingsTile(
-                  title: 'Terms of Service', leading: Icon(Icons.description)),
+                  title: 'Feedback',
+                  onTap: (() => {}),
+                  subtitle: "Please send me emails with feedback or requests",
+                  leading: Icon(Icons.email)),
               SettingsTile(
-                  title: 'Open source licenses',
-                  leading: Icon(Icons.collections_bookmark)),
+                  title: 'Rate',
+                  leading: Icon(Icons.star),
+                  onTap: () => LaunchReview.launch(
+                      androidAppId: "com.twarkapps.phone_monitor"),
+                  subtitle: "Please rate me on Play Store"),
             ],
           ),
           CustomSection(
@@ -56,10 +65,20 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       color: Color(0xFF777777),
                       size: 40,
                     )),
-                Text(
-                  'Version: 2.4.0 (287)',
-                  style: TextStyle(color: Color(0xFF777777)),
-                ),
+                FutureBuilder<PackageInfo>(
+                    future: PackageInfo.fromPlatform(),
+                    builder: (context, snapshot) {
+                      if (snapshot.hasData) {
+                        return Text(
+                          'Version: ${snapshot.data.version}',
+                          style: TextStyle(color: Color(0xFF777777)),
+                        );
+                      }
+                      return Text(
+                        'Version: N/A',
+                        style: TextStyle(color: Color(0xFF777777)),
+                      );
+                    }),
               ],
             ),
           ),
