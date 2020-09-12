@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="15" height="30.632" viewBox="0 0 15 30.632">
+  <g id="Group_5" data-name="Group 5" transform="translate(-338 -423)">
+    <g id="Icon_material-battery-charging-50" data-name="Icon material-battery-charging-50" transform="translate(338 423)">
+      <path id="Path_1" data-name="Path 1" d="M21.7,20.25,16.5,30.16V21.775h-3l.795-1.525H10.5V31.182a2.02,2.02,0,0,0,1.995,2.028H23.49a2.023,2.023,0,0,0,2.01-2.028V20.25Z" transform="translate(-10.5 -2.717)" fill="#5b7eec"/>
+      <path id="Path_2" data-name="Path 2" d="M23.5,6.049H21V3H15V6.049h-2.5A2.02,2.02,0,0,0,10.5,8.077V20.533h3.795l5.2-9.91v8.386h3l-.8,1.525h3.8V8.077A2.02,2.02,0,0,0,23.5,6.049Z" transform="translate(-10.5 -3)" fill="#5b7eec"/>
+    </g>
+    <path id="Path_43" data-name="Path 43" d="M845,535.943v2.419a2.34,2.34,0,0,0,1.8,1.737c1.472.241,11.535,0,11.535,0s1.638-.338,1.638-1.737v-2.419Z" transform="translate(-507 -86.574)" fill="#ff0505"/>
+    <path id="Path_44" data-name="Path 44" d="M802.939,511.207v1.153l.51-1.153h-.68" transform="translate(-458.925 -61.868)" fill="#fff"/>
+  </g>
+</svg>

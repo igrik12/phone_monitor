@@ -19,12 +19,11 @@ class BatteryCard extends GetView<DashboardController> {
             Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: SvgPicture.asset(
-                    'assets/icons/battery.svg',
-                    height: 35,
-                  ),
-                )
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Obx(
+                      () => buildBatteryIcon(
+                          controller.wrapper.value.battery.batteryLevel),
+                    ))
               ],
             ),
             SizedBox(
@@ -73,6 +72,19 @@ class BatteryCard extends GetView<DashboardController> {
           ],
         ),
       ),
+    );
+  }
+
+  SvgPicture buildBatteryIcon(level) {
+    var path = "assets/icons/battery_full.svg";
+    if ((level >= 10) & (level < 100)) {
+      path = "assets/icons/battery_charging.svg";
+    } else if (level < 10) {
+      path = "assets/icons/battery_low.svg";
+    }
+    return SvgPicture.asset(
+      path,
+      height: 35,
     );
   }
 }

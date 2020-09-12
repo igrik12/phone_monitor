@@ -19,7 +19,7 @@ class DashboardController extends GetxController {
   double totalPhysicalMemory = 0;
   double totalDiskSpace = 0;
 
-  // Memory wrapper observable
+  // Dashboard wrapper observable
   final wrapper = DashboardInfoWrapper().obs
     ..value.totalRamUsage = 100
     ..value.battery = BatteryInfo()
@@ -33,6 +33,10 @@ class DashboardController extends GetxController {
     deviceInfo = await deviceInfoPlugin;
     totalPhysicalMemory = await NativeComms.getTotalMemory();
     totalDiskSpace = (await DiskSpace.getTotalDiskSpace / 1024).toPrecision(2);
+    var display = await NativeComms.getDisplayData();
+    wrapper.update((value) {
+      value.display = display;
+    });
     _timer = Timer.periodic(Duration(seconds: 1), dashboardHandler);
   }
 
@@ -47,7 +51,6 @@ class DashboardController extends GetxController {
     var diskSpaceUsedInPersent =
         await calcDiskSpaceUsed(totalDiskSpace, totalDiskSpaceAvailable);
     var battery = await NativeComms.getBatteryData();
-    var display = await NativeComms.getDisplayData();
 
     /// Runs an update on the [DashboardWrapper.obs]
     wrapper.update((value) {
@@ -63,9 +66,6 @@ class DashboardController extends GetxController {
 
       // Battery
       value.battery = battery;
-
-      // Display
-      value.display = display;
     });
   }
 

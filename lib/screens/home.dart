@@ -4,7 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:phone_monitor/tabs/cpu/cpu.dart';
-import 'package:phone_monitor/tabs/dashboard/applications.dart';
+import 'package:phone_monitor/tabs/applications/applications.dart';
 import 'package:phone_monitor/tabs/dashboard/dashboard.dart';
 import 'package:phone_monitor/tabs/sensors/sensors.dart';
 import 'package:phone_monitor/tabs/system/system.dart';
@@ -97,6 +97,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               color: Theme.of(context).accentColor,
             ),
           ],
+          height: 60,
           color: Theme.of(context).bottomAppBarColor,
           buttonBackgroundColor: Colors.white,
           backgroundColor: Theme.of(context).scaffoldBackgroundColor,

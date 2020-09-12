@@ -11,6 +11,7 @@ import 'controllers/bindings.dart';
 import 'utils/ad_manager.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
   Get.lazyPut<ThemeController>(() => ThemeController());
   Admob.initialize(AdManager.appId);
