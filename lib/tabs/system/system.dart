@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:phone_monitor/controllers/cpu_controller.dart';
 import 'package:phone_monitor/tabs/system/systemOverview.dart';
-
-import 'displayOverview.dart';
 import 'hardwareDescription.dart';
 
 class System extends GetView<CpuController> {
@@ -12,14 +10,13 @@ class System extends GetView<CpuController> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(16),
+      padding: EdgeInsets.all(8),
       child: SingleChildScrollView(
         child: Column(
           children: [
             SystemOverview(),
             HardwareDescription(),
             // DismissableAdBanner(), DISABLED TILL THE APP KICKS OFF
-            DisplayOverview()
           ],
         ),
       ),

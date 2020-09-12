@@ -4,6 +4,7 @@ import 'package:get/get.dart';
 import 'package:phone_monitor/tabs/cpu/cpu.dart';
 import 'package:phone_monitor/tabs/applications/applications.dart';
 import 'package:phone_monitor/tabs/dashboard/dashboard.dart';
+import 'package:phone_monitor/tabs/display/display.dart';
 import 'package:phone_monitor/tabs/sensors/sensors.dart';
 import 'package:phone_monitor/tabs/system/system.dart';
 
@@ -16,7 +17,7 @@ class _HomeState extends State<Home> {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
-        length: 5,
+        length: 6,
         child: Scaffold(
           appBar: AppBar(
             title: Text(
@@ -43,11 +44,9 @@ class _HomeState extends State<Home> {
   List<Widget> _buildTabView() {
     return [
       Dashboard(),
-      Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: CpuTab(),
-      ),
+      CpuTab(),
       System(),
+      Display(),
       Applications(),
       Sensors()
     ];
@@ -69,8 +68,13 @@ class _HomeState extends State<Home> {
         ),
       ),
       Tab(
-        text: "System Info",
+        text: "System",
         icon: SvgPicture.asset('assets/icons/system_info.svg',
+            height: 25, color: Theme.of(context).iconTheme.color),
+      ),
+      Tab(
+        text: "Display",
+        icon: SvgPicture.asset('assets/icons/phone_screen.svg',
             height: 25, color: Theme.of(context).iconTheme.color),
       ),
       Tab(

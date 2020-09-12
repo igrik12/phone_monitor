@@ -2,6 +2,7 @@ import 'package:device_apps/device_apps.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:phone_monitor/controllers/applications.dart';
+import 'package:phone_monitor/widgets/custom_card.dart';
 
 class Applications extends StatefulWidget {
   @override
@@ -26,42 +27,48 @@ class _ApplicationsState extends State<Applications> {
         List<Application> filteredApps = _filterApps(
             appController.applications, appController.appType, filter);
 
-        return Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
-              child: isSearching
-                  ? searchBar()
-                  : buildAppSelectorRow(filteredApps, appController),
-            ),
-            SizedBox(
-              height: 10,
-            ),
-            Expanded(
-              flex: 1,
-              child: Scrollbar(
-                child: ListView.builder(
-                  shrinkWrap: true,
-                  itemCount: filteredApps.length,
-                  itemBuilder: (context, index) => ListTile(
-                      title: Text(
-                          '${filteredApps[index].appName} (${filteredApps[index].packageName})'),
-                      subtitle: Text(
-                          'Version: ${filteredApps[index].versionName}\n'
-                          'System app: ${filteredApps[index].systemApp}\n'
-                          'Installed: ${DateTime.fromMillisecondsSinceEpoch(filteredApps[index].installTimeMillis).toString()}\n'
-                          'Updated: ${DateTime.fromMillisecondsSinceEpoch(filteredApps[index].updateTimeMillis).toString()}'),
-                      leading: filteredApps[index] is ApplicationWithIcon
-                          ? CircleAvatar(
-                              backgroundImage: MemoryImage(
-                                  (filteredApps[index] as ApplicationWithIcon)
-                                      .icon),
-                            )
-                          : null),
+        return Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: CustomCard(
+            child: Column(
+              children: [
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: isSearching
+                      ? searchBar()
+                      : buildAppSelectorRow(filteredApps, appController),
                 ),
-              ),
+                SizedBox(
+                  height: 10,
+                ),
+                Expanded(
+                  flex: 1,
+                  child: Scrollbar(
+                    child: ListView.builder(
+                      shrinkWrap: true,
+                      itemCount: filteredApps.length,
+                      itemBuilder: (context, index) => ListTile(
+                          title: Text(
+                              '${filteredApps[index].appName} (${filteredApps[index].packageName})'),
+                          subtitle: Text(
+                              'Version: ${filteredApps[index].versionName}\n'
+                              'System app: ${filteredApps[index].systemApp}\n'
+                              'Installed: ${DateTime.fromMillisecondsSinceEpoch(filteredApps[index].installTimeMillis).toString()}\n'
+                              'Updated: ${DateTime.fromMillisecondsSinceEpoch(filteredApps[index].updateTimeMillis).toString()}'),
+                          leading: filteredApps[index] is ApplicationWithIcon
+                              ? CircleAvatar(
+                                  backgroundImage: MemoryImage(
+                                      (filteredApps[index]
+                                              as ApplicationWithIcon)
+                                          .icon),
+                                )
+                              : null),
+                    ),
+                  ),
+                ),
+              ],
             ),
-          ],
+          ),
         );
       },
     );
@@ -106,7 +113,10 @@ class _ApplicationsState extends State<Applications> {
           child: Align(
               alignment: Alignment.centerRight,
               child: IconButton(
-                  icon: Icon(Icons.search),
+                  icon: Icon(
+                    Icons.search,
+                    color: Theme.of(context).textTheme.bodyText2.color,
+                  ),
                   onPressed: () {
                     setState(() {
                       isSearching = true;
@@ -155,7 +165,10 @@ class _ApplicationsState extends State<Applications> {
           ),
         ),
         IconButton(
-          icon: Icon(Icons.close),
+          icon: Icon(
+            Icons.close,
+            color: Theme.of(context).textTheme.bodyText2.color,
+          ),
           onPressed: () {
             setState(() {
               isSearching = false;

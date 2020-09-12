@@ -640,6 +640,6 @@ class _SensorsState extends State<Sensors> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView(padding: EdgeInsets.all(6.0), children: buildUI());
+    return ListView(padding: EdgeInsets.all(8.0), children: buildUI());
   }
 }

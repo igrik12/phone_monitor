@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:launch_review/launch_review.dart';
 import 'package:package_info/package_info.dart';
 import 'package:phone_monitor/controllers/themeController.dart';
-import 'package:phone_monitor/widgets/custom_card.dart';
 import 'package:settings_ui/settings_ui.dart';
 
 class SettingsScreen extends StatefulWidget {

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:phone_monitor/controllers/cpu_controller.dart';
 import 'package:phone_monitor/controllers/dashboard_controller.dart';
 import 'package:phone_monitor/tabs/dashboard/battery_card.dart';
+import 'package:phone_monitor/utils/constants.dart';
 import 'package:phone_monitor/widgets/custom_card.dart';
 import 'package:phone_monitor/widgets/dismissableAdBanner.dart';
 import 'package:phone_monitor/widgets/progressWithPercentage.dart';
@@ -15,7 +16,7 @@ class Dashboard extends GetView<DashboardController> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(16),
+      padding: EdgeInsets.all(8),
       child: SingleChildScrollView(
         child: Column(
           children: [
@@ -74,7 +75,7 @@ class Dashboard extends GetView<DashboardController> {
                             Icon(
                               Icons.android,
                               size: 40,
-                              color: Colors.green,
+                              color: kPrimaryColor,
                             ),
                             SizedBox(
                               height: 5,

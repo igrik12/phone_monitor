@@ -34,7 +34,7 @@ class BatteryCard extends GetView<DashboardController> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Battery (${controller.wrapper.value.battery?.isCharging ?? false ? "Charging" : "Discharging"})",
+                        "Battery (${getBatteryChargeStatus(controller)})",
                         textScaleFactor: 1.3,
                       ),
                       SizedBox(
@@ -73,6 +73,17 @@ class BatteryCard extends GetView<DashboardController> {
         ),
       ),
     );
+  }
+
+  String getBatteryChargeStatus(DashboardController controller1) {
+    final isCharging = controller.wrapper.value.battery.isCharging ?? false;
+    final level = controller.wrapper.value.battery.batteryLevel;
+    if (isCharging && !(level < 100)) {
+      return "Charging";
+    }
+    if (!isCharging && (level < 100)) return "Discharging";
+
+    return "Full";
   }
 
   SvgPicture buildBatteryIcon(level) {
