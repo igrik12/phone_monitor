@@ -60,6 +60,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
           ],
         ),
         body: PageView(
+          physics: AlwaysScrollableScrollPhysics(),
+          pageSnapping: true,
           controller: pageController,
           children: getPages(),
           onPageChanged: (index) {
