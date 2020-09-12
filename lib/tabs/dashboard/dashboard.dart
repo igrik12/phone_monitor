@@ -110,7 +110,7 @@ class Dashboard extends GetView<DashboardController> {
                 ),
               ),
             ),
-            DismissableAdBanner(),
+            // DismissableAdBanner(), DISABLED TILL THE APP KICKS OFF
             StorageCard(),
             BatteryCard(),
             DisplayCard(),

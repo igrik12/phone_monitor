@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:phone_monitor/controllers/cpu_controller.dart';
 import 'package:phone_monitor/tabs/system/systemOverview.dart';
-import 'package:phone_monitor/widgets/dismissableAdBanner.dart';
 
 import 'displayOverview.dart';
 import 'hardwareDescription.dart';
@@ -19,7 +18,7 @@ class System extends GetView<CpuController> {
           children: [
             SystemOverview(),
             HardwareDescription(),
-            DismissableAdBanner(),
+            // DismissableAdBanner(), DISABLED TILL THE APP KICKS OFF
             DisplayOverview()
           ],
         ),

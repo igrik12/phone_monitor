@@ -22,10 +22,10 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setPreferredOrientations([
-      DeviceOrientation.portraitUp,
-      DeviceOrientation.portraitDown,
-    ]);
+    // SystemChrome.setPreferredOrientations([
+    //   DeviceOrientation.portraitUp,
+    //   DeviceOrientation.portraitDown,
+    // ]);
     return GetMaterialApp(
       initialBinding: InitialBinding(),
       debugShowCheckedModeBanner: false,
@@ -33,6 +33,9 @@ class MyApp extends StatelessWidget {
       darkTheme: ThemeData.dark().copyWith(
           primaryColor: Colors.amber,
           accentColor: Colors.amber,
+          tabBarTheme: TabBarTheme().copyWith(labelColor: Colors.black),
+          iconTheme: IconThemeData().copyWith(color: Colors.black),
+          primaryIconTheme: IconThemeData().copyWith(color: Colors.black),
           visualDensity: VisualDensity.adaptivePlatformDensity,
           textTheme: TextTheme(
               subtitle1: TextStyle(color: Colors.amber, fontSize: 18),
@@ -42,6 +45,10 @@ class MyApp extends StatelessWidget {
                   color: Colors.grey[400]))),
       theme: ThemeData(
           primaryColor: Colors.blueAccent,
+          tabBarTheme: TabBarTheme().copyWith(
+              labelColor: Colors.white, indicatorSize: TabBarIndicatorSize.tab),
+          iconTheme: IconThemeData().copyWith(color: Colors.black),
+          primaryIconTheme: IconThemeData().copyWith(color: Colors.white),
           scaffoldBackgroundColor: Color.fromRGBO(242, 246, 247, 1),
           visualDensity: VisualDensity.adaptivePlatformDensity,
           textTheme: TextTheme(
