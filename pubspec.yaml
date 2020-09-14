@@ -3,7 +3,7 @@ description: A new Flutter project.
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 0.0.1+1
+version: 1.0.1+2
 
 environment:
   sdk: '>=2.7.0 <3.0.0'
@@ -12,14 +12,11 @@ dependencies:
   flutter:
     sdk: flutter
   admob_flutter: ^0.3.4
-  curved_navigation_bar: ^0.3.3
   cpu_reader: ^2.0.0
   device_apps: ^1.2.0
   device_info: ^0.4.2+7
   disk_space:
-  font_awesome_flutter: ^8.8.1
   flutter_launcher_icons: ^0.7.5
-  flutter_email_sender: ^3.0.1
   flutter_svg: ^0.18.1
   get: 3.8.0
   get_storage:

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:phone_monitor/controllers/homeController.dart';
 import 'package:phone_monitor/tabs/cpu/cpu.dart';
 import 'package:phone_monitor/tabs/applications/applications.dart';
 import 'package:phone_monitor/tabs/dashboard/dashboard.dart';
@@ -13,31 +14,76 @@ class Home extends StatefulWidget {
   _HomeState createState() => _HomeState();
 }
 
-class _HomeState extends State<Home> {
+class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
+  TabController _tabController;
+  HomeController homeController;
+  @override
+  void initState() {
+    super.initState();
+    homeController = Get.find<HomeController>();
+    _tabController = TabController(vsync: this, length: 6);
+    homeController.setController(_tabController);
+  }
+
+  var tabIndex = 0;
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
         length: 6,
-        child: Scaffold(
-          appBar: AppBar(
-            title: Text(
-              'Phone Monitor',
-              style: TextStyle(color: Theme.of(context).tabBarTheme.labelColor),
+        child: WillPopScope(
+          onWillPop: () async {
+            if (_tabController.index == 0) {
+              return showDialog(
+                    context: context,
+                    builder: (context) => new AlertDialog(
+                      title: new Text('Are you sure?'),
+                      content: new Text('Do you want to exit Phone Monitor?'),
+                      actions: <Widget>[
+                        OutlineButton(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: new BorderRadius.circular(20.0)),
+                          onPressed: () => Navigator.of(context).pop(false),
+                          child: Text("No"),
+                        ),
+                        OutlineButton(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: new BorderRadius.circular(20.0)),
+                            onPressed: () => Navigator.of(context).pop(true),
+                            child: Text("Yes")),
+                      ],
+                    ),
+                  ) ??
+                  false;
+            }
+            _tabController.animateTo(0);
+            return false;
+          },
+          child: Scaffold(
+            appBar: AppBar(
+              title: Text(
+                'Phone Monitor',
+                style:
+                    TextStyle(color: Theme.of(context).tabBarTheme.labelColor),
+              ),
+              bottom: TabBar(
+                  controller: _tabController,
+                  tabs: _buildTabs(context),
+                  isScrollable: true,
+                  indicatorSize: TabBarIndicatorSize.tab,
+                  indicatorColor: Theme.of(context).tabBarTheme.labelColor),
+              actions: [
+                IconButton(
+                    icon: Icon(Icons.settings),
+                    onPressed: () {
+                      Get.toNamed("/settings");
+                    }),
+              ],
             ),
-            bottom: TabBar(
-                tabs: _buildTabs(context),
-                isScrollable: true,
-                indicatorSize: TabBarIndicatorSize.tab,
-                indicatorColor: Theme.of(context).tabBarTheme.labelColor),
-            actions: [
-              IconButton(
-                  icon: Icon(Icons.settings),
-                  onPressed: () {
-                    Get.toNamed("/settings");
-                  }),
-            ],
+            body: TabBarView(
+              children: _buildTabView(),
+              controller: _tabController,
+            ),
           ),
-          body: TabBarView(children: _buildTabView()),
         ));
   }
 
@@ -91,5 +137,10 @@ class _HomeState extends State<Home> {
         ),
       ),
     ];
+  }
+
+  Future<bool> _handlePop() async {
+    Get.to(Home());
+    return false;
   }
 }

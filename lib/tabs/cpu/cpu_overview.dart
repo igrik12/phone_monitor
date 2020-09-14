@@ -42,8 +42,8 @@ class CpuOverview extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         SvgPicture.asset('assets/icons/cpu_hardware.svg',
-                            height: 20,
-                            color: Theme.of(context).iconTheme.color),
+                            height: 20.0,
+                            color: Theme.of(context).primaryColor),
                         SizedBox(
                           width: 5,
                         ),
@@ -65,8 +65,8 @@ class CpuOverview extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           SvgPicture.asset('assets/icons/cpu_cores.svg',
-                              height: 20,
-                              color: Theme.of(context).iconTheme.color),
+                              height: 20.0,
+                              color: Theme.of(context).primaryColor),
                           SizedBox(
                             width: 5,
                           ),
@@ -87,8 +87,8 @@ class CpuOverview extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           SvgPicture.asset('assets/icons/architecture.svg',
-                              height: 20,
-                              color: Theme.of(context).iconTheme.color),
+                              height: 20.0,
+                              color: Theme.of(context).primaryColor),
                           SizedBox(
                             width: 5,
                           ),
@@ -107,8 +107,8 @@ class CpuOverview extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           SvgPicture.asset('assets/icons/abi.svg',
-                              height: 20,
-                              color: Theme.of(context).iconTheme.color),
+                              height: 20.0,
+                              color: Theme.of(context).primaryColor),
                           SizedBox(
                             width: 5,
                           ),
@@ -129,8 +129,8 @@ class CpuOverview extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
                           SvgPicture.asset('assets/icons/cpu_frequency.svg',
-                              height: 20,
-                              color: Theme.of(context).iconTheme.color),
+                              height: 20.0,
+                              color: Theme.of(context).primaryColor),
                           SizedBox(
                             width: 5,
                           ),

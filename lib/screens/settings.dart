@@ -13,7 +13,6 @@ class SettingsScreen extends StatefulWidget {
 class _SettingsScreenState extends State<SettingsScreen> {
   bool lockInBackground = Get.isDarkMode;
   String theme = Get.isDarkMode ? 'Dark Theme' : 'Light Theme';
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,11 +40,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
           SettingsSection(
             title: 'Misc',
             tiles: [
-              SettingsTile(
-                  title: 'Feedback',
-                  onTap: (() => {}),
-                  subtitle: "Please send me emails with feedback or requests",
-                  leading: Icon(Icons.email)),
               SettingsTile(
                   title: 'Rate',
                   leading: Icon(Icons.star),

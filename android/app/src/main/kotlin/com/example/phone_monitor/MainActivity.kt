@@ -176,7 +176,11 @@ class MainActivity : FlutterActivity() {
         val pluggedUsb = BatteryManager.BATTERY_PLUGGED_USB
         val pluggedAc = BatteryManager.BATTERY_PLUGGED_AC
         val pluggedWireless = BatteryManager.BATTERY_PLUGGED_WIRELESS
-        val chargeTimeRemaining = batteryManager.computeChargeTimeRemaining()
+        val chargeTimeRemaining = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
+            batteryManager.computeChargeTimeRemaining()
+        } else {
+            0.0
+        }
         val currentAverage = batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CURRENT_AVERAGE)
         val currentNow = batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CURRENT_NOW)
         val charging = status == BatteryManager.BATTERY_STATUS_CHARGING

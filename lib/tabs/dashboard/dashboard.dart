@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:phone_monitor/controllers/cpu_controller.dart';
 import 'package:phone_monitor/controllers/dashboard_controller.dart';
+import 'package:phone_monitor/controllers/homeController.dart';
+import 'package:phone_monitor/tabs/applications/applications.dart';
 import 'package:phone_monitor/tabs/dashboard/battery_card.dart';
-import 'package:phone_monitor/utils/constants.dart';
+import 'package:phone_monitor/tabs/dashboard/overview.dart';
+import 'package:phone_monitor/tabs/sensors/sensors.dart';
 import 'package:phone_monitor/widgets/custom_card.dart';
-import 'package:phone_monitor/widgets/dismissableAdBanner.dart';
-import 'package:phone_monitor/widgets/progressWithPercentage.dart';
-import 'package:phone_monitor/widgets/usageProgressDisplay.dart';
 
 import 'display_card.dart';
 import 'storage_card.dart';
@@ -20,101 +20,77 @@ class Dashboard extends GetView<DashboardController> {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            CustomCard(
-              child: Padding(
-                padding:
-                    const EdgeInsets.symmetric(vertical: 26, horizontal: 10),
-                child: Column(
-                  children: [
-                    Obx(() => Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            UsageProgressDisplay(
-                                title: "Memory",
-                                value: controller.wrapper.value.totalRamUsage
-                                        .toDouble() /
-                                    100),
-                            UsageProgressDisplay(
-                              title: "Battery",
-                              value: controller
-                                      .wrapper.value.battery.batteryLevel /
-                                  100,
-                            ),
-                            UsageProgressDisplay(
-                              title: "Storage",
-                              value: controller
-                                      .wrapper.value.diskSpaceUsedInPersent /
-                                  100,
-                            )
-                          ],
-                        )),
-                    Divider(
-                      height: 30,
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceAround,
-                      children: [
-                        Column(
-                          children: [
-                            Icon(
-                              Icons.phone_android,
-                              size: 40,
-                              color: Colors.blue,
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Obx(() => Text(
-                                  controller.deviceInfo?.device ?? "",
-                                  textScaleFactor: 1.5,
-                                ))
-                          ],
-                        ),
-                        Column(
-                          children: [
-                            Icon(
-                              Icons.android,
-                              size: 40,
-                              color: kPrimaryColor,
-                            ),
-                            SizedBox(
-                              height: 5,
-                            ),
-                            Obx(() => Text(
-                                  "Android ${controller.deviceInfo?.version?.release}" ??
-                                      "",
-                                  textScaleFactor: 1.5,
-                                ))
-                          ],
-                        ),
-                      ],
-                    ),
-                    Divider(
-                      height: 30,
-                    ),
-                    Row(
-                      children: [
-                        Flexible(
-                            child: GetX<CpuController>(
-                          builder: (cpuController) => Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 10),
-                            child: ProgressWithPercentage(
-                              value: cpuController.overallUsage?.overAll ?? 0.0,
-                              title: "Overall Cpu Usage",
-                              height: 16,
-                            ),
-                          ),
-                        )),
-                      ],
-                    )
-                  ],
-                ),
-              ),
-            ),
+            DashboardOverview(),
             // DismissableAdBanner(), DISABLED TILL THE APP KICKS OFF
             StorageCard(),
             BatteryCard(),
             DisplayCard(),
+            GetBuilder<HomeController>(
+              builder: (homeController) => Row(
+                children: [
+                  GestureDetector(
+                    onTap: () => homeController.goTo(5),
+                    child: CustomCard(
+                      child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Row(
+                          children: [
+                            SvgPicture.asset(
+                              "assets/icons/gyroscope.svg",
+                              color: Theme.of(context).primaryColor,
+                              height: 50,
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Column(
+                              children: [
+                                Text("34", style: Get.textTheme.headline4),
+                                Text(
+                                  "Sensors Available",
+                                )
+                              ],
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                  Expanded(
+                    child: GestureDetector(
+                      onTap: () => homeController.goTo(4),
+                      child: CustomCard(
+                          child: Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Row(
+                          children: [
+                            Icon(
+                              Icons.apps,
+                              size: 50,
+                              color: Theme.of(context).primaryColor,
+                            ),
+                            SizedBox(
+                              width: 10,
+                            ),
+                            Column(
+                              children: [
+                                Text(
+                                  "223",
+                                  style: Get.textTheme.headline4,
+                                ),
+                                Text(
+                                  "Apps installed",
+                                )
+                              ],
+                            )
+                          ],
+                        ),
+                      )),
+                    ),
+                  )
+                ],
+              ),
+            )
           ],
         ),
       ),
