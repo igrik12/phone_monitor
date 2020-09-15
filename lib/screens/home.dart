@@ -1,10 +1,11 @@
-import 'package:curved_navigation_bar/curved_navigation_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:phone_monitor/controllers/homeController.dart';
 import 'package:phone_monitor/tabs/cpu/cpu.dart';
-import 'package:phone_monitor/tabs/dashboard/applications.dart';
+import 'package:phone_monitor/tabs/applications/applications.dart';
 import 'package:phone_monitor/tabs/dashboard/dashboard.dart';
+import 'package:phone_monitor/tabs/display/display.dart';
 import 'package:phone_monitor/tabs/sensors/sensors.dart';
 import 'package:phone_monitor/tabs/system/system.dart';
 
@@ -14,109 +15,132 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
-  TabController tabController;
-  ScrollController scrollController;
-  PageController pageController;
-  int bottomSelectedIndex = 0;
-  GlobalKey _bottomNavigationKey = GlobalKey();
-
-  void pageChanged(int index) {
-    setState(() {
-      bottomSelectedIndex = index;
-    });
-  }
-
-  void bottomTapped(int index) {
-    setState(() {
-      bottomSelectedIndex = index;
-      pageController.animateToPage(index,
-          duration: Duration(milliseconds: 600), curve: Curves.ease);
-    });
-  }
-
+  TabController _tabController;
+  HomeController homeController;
   @override
   void initState() {
     super.initState();
-    tabController = TabController(
-      length: 4,
-      vsync: this,
-    );
-    pageController = PageController(initialPage: 0);
-    scrollController = ScrollController();
+    homeController = Get.find<HomeController>();
+    _tabController = TabController(vsync: this, length: 6);
+    homeController.setController(_tabController);
   }
 
+  var tabIndex = 0;
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text('Phone Monitor'),
-          actions: [
-            IconButton(
-                icon: Icon(Icons.settings),
-                onPressed: () {
-                  Get.toNamed("/settings");
-                }),
-          ],
-        ),
-        body: PageView(
-          controller: pageController,
-          children: getPages(),
-          onPageChanged: (index) {
-            pageChanged(index);
+    return DefaultTabController(
+        length: 6,
+        child: WillPopScope(
+          onWillPop: () async {
+            if (_tabController.index == 0) {
+              return showDialog(
+                    context: context,
+                    builder: (context) => new AlertDialog(
+                      title: new Text('Are you sure?'),
+                      content: new Text('Do you want to exit Phone Monitor?'),
+                      actions: <Widget>[
+                        OutlineButton(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: new BorderRadius.circular(20.0)),
+                          onPressed: () => Navigator.of(context).pop(false),
+                          child: Text("No"),
+                        ),
+                        OutlineButton(
+                            shape: RoundedRectangleBorder(
+                                borderRadius: new BorderRadius.circular(20.0)),
+                            onPressed: () => Navigator.of(context).pop(true),
+                            child: Text("Yes")),
+                      ],
+                    ),
+                  ) ??
+                  false;
+            }
+            _tabController.animateTo(0);
+            return false;
           },
-        ),
-        bottomNavigationBar: CurvedNavigationBar(
-          key: _bottomNavigationKey,
-          index: bottomSelectedIndex,
-          items: [
-            Icon(
-              Icons.dashboard,
-              size: 25.0,
-              color: Theme.of(context).accentColor,
-              //color: Colors.black,
+          child: Scaffold(
+            appBar: AppBar(
+              title: Text(
+                'Phone Monitor',
+                style:
+                    TextStyle(color: Theme.of(context).tabBarTheme.labelColor),
+              ),
+              bottom: TabBar(
+                  controller: _tabController,
+                  tabs: _buildTabs(context),
+                  isScrollable: true,
+                  indicatorSize: TabBarIndicatorSize.tab,
+                  indicatorColor: Theme.of(context).tabBarTheme.labelColor),
+              actions: [
+                IconButton(
+                    icon: Icon(Icons.settings),
+                    onPressed: () {
+                      Get.toNamed("/settings");
+                    }),
+              ],
             ),
-            Icon(
-              FontAwesomeIcons.microchip,
-              size: 25.0,
-              color: Theme.of(context).accentColor,
+            body: TabBarView(
+              children: _buildTabView(),
+              controller: _tabController,
             ),
-            Icon(
-              Icons.perm_device_information,
-              size: 25.0,
-              color: Theme.of(context).accentColor,
-            ),
-            Icon(
-              Icons.apps,
-              size: 25.0,
-              color: Theme.of(context).accentColor,
-            ),
-            Icon(
-              Icons.gps_fixed,
-              size: 25.0,
-              color: Theme.of(context).accentColor,
-            ),
-          ],
-          color: Theme.of(context).bottomAppBarColor,
-          buttonBackgroundColor: Colors.white,
-          backgroundColor: Theme.of(context).scaffoldBackgroundColor,
-          animationCurve: Curves.easeInOut,
-          animationDuration: Duration(milliseconds: 600),
-          onTap: (index) {
-            bottomTapped(index);
-          },
+          ),
         ));
   }
 
-  List<Widget> getPages() {
-    return <Widget>[
+  List<Widget> _buildTabView() {
+    return [
       Dashboard(),
-      Padding(
-        padding: const EdgeInsets.all(12.0),
-        child: CpuTab(),
-      ),
+      CpuTab(),
       System(),
+      Display(),
       Applications(),
       Sensors()
     ];
+  }
+
+  List<Widget> _buildTabs(BuildContext context) {
+    return [
+      Tab(
+        text: "Dashboard",
+        icon: Icon(Icons.dashboard,
+            size: 25.0, color: Theme.of(context).iconTheme.color),
+      ),
+      Tab(
+        text: "CPU",
+        icon: SvgPicture.asset(
+          'assets/icons/cpu_hardware.svg',
+          color: Theme.of(context).iconTheme.color,
+          height: 25,
+        ),
+      ),
+      Tab(
+        text: "System",
+        icon: SvgPicture.asset('assets/icons/system_info.svg',
+            height: 25, color: Theme.of(context).iconTheme.color),
+      ),
+      Tab(
+        text: "Display",
+        icon: SvgPicture.asset('assets/icons/phone_screen.svg',
+            height: 25, color: Theme.of(context).iconTheme.color),
+      ),
+      Tab(
+        text: "Apps",
+        icon: Icon(Icons.apps,
+            size: 25.0, color: Theme.of(context).iconTheme.color),
+      ),
+      Tab(
+        text: "Sensors",
+        icon: SvgPicture.asset(
+          'assets/icons/gyroscope.svg',
+          height: 25,
+          color: Theme.of(context).iconTheme.color,
+        ),
+      ),
+    ];
+  }
+
+  Future<bool> _handlePop() async {
+    Get.to(Home());
+    return false;
   }
 }

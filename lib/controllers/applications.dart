@@ -32,8 +32,6 @@ class ApplicationsController extends GetxController {
   void onInit() async {
     super.onInit();
     applications.value = await DeviceApps.getInstalledApplications(
-        onlyAppsWithLaunchIntent: true,
-        includeAppIcons: true,
-        includeSystemApps: true);
+        includeAppIcons: true, includeSystemApps: true);
   }
 }

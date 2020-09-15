@@ -86,10 +86,17 @@
             </list>
           </value>
         </entry>
-        <entry key="curved_navigation_bar">
+        <entry key="cupertino_icons">
           <value>
             <list>
-              <option value="$PROJECT_DIR$/../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/curved_navigation_bar-0.3.3/lib" />
+              <option value="$PROJECT_DIR$/../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/cupertino_icons-0.1.3/lib" />
+            </list>
+          </value>
+        </entry>
+        <entry key="device_apps">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/device_apps-1.2.0/lib" />
             </list>
           </value>
         </entry>
@@ -163,13 +170,6 @@
             </list>
           </value>
         </entry>
-        <entry key="font_awesome_flutter">
-          <value>
-            <list>
-              <option value="$PROJECT_DIR$/../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/font_awesome_flutter-8.8.1/lib" />
-            </list>
-          </value>
-        </entry>
         <entry key="get">
           <value>
             <list>
@@ -212,6 +212,13 @@
             </list>
           </value>
         </entry>
+        <entry key="launch_review">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/launch_review-2.0.0/lib" />
+            </list>
+          </value>
+        </entry>
         <entry key="matcher">
           <value>
             <list>
@@ -237,6 +244,13 @@
           <value>
             <list>
               <option value="$PROJECT_DIR$/../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/optimized_gesture_detector-0.0.5/lib" />
+            </list>
+          </value>
+        </entry>
+        <entry key="package_info">
+          <value>
+            <list>
+              <option value="$PROJECT_DIR$/../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/package_info-0.4.3/lib" />
             </list>
           </value>
         </entry>
@@ -437,7 +451,8 @@
       <root url="file://$PROJECT_DIR$/../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/convert-2.1.1/lib" />
       <root url="file://$PROJECT_DIR$/../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/cpu_reader-2.0.0/lib" />
       <root url="file://$PROJECT_DIR$/../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/crypto-2.1.5/lib" />
-      <root url="file://$PROJECT_DIR$/../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/curved_navigation_bar-0.3.3/lib" />
+      <root url="file://$PROJECT_DIR$/../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/cupertino_icons-0.1.3/lib" />
+      <root url="file://$PROJECT_DIR$/../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/device_apps-1.2.0/lib" />
       <root url="file://$PROJECT_DIR$/../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/device_info-0.4.2+7/lib" />
       <root url="file://$PROJECT_DIR$/../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/device_info_platform_interface-1.0.0/lib" />
       <root url="file://$PROJECT_DIR$/../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/disk_space-0.0.3/lib" />
@@ -446,17 +461,18 @@
       <root url="file://$PROJECT_DIR$/../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/file_utils-0.1.4/lib" />
       <root url="file://$PROJECT_DIR$/../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_launcher_icons-0.7.5/lib" />
       <root url="file://$PROJECT_DIR$/../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/flutter_svg-0.18.1/lib" />
-      <root url="file://$PROJECT_DIR$/../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/font_awesome_flutter-8.8.1/lib" />
       <root url="file://$PROJECT_DIR$/../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/get-3.8.0/lib" />
       <root url="file://$PROJECT_DIR$/../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/get_storage-1.3.0/lib" />
       <root url="file://$PROJECT_DIR$/../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/globbing-0.3.1/lib" />
       <root url="file://$PROJECT_DIR$/../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/image-2.1.14/lib" />
       <root url="file://$PROJECT_DIR$/../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/image_gallery_saver-1.5.0/lib" />
       <root url="file://$PROJECT_DIR$/../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/intl-0.16.1/lib" />
+      <root url="file://$PROJECT_DIR$/../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/launch_review-2.0.0/lib" />
       <root url="file://$PROJECT_DIR$/../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/matcher-0.12.8/lib" />
       <root url="file://$PROJECT_DIR$/../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/meta-1.1.8/lib" />
       <root url="file://$PROJECT_DIR$/../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/mp_chart-0.2.2/lib" />
       <root url="file://$PROJECT_DIR$/../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/optimized_gesture_detector-0.0.5/lib" />
+      <root url="file://$PROJECT_DIR$/../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/package_info-0.4.3/lib" />
       <root url="file://$PROJECT_DIR$/../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/path-1.7.0/lib" />
       <root url="file://$PROJECT_DIR$/../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/path_drawing-0.4.1+1/lib" />
       <root url="file://$PROJECT_DIR$/../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/path_parsing-0.1.4/lib" />

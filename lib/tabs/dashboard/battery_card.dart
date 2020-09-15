@@ -19,12 +19,11 @@ class BatteryCard extends GetView<DashboardController> {
             Column(
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                  child: SvgPicture.asset(
-                    'assets/icons/battery.svg',
-                    height: 35,
-                  ),
-                )
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: Obx(
+                      () => buildBatteryIcon(
+                          controller.wrapper.value.battery.batteryLevel),
+                    ))
               ],
             ),
             SizedBox(
@@ -35,7 +34,7 @@ class BatteryCard extends GetView<DashboardController> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Battery (${controller.wrapper.value.battery?.isCharging ?? false ? "Charging" : "Discharging"})",
+                        "Battery (${getBatteryChargeStatus(controller)})",
                         textScaleFactor: 1.3,
                       ),
                       SizedBox(
@@ -73,6 +72,30 @@ class BatteryCard extends GetView<DashboardController> {
           ],
         ),
       ),
+    );
+  }
+
+  String getBatteryChargeStatus(DashboardController controller1) {
+    final isCharging = controller.wrapper.value.battery.isCharging ?? false;
+    final level = controller.wrapper.value.battery.batteryLevel;
+    if (isCharging && (level < 100)) {
+      return "Charging";
+    }
+    if (!isCharging && (level < 100)) return "Discharging";
+
+    return "Full";
+  }
+
+  SvgPicture buildBatteryIcon(level) {
+    var path = "assets/icons/battery_full.svg";
+    if ((level >= 10) & (level < 100)) {
+      path = "assets/icons/battery_charging.svg";
+    } else if (level < 10) {
+      path = "assets/icons/battery_low.svg";
+    }
+    return SvgPicture.asset(
+      path,
+      height: 35,
     );
   }
 }

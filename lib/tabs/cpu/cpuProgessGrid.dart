@@ -5,9 +5,7 @@ import 'package:phone_monitor/widgets/custom_card.dart';
 import 'package:phone_monitor/widgets/progressWithPercentage.dart';
 
 class CpuProgressGrid extends StatelessWidget {
-  final chartsScrollController;
-
-  CpuProgressGrid({Key key, this.chartsScrollController}) : super(key: key);
+  CpuProgressGrid({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,39 +24,47 @@ class CpuProgressGrid extends StatelessWidget {
                     Divider(
                       height: 15,
                     ),
-                    Container(
-                      child: GridView.count(
-                        controller: chartsScrollController,
-                        crossAxisSpacing: 10,
-                        childAspectRatio: 3.5,
+                    GridView.builder(
                         shrinkWrap: true,
-                        crossAxisCount: 2,
-                        children: _buildCpuGrid(controller),
-                      ),
-                    ),
+                        physics: NeverScrollableScrollPhysics(),
+                        itemCount: controller.cpuInfo.numberOfCores,
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                          mainAxisSpacing: 12.0,
+                          crossAxisSpacing: 12.0,
+                          childAspectRatio: 3.5,
+                        ),
+                        itemBuilder: (_, index) =>
+                            Obx(() => ProgressWithPercentage(
+                                  height: 12,
+                                  title:
+                                      "cpu$index ${controller.cpuInfo.currentFrequencies[index].truncateToDouble()} mhz",
+                                  value: controller
+                                      .overallUsage.overAllPerCore[index],
+                                ))),
                   ],
                 ),
               ),
             ));
   }
+}
 
-  List<Widget> _buildCpuGrid(CpuController controller) {
-    if (controller.cpuInfo == null || controller.overallUsage == null) {
-      return List.generate(
-          controller.cpuInfo?.numberOfCores,
-          (index) => ProgressWithPercentage(
-                height: 12,
-                title: "cpu$index 0 mhz",
-                value: 0.0,
-              ));
-    }
+List<Widget> _buildCpuGrid(CpuController controller) {
+  if (controller.cpuInfo == null || controller.overallUsage == null) {
     return List.generate(
-        controller.cpuInfo?.numberOfCores ?? 0,
+        controller.cpuInfo?.numberOfCores,
         (index) => ProgressWithPercentage(
               height: 12,
-              title:
-                  "cpu$index ${controller.cpuInfo.currentFrequencies[index].truncateToDouble()} mhz",
-              value: controller.overallUsage.overAllPerCore[index],
+              title: "cpu$index 0 mhz",
+              value: 0.0,
             ));
   }
+  return List.generate(
+      controller.cpuInfo?.numberOfCores ?? 0,
+      (index) => ProgressWithPercentage(
+            height: 12,
+            title:
+                "cpu$index ${controller.cpuInfo.currentFrequencies[index].truncateToDouble()} mhz",
+            value: controller.overallUsage.overAllPerCore[index],
+          ));
 }
