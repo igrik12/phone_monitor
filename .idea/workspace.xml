@@ -42,11 +42,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4fc786a1-d1ec-4116-be9c-d2c2d3e427e5" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/kotlin/com/example/phone_monitor/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/kotlin/com/example/phone_monitor/MainActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/tabs/cpu/cpu_overview.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/tabs/cpu/cpu_overview.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/controllers/dashboard_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/controllers/dashboard_controller.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/models/dashboard_wrapper.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/models/dashboard_wrapper.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/tabs/dashboard/battery_card.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/tabs/dashboard/battery_card.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/lib/tabs/dashboard/dashboard.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/tabs/dashboard/dashboard.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,6 +54,13 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_2_API_30" />
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Kotlin File" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -95,7 +102,9 @@
       <workItem from="1599466263574" duration="27566000" />
       <workItem from="1599647547810" duration="1524000" />
       <workItem from="1599652438048" duration="640000" />
-      <workItem from="1599722014695" duration="2231000" />
+      <workItem from="1599722014695" duration="7291000" />
+      <workItem from="1599996225004" duration="20000" />
+      <workItem from="1600111774271" duration="11000" />
     </task>
     <servers />
   </component>
@@ -112,28 +121,29 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="WindowStateProjectService">
     <state x="1822" y="311" key="FileChooserDialogImpl" timestamp="1598817575661">
       <screen x="0" y="0" width="2752" height="1112" />
     </state>
     <state x="1822" y="311" key="FileChooserDialogImpl/3440.205.1536.824/0.0.2752.1112@0.0.2752.1112" timestamp="1598817575661" />
-    <state width="1362" height="329" key="GridCell.Tab.0.bottom" timestamp="1598817580850">
+    <state width="1316" height="328" key="GridCell.Tab.0.bottom" timestamp="1599904398242">
       <screen x="0" y="0" width="2752" height="1112" />
     </state>
-    <state width="1362" height="329" key="GridCell.Tab.0.bottom/3440.205.1536.824/0.0.2752.1112@0.0.2752.1112" timestamp="1598817580850" />
-    <state width="1362" height="329" key="GridCell.Tab.0.center" timestamp="1598817580850">
+    <state width="1316" height="328" key="GridCell.Tab.0.bottom/3440.205.1536.824/0.0.2752.1112@0.0.2752.1112" timestamp="1599904398242" />
+    <state width="1316" height="328" key="GridCell.Tab.0.center" timestamp="1599904398242">
       <screen x="0" y="0" width="2752" height="1112" />
     </state>
-    <state width="1362" height="329" key="GridCell.Tab.0.center/3440.205.1536.824/0.0.2752.1112@0.0.2752.1112" timestamp="1598817580850" />
-    <state width="1362" height="329" key="GridCell.Tab.0.left" timestamp="1598817580850">
+    <state width="1316" height="328" key="GridCell.Tab.0.center/3440.205.1536.824/0.0.2752.1112@0.0.2752.1112" timestamp="1599904398242" />
+    <state width="1316" height="328" key="GridCell.Tab.0.left" timestamp="1599904398240">
       <screen x="0" y="0" width="2752" height="1112" />
     </state>
-    <state width="1362" height="329" key="GridCell.Tab.0.left/3440.205.1536.824/0.0.2752.1112@0.0.2752.1112" timestamp="1598817580850" />
-    <state width="1362" height="329" key="GridCell.Tab.0.right" timestamp="1598817580850">
+    <state width="1316" height="328" key="GridCell.Tab.0.left/3440.205.1536.824/0.0.2752.1112@0.0.2752.1112" timestamp="1599904398240" />
+    <state width="1316" height="328" key="GridCell.Tab.0.right" timestamp="1599904398242">
       <screen x="0" y="0" width="2752" height="1112" />
     </state>
-    <state width="1362" height="329" key="GridCell.Tab.0.right/3440.205.1536.824/0.0.2752.1112@0.0.2752.1112" timestamp="1598817580850" />
+    <state width="1316" height="328" key="GridCell.Tab.0.right/3440.205.1536.824/0.0.2752.1112@0.0.2752.1112" timestamp="1599904398242" />
     <state x="885" y="201" key="SettingsEditor" timestamp="1599415902194">
       <screen x="0" y="0" width="2752" height="1112" />
     </state>
