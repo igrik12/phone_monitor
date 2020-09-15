@@ -78,7 +78,7 @@ class BatteryCard extends GetView<DashboardController> {
   String getBatteryChargeStatus(DashboardController controller1) {
     final isCharging = controller.wrapper.value.battery.isCharging ?? false;
     final level = controller.wrapper.value.battery.batteryLevel;
-    if (isCharging && !(level < 100)) {
+    if (isCharging && (level < 100)) {
       return "Charging";
     }
     if (!isCharging && (level < 100)) return "Discharging";

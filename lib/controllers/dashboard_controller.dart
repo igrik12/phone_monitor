@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:device_apps/device_apps.dart';
 import 'package:device_info/device_info.dart';
 import 'package:disk_space/disk_space.dart';
 import 'package:get/get.dart';

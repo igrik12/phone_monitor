@@ -47,22 +47,61 @@ class _ApplicationsState extends State<Applications> {
                     child: ListView.builder(
                       shrinkWrap: true,
                       itemCount: filteredApps.length,
-                      itemBuilder: (context, index) => ListTile(
-                          title: Text(
-                              '${filteredApps[index].appName} (${filteredApps[index].packageName})'),
-                          subtitle: Text(
-                              'Version: ${filteredApps[index].versionName}\n'
-                              'System app: ${filteredApps[index].systemApp}\n'
-                              'Installed: ${DateTime.fromMillisecondsSinceEpoch(filteredApps[index].installTimeMillis).toString()}\n'
-                              'Updated: ${DateTime.fromMillisecondsSinceEpoch(filteredApps[index].updateTimeMillis).toString()}'),
-                          leading: filteredApps[index] is ApplicationWithIcon
-                              ? CircleAvatar(
-                                  backgroundImage: MemoryImage(
-                                      (filteredApps[index]
-                                              as ApplicationWithIcon)
-                                          .icon),
-                                )
-                              : null),
+                      itemBuilder: (context, index) => GestureDetector(
+                        onTap: () async {
+                          return showDialog(
+                            context: context,
+                            builder: (context) => new AlertDialog(
+                              title: new Text(
+                                  'Do you want to open ${filteredApps[index].appName}'),
+                              actions: <Widget>[
+                                OutlineButton(
+                                  shape: RoundedRectangleBorder(
+                                      borderRadius:
+                                          new BorderRadius.circular(20.0)),
+                                  onPressed: () =>
+                                      Navigator.of(context).pop(true),
+                                  child: Text("Cancel"),
+                                ),
+                                OutlineButton(
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            new BorderRadius.circular(20.0)),
+                                    onPressed: () async {
+                                      final canOpen = await DeviceApps.openApp(
+                                          filteredApps[index].packageName);
+                                      if (!canOpen) {
+                                        Navigator.of(context).pop(true);
+                                        Get.snackbar("Sorry",
+                                            "This app cannot be opened",
+                                            snackPosition:
+                                                SnackPosition.BOTTOM);
+                                        return;
+                                      }
+                                      Navigator.of(context).pop(true);
+                                    },
+                                    child: Text("Open")),
+                              ],
+                            ),
+                          );
+                        },
+                        child: ListTile(
+                            title: Text(
+                                '${filteredApps[index].appName} (${filteredApps[index].packageName})'),
+                            subtitle: Text(
+                                'Version: ${filteredApps[index].versionName}\n'
+                                'System app: ${filteredApps[index].systemApp}\n'
+                                'Installed: ${DateTime.fromMillisecondsSinceEpoch(filteredApps[index].installTimeMillis).toString()}\n'
+                                'Updated: ${DateTime.fromMillisecondsSinceEpoch(filteredApps[index].updateTimeMillis).toString()}'),
+                            leading: filteredApps[index] is ApplicationWithIcon
+                                ? CircleAvatar(
+                                    backgroundImage: MemoryImage(
+                                        (filteredApps[index]
+                                                as ApplicationWithIcon)
+                                            .icon),
+                                  )
+                                : null),
+                      ),
                     ),
                   ),
                 ),
