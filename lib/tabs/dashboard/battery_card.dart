@@ -1,3 +1,4 @@
+import 'package:battery_info/enums/charging_status.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -18,10 +19,9 @@ class BatteryCard extends GetView<DashboardController> {
           children: [
             Column(
               children: [
-                Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: Obx(
-                      () => buildBatteryIcon(
+                Obx(() => Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                      child: buildBatteryIcon(
                           controller.wrapper.value.battery.batteryLevel),
                     ))
               ],
@@ -30,11 +30,12 @@ class BatteryCard extends GetView<DashboardController> {
               width: Get.width * 0.05,
             ),
             Flexible(
-              child: Obx(() => Column(
+              child: Obx(
+                () => Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Battery (${getBatteryChargeStatus(controller)})",
+                        "Battery (${getBatteryChargeStatus(controller.wrapper.value.battery.chargingStatus)})",
                         textScaleFactor: 1.3,
                       ),
                       SizedBox(
@@ -66,8 +67,8 @@ class BatteryCard extends GetView<DashboardController> {
                       ),
                       Text(
                           "Voltage: ${controller.wrapper.value.battery.voltage}mV, Temperature: ${controller.wrapper.value.battery.temperature} °C")
-                    ],
-                  )),
+                    ]),
+              ),
             )
           ],
         ),
@@ -75,18 +76,20 @@ class BatteryCard extends GetView<DashboardController> {
     );
   }
 
-  String getBatteryChargeStatus(DashboardController controller1) {
-    final isCharging = controller.wrapper.value.battery.isCharging ?? false;
-    final level = controller.wrapper.value.battery.batteryLevel;
-    if (isCharging && (level < 100)) {
-      return "Charging";
+  String getBatteryChargeStatus(ChargingStatus status) {
+    switch (status) {
+      case ChargingStatus.Charging:
+        return "Charging";
+      case ChargingStatus.Discharging:
+        return "Discharging";
+      case ChargingStatus.Full:
+        return "Full";
+      default:
+        return "Unknown";
     }
-    if (!isCharging && (level < 100)) return "Discharging";
-
-    return "Full";
   }
 
-  SvgPicture buildBatteryIcon(level) {
+  SvgPicture buildBatteryIcon(int level) {
     var path = "assets/icons/battery_full.svg";
     if ((level >= 10) & (level < 100)) {
       path = "assets/icons/battery_charging.svg";

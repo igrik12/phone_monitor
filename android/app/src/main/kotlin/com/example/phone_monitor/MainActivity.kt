@@ -45,7 +45,6 @@ class MainActivity : FlutterActivity() {
                 "getTotalPhysicalMemory" -> result.success(getTotalPhysicalMemory())
                 "getAvailableMemory" -> result.success(getAvailableMemory())
                 "getTotalMemory" -> result.success(getTotalMemory())
-                "getBatteryData" -> result.success(getBatteryData())
                 "getDisplayData" -> result.success(getDisplayData())
                 "getSensorsList" -> {
                     eventChannel = EventChannel(flutterEngine.dartExecutor.binaryMessenger, eventChannelName)
@@ -159,52 +158,6 @@ class MainActivity : FlutterActivity() {
         var mem = activityManager.getMemoryInfo(memoryInfo)
         return memoryInfo.totalMem
     }
-
-    private fun getBatteryData(): Map<String, Any> {
-
-        val filter = IntentFilter(Intent.ACTION_BATTERY_CHANGED)
-        val intent: Intent? = this.registerReceiver(null, filter)
-        val status: Int = intent?.getIntExtra(BatteryManager.EXTRA_STATUS, -1) ?: 0
-        val batteryManager = getSystemService(Context.BATTERY_SERVICE) as BatteryManager
-
-        val batteryLevel = batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY)
-        val voltage = intent?.getIntExtra(BatteryManager.EXTRA_VOLTAGE, -1) ?: -1
-        val health = intent?.getIntExtra(BatteryManager.EXTRA_HEALTH, 0) ?: 0
-        val plugged = intent?.getIntExtra(BatteryManager.EXTRA_PLUGGED, -1) ?: -1
-        val healthy = BatteryManager.BATTERY_HEALTH_GOOD
-        val dead = BatteryManager.BATTERY_HEALTH_DEAD
-        val pluggedUsb = BatteryManager.BATTERY_PLUGGED_USB
-        val pluggedAc = BatteryManager.BATTERY_PLUGGED_AC
-        val pluggedWireless = BatteryManager.BATTERY_PLUGGED_WIRELESS
-        val chargeTimeRemaining = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.P) {
-            batteryManager.computeChargeTimeRemaining()
-        } else {
-            0.0
-        }
-        val currentAverage = batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CURRENT_AVERAGE)
-        val currentNow = batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CURRENT_NOW)
-        val charging = status == BatteryManager.BATTERY_STATUS_CHARGING
-        val batteryFull = status == BatteryManager.BATTERY_STATUS_FULL
-        val temperature = intent?.getIntExtra(BatteryManager.EXTRA_TEMPERATURE, 0) ?: 0
-        return mapOf(
-                "batteryLevel" to batteryLevel,
-                "batteryFull" to batteryFull,
-                "voltage" to voltage,
-                "charging" to charging,
-                "plugged" to plugged,
-                "health" to health,
-                "healthy" to healthy,
-                "dead" to dead,
-                "pluggedUsb" to pluggedUsb,
-                "pluggedAc" to pluggedAc,
-                "pluggedWireless" to pluggedWireless,
-                "temperature" to temperature / 10,
-                "currentNow" to currentNow,
-                "chargeTimeRemaining" to chargeTimeRemaining,
-                "currentAverage" to currentAverage
-        )
-    }
-
     
     private fun getSensorsList(): Map<String, List<Map<String, String>>> {
         val myMap = mutableMapOf<String, List<Map<String, String>>>()

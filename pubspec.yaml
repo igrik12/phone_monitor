@@ -12,6 +12,7 @@ dependencies:
   flutter:
     sdk: flutter
   admob_flutter: ^0.3.4
+  battery_info: ^1.0.5
   cpu_reader: ^2.0.0
   device_apps: ^1.2.0
   device_info: ^0.4.2+7

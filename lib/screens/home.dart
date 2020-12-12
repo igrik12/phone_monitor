@@ -138,9 +138,4 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
       ),
     ];
   }
-
-  Future<bool> _handlePop() async {
-    Get.to(Home());
-    return false;
-  }
 }

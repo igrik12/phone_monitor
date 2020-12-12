@@ -8,10 +8,6 @@ import 'package:phone_monitor/widgets/progressWithPercentage.dart';
 import 'package:phone_monitor/widgets/usageProgressDisplay.dart';
 
 class DashboardOverview extends GetView<DashboardController> {
-  const DashboardOverview({
-    Key key,
-  }) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return CustomCard(
@@ -24,9 +20,7 @@ class DashboardOverview extends GetView<DashboardController> {
                   children: [
                     UsageProgressDisplay(
                         title: "Memory",
-                        value:
-                            controller.wrapper.value.totalRamUsage.toDouble() /
-                                100),
+                        value: controller.wrapper.value.totalRamUsage / 100),
                     UsageProgressDisplay(
                       title: "Battery",
                       value:

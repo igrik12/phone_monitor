@@ -22,7 +22,10 @@ class DismissableAdBanner extends StatelessWidget {
             child: AdmobBanner(
               adUnitId: AdManager.bannerAdUnitId,
               adSize: AdmobBannerSize.BANNER,
-              listener: (AdmobAdEvent event, Map<String, dynamic> args) {},
+              listener: (AdmobAdEvent event, Map<String, dynamic> args) {
+                print(event);
+                print(args);
+              },
             ),
           ),
         ),

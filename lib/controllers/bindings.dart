@@ -6,8 +6,8 @@ import 'package:phone_monitor/controllers/homeController.dart';
 class InitialBinding extends Bindings {
   @override
   void dependencies() {
-    Get.put<CpuController>(CpuController(), permanent: true);
-    Get.put<HomeController>(HomeController(), permanent: true);
+    Get.put<CpuController>(CpuController());
+    Get.lazyPut<HomeController>(() => HomeController());
     Get.lazyPut<DashboardController>(() => DashboardController());
   }
 }

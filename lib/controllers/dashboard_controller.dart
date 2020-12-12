@@ -1,11 +1,9 @@
 import 'dart:async';
-import 'package:device_apps/device_apps.dart';
+import 'package:battery_info/battery_info_plugin.dart';
 import 'package:device_info/device_info.dart';
 import 'package:disk_space/disk_space.dart';
 import 'package:get/get.dart';
-import 'package:phone_monitor/models/battery_info.dart';
 import 'package:phone_monitor/models/dashboard_wrapper.dart';
-import 'package:phone_monitor/models/display_info.dart';
 import 'package:phone_monitor/utils/native_comms.dart';
 
 class DashboardController extends GetxController {
@@ -23,8 +21,8 @@ class DashboardController extends GetxController {
   // Dashboard wrapper observable
   final wrapper = DashboardInfoWrapper().obs
     ..value.totalRamUsage = 100
-    ..value.battery = BatteryInfo()
-    ..value.display = DisplayInfo()
+    ..value.display
+    ..value.battery
     ..value.diskSpaceUsedInPersent = 100
     ..value.totalDiskSpaceAvailable = 0.0;
 
@@ -35,8 +33,10 @@ class DashboardController extends GetxController {
     totalPhysicalMemory = await NativeComms.getTotalMemory();
     totalDiskSpace = (await DiskSpace.getTotalDiskSpace / 1024).toPrecision(2);
     var display = await NativeComms.getDisplayData();
+    var battery = await BatteryInfoPlugin().androidBatteryInfo;
     wrapper.update((value) {
       value.display = display;
+      value.battery = battery;
     });
     _timer = Timer.periodic(Duration(seconds: 1), dashboardHandler);
   }
@@ -51,7 +51,7 @@ class DashboardController extends GetxController {
         (await DiskSpace.getFreeDiskSpace / 1024).toPrecision(2);
     var diskSpaceUsedInPersent =
         await calcDiskSpaceUsed(totalDiskSpace, totalDiskSpaceAvailable);
-    var battery = await NativeComms.getBatteryData();
+    var battery = await BatteryInfoPlugin().androidBatteryInfo;
 
     /// Runs an update on the [DashboardWrapper.obs]
     wrapper.update((value) {
@@ -64,8 +64,6 @@ class DashboardController extends GetxController {
           (totalDiskSpace - totalDiskSpaceAvailable).toPrecision(2);
       value.diskSpaceUsedInPersent = diskSpaceUsedInPersent;
       value.totalDiskSpaceAvailable = totalDiskSpaceAvailable;
-
-      // Battery
       value.battery = battery;
     });
   }
