@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:phone_monitor/controllers/dashboard_controller.dart';
+
 import 'package:phone_monitor/widgets/customProgressIndicator.dart';
 import 'package:phone_monitor/widgets/custom_card.dart';
 
 class StorageCard extends GetView<DashboardController> {
-  const StorageCard({Key key}) : super(key: key);
-
   @override
   Widget build(BuildContext context) {
     return CustomCard(

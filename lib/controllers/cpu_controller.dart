@@ -1,5 +1,4 @@
 import 'dart:collection';
-import 'dart:math';
 
 import 'package:cpu_reader/cpu_reader.dart';
 import 'package:cpu_reader/cpuinfo.dart';
@@ -38,7 +37,7 @@ class CpuController extends GetxController {
     _cpuTemperature.value = value;
   }
 
-  Stream<CpuInfo> stream = CpuReader.cpuStream(2000).asBroadcastStream();
+  Stream<CpuInfo> stream = CpuReader.cpuStream(1000).asBroadcastStream();
 
   @override
   onInit() async {

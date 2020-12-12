@@ -16,7 +16,7 @@ class System extends GetView<CpuController> {
           children: [
             SystemOverview(),
             HardwareDescription(),
-            // DismissableAdBanner(), DISABLED TILL THE APP KICKS OFF
+            // DismissableAdBanner()
           ],
         ),
       ),
