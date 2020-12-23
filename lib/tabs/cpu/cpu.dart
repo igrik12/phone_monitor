@@ -21,8 +21,8 @@ class _CpuTabState extends State<CpuTab> {
         child: Column(
           children: [
             CpuOverview(),
-            // DismissableAdBanner(),
             CpuProgressGrid(),
+            // DismissableAdBanner(),
             Charts(),
             CpuController.to.cpuInfo.cpuTemperature != -1
                 ? TemperatureChart()

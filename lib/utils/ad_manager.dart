@@ -8,7 +8,7 @@ import 'package:phone_monitor/widgets/custom_card.dart';
 class AdManager {
   static String get appId {
     if (Platform.isAndroid) {
-      return "ca-app-pub-8553583576390987~6421066446";
+      return "ca-app-pub-9203200566585009~4031425375";
     } else {
       throw new UnsupportedError("Unsupported platform");
     }
@@ -16,7 +16,7 @@ class AdManager {
 
   static String get bannerAdUnitId {
     if (Platform.isAndroid) {
-      return "ca-app-pub-8553583576390987/4063508172";
+      return "ca-app-pub-9203200566585009/5671810102";
     } else {
       throw new UnsupportedError("Unsupported platform");
     }
