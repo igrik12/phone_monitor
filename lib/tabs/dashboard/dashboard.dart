@@ -5,7 +5,6 @@ import 'package:phone_monitor/controllers/dashboard_controller.dart';
 import 'package:phone_monitor/tabs/dashboard/battery_card.dart';
 import 'package:phone_monitor/tabs/dashboard/overview.dart';
 import 'package:phone_monitor/widgets/animatedText.dart';
-import 'package:phone_monitor/widgets/dismissableAdBanner.dart';
 import 'package:phone_monitor/widgets/progressWave.dart';
 
 import 'SensorCounter.dart';
@@ -25,7 +24,6 @@ class Dashboard extends GetView<DashboardController> {
               DashboardOverview(),
               StorageCard(),
               BatteryCard(),
-              DismissableAdBanner(),
               DisplayCard(),
               Row(
                 children: [
