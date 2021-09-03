@@ -7,6 +7,7 @@ import 'package:phone_monitor/models/dashboard_wrapper.dart';
 import 'package:phone_monitor/utils/native_comms.dart';
 
 class DashboardController extends GetxController {
+  static DashboardController get to => Get.find();
   final deviceInfoPlugin = DeviceInfoPlugin().androidInfo;
   Rx<AndroidDeviceInfo> _deviceInfo = Rx<AndroidDeviceInfo>(null);
   AndroidDeviceInfo get deviceInfo => _deviceInfo.value;

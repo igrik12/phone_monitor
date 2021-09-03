@@ -13,6 +13,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
   await MobileAds.instance.initialize();
+  Get.lazyPut<ThemeController>(() => ThemeController());
   runApp(MyApp());
 }
 

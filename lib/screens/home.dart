@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -19,36 +21,47 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   TabController _tabController;
   HomeController homeController;
-  BannerAd _bannerAd;
-  bool _isBannerAdReady = false;
+
+  InterstitialAd _interstitialAd;
+
   @override
   void initState() {
     super.initState();
     homeController = Get.find<HomeController>();
     _tabController = TabController(vsync: this, length: 6);
     homeController.setController(_tabController);
-    _bannerAd = BannerAd(
-      adUnitId: AdManager.bannerAdUnitId,
-      request: AdRequest(),
-      size: AdSize.banner,
-      listener: BannerAdListener(
-        onAdLoaded: (_) {
-          setState(() {
-            _isBannerAdReady = true;
-          });
-        },
-        onAdFailedToLoad: (ad, err) {
-          print('Failed to load a banner ad: ${err.message}');
-          _isBannerAdReady = false;
-          ad.dispose();
-        },
-      ),
-    );
+    InterstitialAd.load(
+        adUnitId: AdManager.interstitialAdUnitId,
+        request: AdRequest(),
+        adLoadCallback: InterstitialAdLoadCallback(
+          onAdLoaded: (InterstitialAd ad) {
+            this._interstitialAd = ad;
+            this._interstitialAd.fullScreenContentCallback =
+                FullScreenContentCallback(
+              onAdShowedFullScreenContent: (InterstitialAd ad) =>
+                  print('%ad onAdShowedFullScreenContent.'),
+              onAdDismissedFullScreenContent: (InterstitialAd ad) {
+                print('$ad onAdDismissedFullScreenContent.');
+              },
+              onAdFailedToShowFullScreenContent:
+                  (InterstitialAd ad, AdError error) {
+                print('$ad onAdFailedToShowFullScreenContent: $error');
+                ad.dispose();
+              },
+              onAdImpression: (InterstitialAd ad) =>
+                  print('$ad impression occurred.'),
+            );
+            this._interstitialAd.show();
+          },
+          onAdFailedToLoad: (LoadAdError error) {
+            print('InterstitialAd failed to load: $error');
+          },
+        ));
   }
 
   @override
   void dispose() {
-    _bannerAd.dispose();
+    _interstitialAd.dispose();
     super.dispose();
   }
 
@@ -107,18 +120,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               ],
             ),
             body: TabBarView(
-              children: [
-                if (_isBannerAdReady)
-                  Align(
-                    alignment: Alignment.topCenter,
-                    child: Container(
-                      width: _bannerAd.size.width.toDouble(),
-                      height: _bannerAd.size.height.toDouble(),
-                      child: AdWidget(ad: _bannerAd),
-                    ),
-                  ),
-                ..._buildTabView()
-              ],
+              children: _buildTabView(),
               controller: _tabController,
             ),
           ),
