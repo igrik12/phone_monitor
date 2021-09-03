@@ -13,8 +13,7 @@ class CpuController extends GetxController {
   static CpuController get to => Get.find();
 
   // Device info getter/setter
-  Rx<AndroidDeviceInfo> _deviceInfo =
-      Rx<AndroidDeviceInfo>(AndroidDeviceInfo());
+  Rx<AndroidDeviceInfo> _deviceInfo = Rx<AndroidDeviceInfo>(null);
   AndroidDeviceInfo get deviceInfo => _deviceInfo.value;
   set deviceInfo(AndroidDeviceInfo value) {
     _deviceInfo.value = value;

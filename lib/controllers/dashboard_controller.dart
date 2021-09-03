@@ -8,8 +8,7 @@ import 'package:phone_monitor/utils/native_comms.dart';
 
 class DashboardController extends GetxController {
   final deviceInfoPlugin = DeviceInfoPlugin().androidInfo;
-  Rx<AndroidDeviceInfo> _deviceInfo =
-      Rx<AndroidDeviceInfo>(AndroidDeviceInfo());
+  Rx<AndroidDeviceInfo> _deviceInfo = Rx<AndroidDeviceInfo>(null);
   AndroidDeviceInfo get deviceInfo => _deviceInfo.value;
   set deviceInfo(AndroidDeviceInfo value) {
     _deviceInfo.value = value;
