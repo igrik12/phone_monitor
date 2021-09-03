@@ -45,7 +45,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   leading: Icon(Icons.star),
                   onTap: () => LaunchReview.launch(
                       androidAppId: "com.twarkapps.phone_monitor"),
-                  subtitle: "Please rate me on Play Store"),
+                  subtitle: "Please rate the app on Play Store"),
             ],
           ),
           CustomSection(

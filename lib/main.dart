@@ -1,20 +1,19 @@
-import 'package:admob_flutter/admob_flutter.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:phone_monitor/controllers/themeController.dart';
 import 'package:phone_monitor/screens/home.dart';
 import 'package:phone_monitor/screens/settings.dart';
 
 import 'controllers/bindings.dart';
-import 'utils/ad_manager.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
+  await MobileAds.instance.initialize();
   Get.lazyPut<ThemeController>(() => ThemeController());
-  Admob.initialize(AdManager.appId);
   runApp(MyApp());
 }
 
@@ -32,7 +31,7 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeController.to.themeMode,
       darkTheme: ThemeData.dark().copyWith(
           primaryColor: Colors.amber,
-          accentColor: Colors.amber,
+          accentColor: Colors.amberAccent,
           tabBarTheme: TabBarTheme().copyWith(labelColor: Colors.black),
           iconTheme: IconThemeData().copyWith(color: Colors.black),
           primaryIconTheme: IconThemeData().copyWith(color: Colors.black),

@@ -1,5 +1,4 @@
 import 'dart:collection';
-import 'dart:math';
 
 import 'package:cpu_reader/cpu_reader.dart';
 import 'package:cpu_reader/cpuinfo.dart';
@@ -14,7 +13,7 @@ class CpuController extends GetxController {
   static CpuController get to => Get.find();
 
   // Device info getter/setter
-  Rx<AndroidDeviceInfo> _deviceInfo = Rx<AndroidDeviceInfo>();
+  Rx<AndroidDeviceInfo> _deviceInfo = Rx<AndroidDeviceInfo>(null);
   AndroidDeviceInfo get deviceInfo => _deviceInfo.value;
   set deviceInfo(AndroidDeviceInfo value) {
     _deviceInfo.value = value;
@@ -25,7 +24,7 @@ class CpuController extends GetxController {
   CpuInfo get cpuInfo => _cpuInfo.value;
 
   // Overall CPU usage in percentage
-  var _overallUsage = Rx<OverallUsage>();
+  var _overallUsage = Rx<OverallUsage>(OverallUsage());
   OverallUsage get overallUsage => _overallUsage.value;
   set overallUsage(OverallUsage value) {
     _overallUsage.value = value;
@@ -38,10 +37,11 @@ class CpuController extends GetxController {
     _cpuTemperature.value = value;
   }
 
-  Stream<CpuInfo> stream = CpuReader.cpuStream(2000).asBroadcastStream();
+  Stream<CpuInfo> stream = CpuReader.cpuStream(1000).asBroadcastStream();
 
   @override
   onInit() async {
+    super.onInit();
     _cpuInfo.value = await CpuReader.cpuInfo;
     deviceInfo = await androidInfo;
     stream.listen((cpuInfo) async {
