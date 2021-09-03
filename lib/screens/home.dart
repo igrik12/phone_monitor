@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:phone_monitor/controllers/homeController.dart';
 import 'package:phone_monitor/tabs/cpu/cpu.dart';
 import 'package:phone_monitor/tabs/applications/applications.dart';
@@ -8,6 +9,7 @@ import 'package:phone_monitor/tabs/dashboard/dashboard.dart';
 import 'package:phone_monitor/tabs/display/display.dart';
 import 'package:phone_monitor/tabs/sensors/sensors.dart';
 import 'package:phone_monitor/tabs/system/system.dart';
+import 'package:phone_monitor/utils/ad_manager.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -17,12 +19,37 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   TabController _tabController;
   HomeController homeController;
+  BannerAd _bannerAd;
+  bool _isBannerAdReady = false;
   @override
   void initState() {
     super.initState();
     homeController = Get.find<HomeController>();
     _tabController = TabController(vsync: this, length: 6);
     homeController.setController(_tabController);
+    _bannerAd = BannerAd(
+      adUnitId: AdManager.bannerAdUnitId,
+      request: AdRequest(),
+      size: AdSize.banner,
+      listener: BannerAdListener(
+        onAdLoaded: (_) {
+          setState(() {
+            _isBannerAdReady = true;
+          });
+        },
+        onAdFailedToLoad: (ad, err) {
+          print('Failed to load a banner ad: ${err.message}');
+          _isBannerAdReady = false;
+          ad.dispose();
+        },
+      ),
+    );
+  }
+
+  @override
+  void dispose() {
+    _bannerAd.dispose();
+    super.dispose();
   }
 
   var tabIndex = 0;
@@ -80,7 +107,18 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
               ],
             ),
             body: TabBarView(
-              children: _buildTabView(),
+              children: [
+                if (_isBannerAdReady)
+                  Align(
+                    alignment: Alignment.topCenter,
+                    child: Container(
+                      width: _bannerAd.size.width.toDouble(),
+                      height: _bannerAd.size.height.toDouble(),
+                      child: AdWidget(ad: _bannerAd),
+                    ),
+                  ),
+                ..._buildTabView()
+              ],
               controller: _tabController,
             ),
           ),
