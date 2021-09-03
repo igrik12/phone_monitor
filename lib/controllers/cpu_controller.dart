@@ -13,7 +13,7 @@ class CpuController extends GetxController {
   static CpuController get to => Get.find();
 
   // Device info getter/setter
-  Rx<AndroidDeviceInfo> _deviceInfo = Rx<AndroidDeviceInfo>();
+  Rx<AndroidDeviceInfo> _deviceInfo = Rx<AndroidDeviceInfo>(null);
   AndroidDeviceInfo get deviceInfo => _deviceInfo.value;
   set deviceInfo(AndroidDeviceInfo value) {
     _deviceInfo.value = value;
@@ -24,7 +24,7 @@ class CpuController extends GetxController {
   CpuInfo get cpuInfo => _cpuInfo.value;
 
   // Overall CPU usage in percentage
-  var _overallUsage = Rx<OverallUsage>();
+  var _overallUsage = Rx<OverallUsage>(OverallUsage());
   OverallUsage get overallUsage => _overallUsage.value;
   set overallUsage(OverallUsage value) {
     _overallUsage.value = value;
@@ -41,6 +41,7 @@ class CpuController extends GetxController {
 
   @override
   onInit() async {
+    super.onInit();
     _cpuInfo.value = await CpuReader.cpuInfo;
     deviceInfo = await androidInfo;
     stream.listen((cpuInfo) async {

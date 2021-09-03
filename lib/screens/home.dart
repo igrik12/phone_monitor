@@ -1,6 +1,9 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:phone_monitor/controllers/homeController.dart';
 import 'package:phone_monitor/tabs/cpu/cpu.dart';
 import 'package:phone_monitor/tabs/applications/applications.dart';
@@ -8,6 +11,7 @@ import 'package:phone_monitor/tabs/dashboard/dashboard.dart';
 import 'package:phone_monitor/tabs/display/display.dart';
 import 'package:phone_monitor/tabs/sensors/sensors.dart';
 import 'package:phone_monitor/tabs/system/system.dart';
+import 'package:phone_monitor/utils/ad_manager.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -17,12 +21,48 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   TabController _tabController;
   HomeController homeController;
+
+  InterstitialAd _interstitialAd;
+
   @override
   void initState() {
     super.initState();
     homeController = Get.find<HomeController>();
     _tabController = TabController(vsync: this, length: 6);
     homeController.setController(_tabController);
+    InterstitialAd.load(
+        adUnitId: AdManager.interstitialAdUnitId,
+        request: AdRequest(),
+        adLoadCallback: InterstitialAdLoadCallback(
+          onAdLoaded: (InterstitialAd ad) {
+            this._interstitialAd = ad;
+            this._interstitialAd.fullScreenContentCallback =
+                FullScreenContentCallback(
+              onAdShowedFullScreenContent: (InterstitialAd ad) =>
+                  print('%ad onAdShowedFullScreenContent.'),
+              onAdDismissedFullScreenContent: (InterstitialAd ad) {
+                print('$ad onAdDismissedFullScreenContent.');
+              },
+              onAdFailedToShowFullScreenContent:
+                  (InterstitialAd ad, AdError error) {
+                print('$ad onAdFailedToShowFullScreenContent: $error');
+                ad.dispose();
+              },
+              onAdImpression: (InterstitialAd ad) =>
+                  print('$ad impression occurred.'),
+            );
+            this._interstitialAd.show();
+          },
+          onAdFailedToLoad: (LoadAdError error) {
+            print('InterstitialAd failed to load: $error');
+          },
+        ));
+  }
+
+  @override
+  void dispose() {
+    _interstitialAd.dispose();
+    super.dispose();
   }
 
   var tabIndex = 0;
