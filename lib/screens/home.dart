@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
@@ -31,8 +29,13 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     homeController = Get.find<HomeController>();
     _tabController = TabController(vsync: this, length: 6);
     homeController.setController(_tabController);
-    Get.find<TabClickController>().clicked.obs.listen((clicks) {
-      if (clicks.value == 2) {
+    final clickController = Get.find<TabClickController>();
+    _tabController.addListener(() {
+      clickController.click();
+    });
+
+    clickController.clicked.stream.listen((clicks) {
+      if (clicks >= 3) {
         InterstitialAd.load(
             adUnitId: AdManager.interstitialAdUnitId,
             request: AdRequest(),
@@ -41,18 +44,20 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 this._interstitialAd = ad;
                 this._interstitialAd.fullScreenContentCallback =
                     FullScreenContentCallback(
-                  onAdShowedFullScreenContent: (InterstitialAd ad) => ad,
-                  onAdDismissedFullScreenContent: (InterstitialAd ad) {
-                    print('$ad onAdDismissedFullScreenContent.');
-                  },
-                  onAdFailedToShowFullScreenContent:
-                      (InterstitialAd ad, AdError error) {
-                    print('$ad onAdFailedToShowFullScreenContent: $error');
-                    ad.dispose();
-                  },
-                  onAdImpression: (InterstitialAd ad) =>
-                      print('$ad impression occurred.'),
-                );
+                        onAdShowedFullScreenContent: (InterstitialAd ad) {
+                  clickController.resetClicks();
+                  print(ad.adUnitId);
+                }, onAdDismissedFullScreenContent: (InterstitialAd ad) {
+                  clickController.resetClicks();
+                }, onAdFailedToShowFullScreenContent:
+                            (InterstitialAd ad, AdError error) {
+                  print('$ad onAdFailedToShowFullScreenContent: $error');
+                  clickController.resetClicks();
+                  ad.dispose();
+                }, onAdImpression: (InterstitialAd ad) {
+                  print('$ad impression occurred.');
+                  clickController.resetClicks();
+                });
                 this._interstitialAd.show();
               },
               onAdFailedToLoad: (LoadAdError error) {
