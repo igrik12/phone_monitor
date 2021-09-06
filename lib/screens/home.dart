@@ -5,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:phone_monitor/controllers/homeController.dart';
+import 'package:phone_monitor/controllers/tab_click_controller.dart';
 import 'package:phone_monitor/tabs/cpu/cpu.dart';
 import 'package:phone_monitor/tabs/applications/applications.dart';
 import 'package:phone_monitor/tabs/dashboard/dashboard.dart';
@@ -30,33 +31,36 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     homeController = Get.find<HomeController>();
     _tabController = TabController(vsync: this, length: 6);
     homeController.setController(_tabController);
-    InterstitialAd.load(
-        adUnitId: AdManager.interstitialAdUnitId,
-        request: AdRequest(),
-        adLoadCallback: InterstitialAdLoadCallback(
-          onAdLoaded: (InterstitialAd ad) {
-            this._interstitialAd = ad;
-            this._interstitialAd.fullScreenContentCallback =
-                FullScreenContentCallback(
-              onAdShowedFullScreenContent: (InterstitialAd ad) =>
-                  print('%ad onAdShowedFullScreenContent.'),
-              onAdDismissedFullScreenContent: (InterstitialAd ad) {
-                print('$ad onAdDismissedFullScreenContent.');
+    Get.find<TabClickController>().clicked.obs.listen((clicks) {
+      if (clicks.value == 2) {
+        InterstitialAd.load(
+            adUnitId: AdManager.interstitialAdUnitId,
+            request: AdRequest(),
+            adLoadCallback: InterstitialAdLoadCallback(
+              onAdLoaded: (InterstitialAd ad) {
+                this._interstitialAd = ad;
+                this._interstitialAd.fullScreenContentCallback =
+                    FullScreenContentCallback(
+                  onAdShowedFullScreenContent: (InterstitialAd ad) => ad,
+                  onAdDismissedFullScreenContent: (InterstitialAd ad) {
+                    print('$ad onAdDismissedFullScreenContent.');
+                  },
+                  onAdFailedToShowFullScreenContent:
+                      (InterstitialAd ad, AdError error) {
+                    print('$ad onAdFailedToShowFullScreenContent: $error');
+                    ad.dispose();
+                  },
+                  onAdImpression: (InterstitialAd ad) =>
+                      print('$ad impression occurred.'),
+                );
+                this._interstitialAd.show();
               },
-              onAdFailedToShowFullScreenContent:
-                  (InterstitialAd ad, AdError error) {
-                print('$ad onAdFailedToShowFullScreenContent: $error');
-                ad.dispose();
+              onAdFailedToLoad: (LoadAdError error) {
+                print('InterstitialAd failed to load: $error');
               },
-              onAdImpression: (InterstitialAd ad) =>
-                  print('$ad impression occurred.'),
-            );
-            this._interstitialAd.show();
-          },
-          onAdFailedToLoad: (LoadAdError error) {
-            print('InterstitialAd failed to load: $error');
-          },
-        ));
+            ));
+      }
+    });
   }
 
   @override
