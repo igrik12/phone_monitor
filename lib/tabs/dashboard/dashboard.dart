@@ -25,23 +25,15 @@ class _DashboardState extends State<Dashboard> {
   @override
   void initState() {
     super.initState();
-    _bannerAd = BannerAd(
-      adUnitId: AdManager.bannerAdUnitId,
-      request: AdRequest(),
-      size: AdSize.banner,
-      listener: BannerAdListener(
-        onAdLoaded: (_) {
-          setState(() {
-            _isBannerAdReady = true;
-          });
-        },
-        onAdFailedToLoad: (ad, err) {
-          print('Failed to load a banner ad: ${err.message}');
-          _isBannerAdReady = false;
-          ad.dispose();
-        },
-      ),
-    );
+    _bannerAd = AdManager.loadSmallBanner(() {
+      setState(() {
+        _isBannerAdReady = true;
+      });
+    }, (ad, err) {
+      print('Failed to load a banner ad: ${err.message}');
+      _isBannerAdReady = false;
+      ad.dispose();
+    });
     _bannerAd.load();
   }
 

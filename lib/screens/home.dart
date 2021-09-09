@@ -35,7 +35,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     });
 
     clickController.clicked.stream.listen((clicks) {
-      if (clicks >= 3) {
+      if (clicks == 3) {
         InterstitialAd.load(
             adUnitId: AdManager.interstitialAdUnitId,
             request: AdRequest(),
@@ -59,11 +59,14 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   clickController.resetClicks();
                 });
                 this._interstitialAd.show();
+                clickController.resetClicks();
               },
               onAdFailedToLoad: (LoadAdError error) {
                 print('InterstitialAd failed to load: $error');
+                clickController.resetClicks();
               },
             ));
+        clickController.resetClicks();
       }
     });
   }
