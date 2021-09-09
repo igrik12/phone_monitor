@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:launch_review/launch_review.dart';
 import 'package:package_info/package_info.dart';
+import 'package:phone_monitor/api/purchase_api.dart';
 import 'package:phone_monitor/controllers/themeController.dart';
+import 'package:phone_monitor/widgets/paywall_widget.dart';
 import 'package:settings_ui/settings_ui.dart';
 
 class SettingsScreen extends StatefulWidget {
@@ -43,9 +45,38 @@ class _SettingsScreenState extends State<SettingsScreen> {
               SettingsTile(
                   title: 'Rate',
                   leading: Icon(Icons.star),
-                  onTap: () => LaunchReview.launch(
-                      androidAppId: "com.twarkapps.phone_monitor"),
+                  onPressed: (context) {
+                    LaunchReview.launch(
+                        androidAppId: "com.twarkapps.phone_monitor");
+                  },
                   subtitle: "Please rate the app on Play Store"),
+            ],
+          ),
+          SettingsSection(
+            title: 'Misc',
+            tiles: [
+              SettingsTile(
+                  title: 'Remove Ads',
+                  leading: Icon(Icons.star),
+                  onPressed: (context) async {
+                    await PurchaseApi.init();
+                    final packages = await PurchaseApi.fetchOffers();
+                    Get.bottomSheet(
+                      PaywallWidget(
+                        packages: packages
+                            .map((offer) => offer.availablePackages)
+                            .expand((pair) => pair)
+                            .toList(),
+                        title: "Remove ads",
+                        description: "Remove ads and support developer ",
+                        onClickedPackage: (package) async {
+                          await PurchaseApi.purchasePackage(package);
+                          Get.back();
+                        },
+                      ),
+                    );
+                  },
+                  subtitle: "Remove ads and support developer"),
             ],
           ),
           CustomSection(
