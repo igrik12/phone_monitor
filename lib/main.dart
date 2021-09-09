@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeController.to.themeMode,
       darkTheme: ThemeData.dark().copyWith(
           primaryColor: Colors.amber,
-          accentColor: Colors.amberAccent,
+          appBarTheme: AppBarTheme().copyWith(backgroundColor: Colors.amber),
           tabBarTheme: TabBarTheme().copyWith(labelColor: Colors.black),
           iconTheme: IconThemeData().copyWith(color: Colors.black),
           primaryIconTheme: IconThemeData().copyWith(color: Colors.black),

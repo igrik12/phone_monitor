@@ -125,7 +125,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   indicatorColor: Theme.of(context).tabBarTheme.labelColor),
               actions: [
                 IconButton(
-                    icon: Icon(Icons.settings),
+                    icon: Icon(Icons.settings,
+                        color: Theme.of(context).iconTheme.color),
                     onPressed: () {
                       Get.toNamed("/settings");
                     }),
