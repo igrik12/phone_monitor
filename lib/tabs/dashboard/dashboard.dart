@@ -70,9 +70,7 @@ class _DashboardState extends State<Dashboard> {
               Row(
                 children: const [
                   SensorCounter(),
-                  Expanded(
-                    child: AppCounter(),
-                  )
+                  Expanded(child: AppCounter())
                 ],
               )
             ],

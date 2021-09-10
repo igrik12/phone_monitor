@@ -86,7 +86,7 @@ class DashboardOverview extends GetView<DashboardController> {
                   builder: (cpuController) => Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 10),
                     child: ProgressWithPercentage(
-                      value: cpuController.overallUsage?.overAll ?? 0.0,
+                      value: cpuController?.overallUsage?.overAll ?? 0.0,
                       title: "Overall Cpu Usage",
                       height: 16,
                     ),

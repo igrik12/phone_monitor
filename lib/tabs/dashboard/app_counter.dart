@@ -15,7 +15,7 @@ class AppCounter extends GetView<HomeController> {
       onTap: () => controller.goTo(4),
       child: CustomCard(
           child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(14.0),
         child: Row(
           children: [
             Icon(

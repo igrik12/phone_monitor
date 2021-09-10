@@ -1,3 +1,5 @@
+import 'package:get/get.dart';
+import 'package:phone_monitor/controllers/database_controller.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 
 class PurchaseApi {
@@ -35,8 +37,10 @@ class PurchaseApi {
   static Future<bool> purchasePackage(Package package) async {
     try {
       await Purchases.purchasePackage(package);
+      Get.find<DatabaseController>().setPremium(true);
       return true;
     } catch (e) {
+      Get.find<DatabaseController>().setPremium(false);
       return false;
     }
   }
