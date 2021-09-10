@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:phone_monitor/api/purchase_api.dart';
 import 'package:phone_monitor/controllers/homeController.dart';
+import 'package:phone_monitor/controllers/purchases_controller.dart';
 import 'package:phone_monitor/controllers/tab_click_controller.dart';
 import 'package:phone_monitor/tabs/cpu/cpu.dart';
 import 'package:phone_monitor/tabs/applications/applications.dart';
@@ -11,6 +13,7 @@ import 'package:phone_monitor/tabs/display/display.dart';
 import 'package:phone_monitor/tabs/sensors/sensors.dart';
 import 'package:phone_monitor/tabs/system/system.dart';
 import 'package:phone_monitor/utils/ad_manager.dart';
+import 'package:purchases_flutter/purchases_flutter.dart';
 
 class Home extends StatefulWidget {
   const Home({Key key}) : super(key: key);
@@ -37,6 +40,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     });
 
     clickController.clicked.stream.listen((clicks) {
+      if (Get.find<PurchasesController>().paid.value) return;
       if (clicks == 3) {
         InterstitialAd.load(
             adUnitId: AdManager.interstitialAdUnitId,

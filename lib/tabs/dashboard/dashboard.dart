@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:phone_monitor/controllers/dashboard_controller.dart';
+import 'package:phone_monitor/controllers/purchases_controller.dart';
 import 'package:phone_monitor/tabs/dashboard/battery_card.dart';
 import 'package:phone_monitor/tabs/dashboard/overview.dart';
 import 'package:phone_monitor/utils/ad_manager.dart';
@@ -15,6 +16,8 @@ import 'display_card.dart';
 import 'storage_card.dart';
 
 class Dashboard extends StatefulWidget {
+  const Dashboard({Key key}) : super(key: key);
+
   @override
   _DashboardState createState() => _DashboardState();
 }
@@ -25,12 +28,12 @@ class _DashboardState extends State<Dashboard> {
   @override
   void initState() {
     super.initState();
+    if (Get.find<PurchasesController>().paid.value) return;
     _bannerAd = AdManager.loadSmallBanner(() {
       setState(() {
         _isBannerAdReady = true;
       });
     }, (ad, err) {
-      print('Failed to load a banner ad: ${err.message}');
       _isBannerAdReady = false;
       ad.dispose();
     });
@@ -60,8 +63,8 @@ class _DashboardState extends State<Dashboard> {
                     child: AdWidget(ad: _bannerAd),
                   ),
                 ),
-              DashboardOverview(),
-              StorageCard(),
+              const DashboardOverview(),
+              const StorageCard(),
               const BatteryCard(),
               const DisplayCard(),
               Row(

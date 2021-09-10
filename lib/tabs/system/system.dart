@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:phone_monitor/controllers/purchases_controller.dart';
 import 'package:phone_monitor/tabs/system/system_overview.dart';
 import 'package:phone_monitor/utils/ad_manager.dart';
 import 'hardware_description.dart';
@@ -17,6 +19,7 @@ class _SystemState extends State<System> {
   @override
   void initState() {
     super.initState();
+    if (Get.find<PurchasesController>().paid.value) return;
     _bannerAd = AdManager.loadSmallBanner(() {
       setState(() {
         _isBannerAdReady = true;

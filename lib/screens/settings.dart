@@ -57,7 +57,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   leading: const Icon(Icons.star),
                   onPressed: (context) async {
                     await PurchaseApi.init();
-                    final packages = await PurchaseApi.fetchOffers();
+                    final packages =
+                        await PurchaseApi.fetchOffersByIds(PurchaseApi.allIds);
                     Get.bottomSheet(
                       PaywallWidget(
                         packages: packages
