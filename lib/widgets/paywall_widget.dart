@@ -31,16 +31,18 @@ class _PaywallWidgetState extends State<PaywallWidget> {
         child: Column(
           children: [
             Text(widget.title,
-                style:
-                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                style: TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                    color: Get.isDarkMode ? Colors.amber : Colors.white)),
             const SizedBox(
               height: 16,
             ),
-            Text(
-              widget.description,
-              textAlign: TextAlign.center,
-              style: const TextStyle(fontSize: 18),
-            ),
+            Text(widget.description,
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                    fontSize: 18,
+                    color: Get.isDarkMode ? Colors.amber : Colors.white)),
             const SizedBox(
               height: 16,
             ),
@@ -63,7 +65,7 @@ class _PaywallWidgetState extends State<PaywallWidget> {
     final product = package.product;
 
     return Card(
-      color: Theme.of(context).colorScheme.secondary,
+      color: Theme.of(context).primaryColor,
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       child: Theme(
           data: ThemeData.light(),
@@ -71,11 +73,16 @@ class _PaywallWidgetState extends State<PaywallWidget> {
             contentPadding: const EdgeInsets.all(8),
             title: Text(
               product.title,
-              style: const TextStyle(fontSize: 18),
+              style: TextStyle(
+                  fontSize: 18,
+                  color: Get.isDarkMode ? Colors.black : Colors.white),
             ),
             subtitle: Text(
               product.priceString,
-              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: Get.isDarkMode ? Colors.black : Colors.white),
             ),
             onTap: () => widget.onClickedPackage(package),
           )),

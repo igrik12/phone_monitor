@@ -104,7 +104,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                 borderRadius: BorderRadius.circular(20.0),
                               ),
                             ),
-                            onPressed: () => Navigator.of(context).pop(true),
+                            onPressed: () => Get.back(),
                             child: const Text("Yes")),
                       ],
                     ),
@@ -147,10 +147,10 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   List<Widget> _buildTabView() {
     return [
       Dashboard(),
-      CpuTab(),
-      System(),
-      Display(),
-      Applications(),
+      const CpuTab(),
+      const System(),
+      const Display(),
+      const Applications(),
       Sensors()
     ];
   }

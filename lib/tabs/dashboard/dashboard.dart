@@ -82,7 +82,7 @@ class _DashboardState extends State<Dashboard> {
                 child: WaveBall(
                   circleColor: Colors.transparent,
                   size: 85,
-                  foregroundColor: Get.theme.colorScheme.secondary,
+                  foregroundColor: Get.theme.primaryColor,
                   backgroundColor: Get.theme.primaryColor,
                   progress: DashboardController
                           .to.wrapper.value.battery.batteryLevel /

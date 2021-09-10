@@ -52,11 +52,6 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         androidAppId: "com.twarkapps.phone_monitor");
                   },
                   subtitle: "Please rate the app on Play Store"),
-            ],
-          ),
-          SettingsSection(
-            title: 'Misc',
-            tiles: [
               SettingsTile(
                   title: 'Remove Ads',
                   leading: const Icon(Icons.star),
@@ -78,7 +73,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       ),
                     );
                   },
-                  subtitle: "Remove ads and support developer"),
+                  subtitle: "Remove ads and support the developer")
             ],
           ),
           CustomSection(
