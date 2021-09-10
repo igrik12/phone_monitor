@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:phone_monitor/controllers/dashboard_controller.dart';
 
-import 'package:phone_monitor/widgets/customProgressIndicator.dart';
+import 'package:phone_monitor/widgets/custom_progress_indicator.dart';
 import 'package:phone_monitor/widgets/custom_card.dart';
 
 class StorageCard extends GetView<DashboardController> {
+  const StorageCard({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return CustomCard(
@@ -15,7 +17,7 @@ class StorageCard extends GetView<DashboardController> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Column(
-              children: [
+              children: const [
                 Icon(
                   Icons.sd_storage,
                   color: Colors.blue,
@@ -30,11 +32,11 @@ class StorageCard extends GetView<DashboardController> {
               child: Obx(() => Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
+                      const Text(
                         "Internal Storage",
                         textScaleFactor: 1.3,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
                       Row(
@@ -49,7 +51,7 @@ class StorageCard extends GetView<DashboardController> {
                                   100,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 10,
                           ),
                           Text(
@@ -58,7 +60,7 @@ class StorageCard extends GetView<DashboardController> {
                           )
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
                       Text(

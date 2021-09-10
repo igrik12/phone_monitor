@@ -2,7 +2,7 @@ import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 
 class TabClickController extends GetxController {
-  RxInt _clicked = 0.obs;
+  final RxInt _clicked = 0.obs;
   RxInt get clicked => _clicked;
 
   void resetClicks() {

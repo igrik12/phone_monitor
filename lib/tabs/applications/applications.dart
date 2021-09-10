@@ -5,6 +5,8 @@ import 'package:phone_monitor/controllers/applications.dart';
 import 'package:phone_monitor/widgets/custom_card.dart';
 
 class Applications extends StatefulWidget {
+  const Applications({Key key}) : super(key: key);
+
   @override
   _ApplicationsState createState() => _ApplicationsState();
 }
@@ -19,10 +21,11 @@ class _ApplicationsState extends State<Applications> {
       init: ApplicationsController(),
       autoRemove: false,
       builder: (appController) {
-        if (appController.applications.isEmpty)
-          return Center(
+        if (appController.applications.isEmpty) {
+          return const Center(
             child: CircularProgressIndicator(),
           );
+        }
 
         List<Application> filteredApps = _filterApps(
             appController.applications, appController.appType, filter);
@@ -38,7 +41,7 @@ class _ApplicationsState extends State<Applications> {
                       ? searchBar()
                       : buildAppSelectorRow(filteredApps, appController),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Expanded(
@@ -51,22 +54,27 @@ class _ApplicationsState extends State<Applications> {
                         onTap: () async {
                           return showDialog(
                             context: context,
-                            builder: (context) => new AlertDialog(
-                              title: new Text(
+                            builder: (context) => AlertDialog(
+                              title: Text(
                                   'Do you want to open ${filteredApps[index].appName}'),
                               actions: <Widget>[
-                                OutlineButton(
-                                  shape: RoundedRectangleBorder(
-                                      borderRadius:
-                                          new BorderRadius.circular(20.0)),
+                                OutlinedButton(
+                                  style: OutlinedButton.styleFrom(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(20.0),
+                                    ),
+                                  ),
                                   onPressed: () =>
                                       Navigator.of(context).pop(true),
-                                  child: Text("Cancel"),
+                                  child: const Text("Cancel"),
                                 ),
-                                OutlineButton(
-                                    shape: RoundedRectangleBorder(
+                                OutlinedButton(
+                                    style: OutlinedButton.styleFrom(
+                                      shape: RoundedRectangleBorder(
                                         borderRadius:
-                                            new BorderRadius.circular(20.0)),
+                                            BorderRadius.circular(20.0),
+                                      ),
+                                    ),
                                     onPressed: () async {
                                       final canOpen = await DeviceApps.openApp(
                                           filteredApps[index].packageName);
@@ -80,7 +88,7 @@ class _ApplicationsState extends State<Applications> {
                                       }
                                       Navigator.of(context).pop(true);
                                     },
-                                    child: Text("Open")),
+                                    child: const Text("Open")),
                               ],
                             ),
                           );
@@ -120,28 +128,28 @@ class _ApplicationsState extends State<Applications> {
       children: [
         Text("${filteredApps.length}",
             style: Get.theme.textTheme.bodyText2.copyWith(fontSize: 14)),
-        SizedBox(
+        const SizedBox(
           width: 30,
         ),
         Obx(() => DropdownButton(
               value: appController.appType,
               items: [
                 DropdownMenuItem(
-                    child: Text(AppType.All.displayValue,
+                    child: Text(AppType.all.displayValue,
                         style: Get.theme.textTheme.bodyText1
                             .copyWith(fontSize: 16)),
-                    value: AppType.All),
+                    value: AppType.all),
                 DropdownMenuItem(
-                  child: Text(AppType.User.displayValue,
+                  child: Text(AppType.user.displayValue,
                       style:
                           Get.theme.textTheme.bodyText1.copyWith(fontSize: 16)),
-                  value: AppType.User,
+                  value: AppType.user,
                 ),
                 DropdownMenuItem(
-                  child: Text(AppType.System.displayValue,
+                  child: Text(AppType.system.displayValue,
                       style:
                           Get.theme.textTheme.bodyText1.copyWith(fontSize: 16)),
-                  value: AppType.System,
+                  value: AppType.system,
                 )
               ],
               onChanged: (value) {
@@ -169,16 +177,16 @@ class _ApplicationsState extends State<Applications> {
   List<Application> _filterApps(
       List<Application> applications, AppType appType, String filter) {
     switch (appType) {
-      case AppType.All:
+      case AppType.all:
         return applications
             .where((app) => app.appName.toLowerCase().contains(filter))
             .toList();
-      case AppType.System:
+      case AppType.system:
         return applications
             .where((app) =>
                 app.systemApp & app.appName.toLowerCase().contains(filter))
             .toList();
-      case AppType.User:
+      case AppType.user:
         return applications
             .where((app) =>
                 !app.systemApp & app.appName.toLowerCase().contains(filter))
@@ -196,7 +204,7 @@ class _ApplicationsState extends State<Applications> {
           flex: 1,
           child: TextField(
             autofocus: true,
-            decoration: InputDecoration(
+            decoration: const InputDecoration(
                 border: InputBorder.none, hintText: 'Enter app name'),
             onChanged: (value) => setState(() {
               filter = value.toLowerCase();

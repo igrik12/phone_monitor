@@ -26,7 +26,6 @@ class _DisplayState extends State<Display> {
         _isBannerAdReady = true;
       });
     }, (ad, err) {
-      print('Failed to load a banner ad: ${err.message}');
       _isBannerAdReady = false;
       ad.dispose();
     });
@@ -42,7 +41,7 @@ class _DisplayState extends State<Display> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(8),
+      padding: const EdgeInsets.all(8),
       child: CustomCard(
         child: GetX<DashboardController>(builder: (dbController) {
           final displayItems =
@@ -55,7 +54,7 @@ class _DisplayState extends State<Display> {
                 if (_isBannerAdReady)
                   Align(
                     alignment: Alignment.topCenter,
-                    child: Container(
+                    child: SizedBox(
                       width: _bannerAd.size.width.toDouble(),
                       height: _bannerAd.size.height.toDouble(),
                       child: AdWidget(ad: _bannerAd),
@@ -65,13 +64,13 @@ class _DisplayState extends State<Display> {
                   "Display",
                   style: Get.theme.textTheme.subtitle1,
                 ),
-                Divider(
+                const Divider(
                   height: 20,
                 ),
                 ListView.builder(
                     shrinkWrap: true,
                     itemCount: displayItems.length,
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     itemBuilder: (_, index) {
                       String dispKey = displayItems.keys.elementAt(index);
                       return Column(
@@ -79,13 +78,13 @@ class _DisplayState extends State<Display> {
                           Row(
                             children: [
                               Text(
-                                "$dispKey",
+                                dispKey,
                                 textScaleFactor: 1.2,
                               ),
-                              Container(
+                              SizedBox(
                                 width: Get.width * 0.35,
                                 child: Text(
-                                  "${displayItems[dispKey]}",
+                                  displayItems[dispKey],
                                   textAlign: TextAlign.left,
                                   textScaleFactor: 1.2,
                                 ),
@@ -93,7 +92,7 @@ class _DisplayState extends State<Display> {
                             ],
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 15,
                           ),
                         ],

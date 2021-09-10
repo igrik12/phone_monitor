@@ -3,7 +3,7 @@ import 'package:phone_monitor/models/display_info.dart';
 
 class NativeComms {
   static const _channel =
-      const MethodChannel('com.twarkapps.phone_monitor/device_info');
+      MethodChannel('com.twarkapps.phone_monitor/device_info');
 
   static double _totalPhysicalMemory;
 
@@ -65,7 +65,7 @@ class NativeComms {
       return res;
     } on Exception catch (e) {
       print(e.toString());
-      return Map<dynamic, dynamic>();
+      return <dynamic, dynamic>{};
     }
   }
 }

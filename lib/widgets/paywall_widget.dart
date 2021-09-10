@@ -27,18 +27,19 @@ class _PaywallWidgetState extends State<PaywallWidget> {
     return Container(
       constraints: BoxConstraints(maxHeight: Get.height * 0.75),
       child: SingleChildScrollView(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         child: Column(
           children: [
             Text(widget.title,
-                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                style:
+                    const TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
             const SizedBox(
               height: 16,
             ),
             Text(
               widget.description,
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 18),
+              style: const TextStyle(fontSize: 18),
             ),
             const SizedBox(
               height: 16,
@@ -67,14 +68,14 @@ class _PaywallWidgetState extends State<PaywallWidget> {
       child: Theme(
           data: ThemeData.light(),
           child: ListTile(
-            contentPadding: EdgeInsets.all(8),
+            contentPadding: const EdgeInsets.all(8),
             title: Text(
               product.title,
-              style: TextStyle(fontSize: 18),
+              style: const TextStyle(fontSize: 18),
             ),
             subtitle: Text(
               product.priceString,
-              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
             ),
             onTap: () => widget.onClickedPackage(package),
           )),

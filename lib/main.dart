@@ -14,10 +14,12 @@ void main() async {
   await GetStorage.init();
   await MobileAds.instance.initialize();
   Get.lazyPut<ThemeController>(() => ThemeController());
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key key}) : super(key: key);
+
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
@@ -31,33 +33,34 @@ class MyApp extends StatelessWidget {
       themeMode: ThemeController.to.themeMode,
       darkTheme: ThemeData.dark().copyWith(
           primaryColor: Colors.amber,
-          appBarTheme: AppBarTheme().copyWith(backgroundColor: Colors.amber),
-          tabBarTheme: TabBarTheme().copyWith(labelColor: Colors.black),
-          iconTheme: IconThemeData().copyWith(color: Colors.black),
-          primaryIconTheme: IconThemeData().copyWith(color: Colors.black),
+          appBarTheme:
+              const AppBarTheme().copyWith(backgroundColor: Colors.amber),
+          tabBarTheme: const TabBarTheme().copyWith(labelColor: Colors.black),
+          iconTheme: const IconThemeData().copyWith(color: Colors.black),
+          primaryIconTheme: const IconThemeData().copyWith(color: Colors.black),
           visualDensity: VisualDensity.adaptivePlatformDensity,
           textTheme: TextTheme(
-              subtitle1: TextStyle(color: Colors.amber, fontSize: 18),
+              subtitle1: const TextStyle(color: Colors.amber, fontSize: 18),
               bodyText2: TextStyle(
                   fontWeight: FontWeight.w500,
                   fontSize: 12,
                   color: Colors.grey[400]))),
       theme: ThemeData(
           primaryColor: Colors.blueAccent,
-          tabBarTheme: TabBarTheme().copyWith(
+          tabBarTheme: const TabBarTheme().copyWith(
               labelColor: Colors.white, indicatorSize: TabBarIndicatorSize.tab),
-          iconTheme: IconThemeData().copyWith(color: Colors.black),
-          primaryIconTheme: IconThemeData().copyWith(color: Colors.white),
-          scaffoldBackgroundColor: Color.fromRGBO(242, 246, 247, 1),
+          iconTheme: const IconThemeData().copyWith(color: Colors.black),
+          primaryIconTheme: const IconThemeData().copyWith(color: Colors.white),
+          scaffoldBackgroundColor: const Color.fromRGBO(242, 246, 247, 1),
           visualDensity: VisualDensity.adaptivePlatformDensity,
-          textTheme: TextTheme(
+          textTheme: const TextTheme(
               subtitle1: TextStyle(fontSize: 18),
               bodyText2: TextStyle(fontWeight: FontWeight.w500, fontSize: 12))),
-      home: Scaffold(
+      home: const Scaffold(
         body: Home(),
       ),
       getPages: [
-        GetPage(name: '/settings', page: () => SettingsScreen()),
+        GetPage(name: '/settings', page: () => const SettingsScreen()),
       ],
     );
   }

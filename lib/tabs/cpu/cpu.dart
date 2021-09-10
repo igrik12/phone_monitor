@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:phone_monitor/controllers/cpu_controller.dart';
 import 'package:phone_monitor/tabs/cpu/charts.dart';
-import 'package:phone_monitor/tabs/cpu/cpuProgessGrid.dart';
+import 'package:phone_monitor/tabs/cpu/cpu_progess_grid.dart';
 import 'package:phone_monitor/tabs/cpu/cpu_overview.dart';
-import 'package:phone_monitor/tabs/cpu/tempChart.dart';
+import 'package:phone_monitor/tabs/cpu/temp_chart.dart';
 import 'package:phone_monitor/utils/ad_manager.dart';
 
 class CpuTab extends StatefulWidget {
-  CpuTab({Key key}) : super(key: key);
+  const CpuTab({Key key}) : super(key: key);
 
   @override
   _CpuTabState createState() => _CpuTabState();
@@ -25,7 +25,6 @@ class _CpuTabState extends State<CpuTab> {
         _isBannerAdReady = true;
       });
     }, (ad, err) {
-      print('Failed to load a banner ad: ${err.message}');
       _isBannerAdReady = false;
       ad.dispose();
     });
@@ -49,19 +48,19 @@ class _CpuTabState extends State<CpuTab> {
             if (_isBannerAdReady)
               Align(
                 alignment: Alignment.topCenter,
-                child: Container(
+                child: SizedBox(
                   width: _bannerAd.size.width.toDouble(),
                   height: _bannerAd.size.height.toDouble(),
                   child: AdWidget(ad: _bannerAd),
                 ),
               ),
-            CpuOverview(),
-            CpuProgressGrid(),
+            const CpuOverview(),
+            const CpuProgressGrid(),
             // DismissableAdBanner(),
-            Charts(),
+            const Charts(),
             CpuController.to.cpuInfo.cpuTemperature != -1
                 ? TemperatureChart()
-                : SizedBox()
+                : const SizedBox()
           ],
         ),
       ),

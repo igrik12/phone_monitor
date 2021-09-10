@@ -13,6 +13,8 @@ import 'package:phone_monitor/tabs/system/system.dart';
 import 'package:phone_monitor/utils/ad_manager.dart';
 
 class Home extends StatefulWidget {
+  const Home({Key key}) : super(key: key);
+
   @override
   _HomeState createState() => _HomeState();
 }
@@ -38,31 +40,27 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
       if (clicks == 3) {
         InterstitialAd.load(
             adUnitId: AdManager.interstitialAdUnitId,
-            request: AdRequest(),
+            request: const AdRequest(),
             adLoadCallback: InterstitialAdLoadCallback(
               onAdLoaded: (InterstitialAd ad) {
-                this._interstitialAd = ad;
-                this._interstitialAd.fullScreenContentCallback =
+                _interstitialAd = ad;
+                _interstitialAd.fullScreenContentCallback =
                     FullScreenContentCallback(
                         onAdShowedFullScreenContent: (InterstitialAd ad) {
                   clickController.resetClicks();
-                  print(ad.adUnitId);
                 }, onAdDismissedFullScreenContent: (InterstitialAd ad) {
                   clickController.resetClicks();
                 }, onAdFailedToShowFullScreenContent:
                             (InterstitialAd ad, AdError error) {
-                  print('$ad onAdFailedToShowFullScreenContent: $error');
                   clickController.resetClicks();
                   ad.dispose();
                 }, onAdImpression: (InterstitialAd ad) {
-                  print('$ad impression occurred.');
                   clickController.resetClicks();
                 });
-                this._interstitialAd.show();
+                _interstitialAd.show();
                 clickController.resetClicks();
               },
               onAdFailedToLoad: (LoadAdError error) {
-                print('InterstitialAd failed to load: $error');
                 clickController.resetClicks();
               },
             ));
@@ -87,21 +85,27 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             if (_tabController.index == 0) {
               return showDialog(
                     context: context,
-                    builder: (context) => new AlertDialog(
-                      title: new Text('Are you sure?'),
-                      content: new Text('Do you want to exit Phone Monitor?'),
+                    builder: (context) => AlertDialog(
+                      title: const Text('Are you sure?'),
+                      content: const Text('Do you want to exit Phone Monitor?'),
                       actions: <Widget>[
-                        OutlineButton(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: new BorderRadius.circular(20.0)),
-                          onPressed: () => Navigator.of(context).pop(false),
-                          child: Text("No"),
-                        ),
-                        OutlineButton(
+                        OutlinedButton(
+                          style: OutlinedButton.styleFrom(
                             shape: RoundedRectangleBorder(
-                                borderRadius: new BorderRadius.circular(20.0)),
+                              borderRadius: BorderRadius.circular(20.0),
+                            ),
+                          ),
+                          onPressed: () => Navigator.of(context).pop(false),
+                          child: const Text("No"),
+                        ),
+                        OutlinedButton(
+                            style: OutlinedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20.0),
+                              ),
+                            ),
                             onPressed: () => Navigator.of(context).pop(true),
-                            child: Text("Yes")),
+                            child: const Text("Yes")),
                       ],
                     ),
                   ) ??

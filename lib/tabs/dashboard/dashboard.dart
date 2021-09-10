@@ -6,11 +6,11 @@ import 'package:phone_monitor/controllers/dashboard_controller.dart';
 import 'package:phone_monitor/tabs/dashboard/battery_card.dart';
 import 'package:phone_monitor/tabs/dashboard/overview.dart';
 import 'package:phone_monitor/utils/ad_manager.dart';
-import 'package:phone_monitor/widgets/animatedText.dart';
-import 'package:phone_monitor/widgets/progressWave.dart';
+import 'package:phone_monitor/widgets/animated_text.dart';
+import 'package:phone_monitor/widgets/progress_wave.dart';
 
-import 'SensorCounter.dart';
-import 'appCounter.dart';
+import 'sensor_counter.dart';
+import 'app_counter.dart';
 import 'display_card.dart';
 import 'storage_card.dart';
 
@@ -46,7 +46,7 @@ class _DashboardState extends State<Dashboard> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.all(8),
+      padding: const EdgeInsets.all(8),
       child: Stack(children: [
         SingleChildScrollView(
           child: Column(
@@ -54,7 +54,7 @@ class _DashboardState extends State<Dashboard> {
               if (_isBannerAdReady)
                 Align(
                   alignment: Alignment.topCenter,
-                  child: Container(
+                  child: SizedBox(
                     width: _bannerAd.size.width.toDouble(),
                     height: _bannerAd.size.height.toDouble(),
                     child: AdWidget(ad: _bannerAd),
@@ -62,10 +62,10 @@ class _DashboardState extends State<Dashboard> {
                 ),
               DashboardOverview(),
               StorageCard(),
-              BatteryCard(),
-              DisplayCard(),
+              const BatteryCard(),
+              const DisplayCard(),
               Row(
-                children: [
+                children: const [
                   SensorCounter(),
                   Expanded(
                     child: AppCounter(),
@@ -82,7 +82,7 @@ class _DashboardState extends State<Dashboard> {
                 child: WaveBall(
                   circleColor: Colors.transparent,
                   size: 85,
-                  foregroundColor: Get.theme.accentColor,
+                  foregroundColor: Get.theme.colorScheme.secondary,
                   backgroundColor: Get.theme.primaryColor,
                   progress: DashboardController
                           .to.wrapper.value.battery.batteryLevel /
@@ -92,7 +92,7 @@ class _DashboardState extends State<Dashboard> {
                   ),
                 ),
               )
-            : SizedBox.shrink())
+            : const SizedBox.shrink())
       ]),
     );
   }
@@ -101,7 +101,7 @@ class _DashboardState extends State<Dashboard> {
     final chargeTime =
         DashboardController.to.wrapper.value.battery.chargeTimeRemaining;
     if (chargeTime == -1) {
-      return AnimatedTextWidget(
+      return const AnimatedTextWidget(
         staticText: '',
         animatedText: '....',
       );

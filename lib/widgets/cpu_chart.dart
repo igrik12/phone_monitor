@@ -7,7 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:mp_chart/mp/chart/line_chart.dart';
 import 'package:phone_monitor/controllers/cpu_controller.dart';
-import 'package:phone_monitor/widgets/chartController.dart';
+import 'package:phone_monitor/widgets/chart_controller.dart';
 
 class CpuChart extends StatefulWidget {
   final int index;
@@ -17,12 +17,14 @@ class CpuChart extends StatefulWidget {
   final int cacheCount;
   final ThemeMode themMode;
 
-  CpuChart(
-      {@required this.index,
+  const CpuChart(
+      {Key key,
+      @required this.index,
       @required this.stream,
       this.minMax,
       this.cacheCount = 50,
-      this.themMode});
+      this.themMode})
+      : super(key: key);
 
   @override
   _CpuChartState createState() => _CpuChartState();
@@ -64,9 +66,9 @@ class _CpuChartState extends State<CpuChart> {
         if (cache[widget.index] == null) {
           cache[widget.index] = Queue<double>();
         } else {
-          cache[widget.index].forEach((freq) {
+          for (var freq in cache[widget.index]) {
             chartController.addEntry(freq);
-          });
+          }
         }
         initRun = false;
       }
@@ -100,7 +102,7 @@ class _CpuChartState extends State<CpuChart> {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
+        SizedBox(
           width: double.infinity,
           child: Wrap(
             alignment: WrapAlignment.spaceBetween,
@@ -113,7 +115,7 @@ class _CpuChartState extends State<CpuChart> {
             ],
           ),
         ),
-        SizedBox(
+        const SizedBox(
           height: 5,
         ),
         Expanded(

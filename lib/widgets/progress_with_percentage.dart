@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'customProgressIndicator.dart';
+import 'custom_progress_indicator.dart';
 
 class ProgressWithPercentage extends StatelessWidget {
   final double value;
   final String title;
   final double height;
-  ProgressWithPercentage({this.value, this.title, this.height});
+  const ProgressWithPercentage({Key key, this.value, this.title, this.height})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -16,15 +17,15 @@ class ProgressWithPercentage extends StatelessWidget {
           children: [
             Text(title,
                 style: TextStyle(
-                  fontSize: this.height,
+                  fontSize: height,
                 )),
             Text('$value%',
                 style: TextStyle(
-                  fontSize: this.height,
+                  fontSize: height,
                 ))
           ],
         ),
-        SizedBox(
+        const SizedBox(
           height: 10,
         ),
         CustomProgressIndicator(

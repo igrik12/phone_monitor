@@ -24,7 +24,7 @@ class SensorCounter extends GetView<HomeController> {
                 color: Theme.of(context).primaryColor,
                 height: 50,
               ),
-              SizedBox(
+              const SizedBox(
                 width: 10,
               ),
               FutureBuilder<Map<dynamic, dynamic>>(
@@ -35,13 +35,13 @@ class SensorCounter extends GetView<HomeController> {
                         children: [
                           Text("${snapshot.data.keys.length}",
                               style: Get.textTheme.headline4),
-                          Text(
+                          const Text(
                             "Sensors Available",
                           )
                         ],
                       );
                     }
-                    return CircularProgressIndicator();
+                    return const CircularProgressIndicator();
                   })
             ],
           ),

@@ -8,6 +8,8 @@ import 'package:phone_monitor/widgets/paywall_widget.dart';
 import 'package:settings_ui/settings_ui.dart';
 
 class SettingsScreen extends StatefulWidget {
+  const SettingsScreen({Key key}) : super(key: key);
+
   @override
   _SettingsScreenState createState() => _SettingsScreenState();
 }
@@ -18,7 +20,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Settings UI')),
+      appBar: AppBar(title: const Text('Settings UI')),
       body: SettingsList(
         sections: [
           SettingsSection(
@@ -26,7 +28,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             tiles: [
               SettingsTile.switchTile(
                 title: theme,
-                leading: Icon(Icons.phonelink_lock),
+                leading: const Icon(Icons.phonelink_lock),
                 switchValue: lockInBackground,
                 onToggle: (bool value) {
                   setState(() {
@@ -44,7 +46,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             tiles: [
               SettingsTile(
                   title: 'Rate',
-                  leading: Icon(Icons.star),
+                  leading: const Icon(Icons.star),
                   onPressed: (context) {
                     LaunchReview.launch(
                         androidAppId: "com.twarkapps.phone_monitor");
@@ -57,7 +59,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             tiles: [
               SettingsTile(
                   title: 'Remove Ads',
-                  leading: Icon(Icons.star),
+                  leading: const Icon(Icons.star),
                   onPressed: (context) async {
                     await PurchaseApi.init();
                     final packages = await PurchaseApi.fetchOffers();
@@ -82,8 +84,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
           CustomSection(
             child: Column(
               children: [
-                Padding(
-                    padding: const EdgeInsets.only(top: 22, bottom: 8),
+                const Padding(
+                    padding: EdgeInsets.only(top: 22, bottom: 8),
                     child: Icon(
                       Icons.settings,
                       color: Color(0xFF777777),
@@ -95,10 +97,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       if (snapshot.hasData) {
                         return Text(
                           'Version: ${snapshot.data.version}',
-                          style: TextStyle(color: Color(0xFF777777)),
+                          style: const TextStyle(color: Color(0xFF777777)),
                         );
                       }
-                      return Text(
+                      return const Text(
                         'Version: N/A',
                         style: TextStyle(color: Color(0xFF777777)),
                       );

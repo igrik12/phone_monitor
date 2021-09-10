@@ -26,12 +26,12 @@ class HardwareDescription extends StatelessWidget {
                       "System",
                       style: Get.theme.textTheme.subtitle1,
                     ),
-                    Divider(
+                    const Divider(
                       height: 20,
                     ),
                     ListView.builder(
                         shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         itemCount: systemInfoMap.keys.length,
                         itemBuilder: (_, index) {
                           String key = systemInfoMap.keys.elementAt(index);
@@ -40,13 +40,13 @@ class HardwareDescription extends StatelessWidget {
                               Row(
                                 children: [
                                   Text(
-                                    "$key",
+                                    key,
                                     textScaleFactor: 1.2,
                                   ),
-                                  Container(
+                                  SizedBox(
                                     width: Get.width * 0.35,
                                     child: Text(
-                                      "${systemInfoMap[key]}",
+                                      systemInfoMap[key],
                                       textAlign: TextAlign.left,
                                       textScaleFactor: 1.2,
                                     ),
@@ -55,7 +55,7 @@ class HardwareDescription extends StatelessWidget {
                                 mainAxisAlignment:
                                     MainAxisAlignment.spaceBetween,
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 height: 15,
                               ),
                             ],
@@ -65,9 +65,9 @@ class HardwareDescription extends StatelessWidget {
                 ),
               );
             }
-            return Container(
+            return SizedBox(
               height: Get.height * 0.6,
-              child: Center(
+              child: const Center(
                 child: CircularProgressIndicator(),
               ),
             );

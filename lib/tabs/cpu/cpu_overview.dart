@@ -13,7 +13,7 @@ class CpuOverview extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomCard(
         child: Container(
-            padding: EdgeInsets.all(15),
+            padding: const EdgeInsets.all(15),
             child: Column(
               children: [
                 Row(
@@ -29,10 +29,10 @@ class CpuOverview extends StatelessWidget {
                                 "${controller.overallUsage.overAll}%",
                                 style: Get.theme.textTheme.subtitle1,
                               )
-                            : SizedBox())
+                            : const SizedBox())
                   ],
                 ),
-                Divider(
+                const Divider(
                   height: 15,
                 ),
                 Row(
@@ -44,10 +44,10 @@ class CpuOverview extends StatelessWidget {
                         SvgPicture.asset('assets/icons/cpu_hardware.svg',
                             height: 20.0,
                             color: Theme.of(context).primaryColor),
-                        SizedBox(
+                        const SizedBox(
                           width: 5,
                         ),
-                        Text('Cpu Hardware'),
+                        const Text('Cpu Hardware'),
                       ],
                     ),
                     Text(
@@ -57,7 +57,7 @@ class CpuOverview extends StatelessWidget {
                     )
                   ],
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -67,10 +67,10 @@ class CpuOverview extends StatelessWidget {
                           SvgPicture.asset('assets/icons/cpu_cores.svg',
                               height: 20.0,
                               color: Theme.of(context).primaryColor),
-                          SizedBox(
+                          const SizedBox(
                             width: 5,
                           ),
-                          Text('Cpu Cores'),
+                          const Text('Cpu Cores'),
                         ],
                       ),
                       GetX<CpuController>(
@@ -79,7 +79,7 @@ class CpuOverview extends StatelessWidget {
                                     'N/A',
                               ))
                     ]),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -89,17 +89,17 @@ class CpuOverview extends StatelessWidget {
                           SvgPicture.asset('assets/icons/architecture.svg',
                               height: 20.0,
                               color: Theme.of(context).primaryColor),
-                          SizedBox(
+                          const SizedBox(
                             width: 5,
                           ),
-                          Text('Architecture'),
+                          const Text('Architecture'),
                         ],
                       ),
                       Text(
                         SysInfo.processors.first.architecture.name ?? 'N/A',
                       )
                     ]),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -109,7 +109,7 @@ class CpuOverview extends StatelessWidget {
                           SvgPicture.asset('assets/icons/abi.svg',
                               height: 20.0,
                               color: Theme.of(context).primaryColor),
-                          SizedBox(
+                          const SizedBox(
                             width: 5,
                           ),
                           Text('ABIs'),
@@ -121,7 +121,7 @@ class CpuOverview extends StatelessWidget {
                         ),
                       )
                     ]),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -131,10 +131,10 @@ class CpuOverview extends StatelessWidget {
                           SvgPicture.asset('assets/icons/cpu_frequency.svg',
                               height: 20.0,
                               color: Theme.of(context).primaryColor),
-                          SizedBox(
+                          const SizedBox(
                             width: 5,
                           ),
-                          Text('Frequencies'),
+                          const Text('Frequencies'),
                         ],
                       ),
                       GetX<CpuController>(

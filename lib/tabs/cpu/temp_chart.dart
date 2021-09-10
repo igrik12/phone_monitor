@@ -5,10 +5,12 @@ import 'package:get/get.dart';
 import 'package:mp_chart/mp/chart/line_chart.dart';
 import 'package:phone_monitor/controllers/cpu_controller.dart';
 
-import '../../widgets/chartController.dart';
+import '../../widgets/chart_controller.dart';
 import '../../widgets/custom_card.dart';
 
 class TemperatureChart extends StatefulWidget {
+  const TemperatureChart({Key key}) : super(key: key);
+
   @override
   _TemperatureChartState createState() => _TemperatureChartState();
 }
@@ -25,9 +27,9 @@ class _TemperatureChartState extends State<TemperatureChart> {
     chartController = _initCharts();
     _streamSubscription = CpuController.to.stream.listen((cpuData) {
       if (initRun) {
-        tempCache.forEach((freq) {
+        for (var freq in tempCache) {
           chartController.addEntry(freq);
-        });
+        }
         initRun = false;
       }
       var currentTemperature = cpuData.cpuTemperature;
@@ -71,7 +73,7 @@ class _TemperatureChartState extends State<TemperatureChart> {
         padding: const EdgeInsets.all(12.0),
         child: Column(
           children: [
-            Container(
+            SizedBox(
               width: double.infinity,
               child: Wrap(
                 alignment: WrapAlignment.spaceBetween,
@@ -88,13 +90,13 @@ class _TemperatureChartState extends State<TemperatureChart> {
                 ],
               ),
             ),
-            Divider(
+            const Divider(
               height: 20,
             ),
-            Container(
+            SizedBox(
                 height: 150,
                 child: ClipRRect(
-                    borderRadius: BorderRadius.all(
+                    borderRadius: const BorderRadius.all(
                       Radius.circular(10),
                     ),
                     child: LineChart(chartController.controller)))

@@ -13,7 +13,6 @@ class PurchaseApi {
       final current = offerings.current;
       return current == null ? [] : [current];
     } catch (e) {
-      print(e);
       return [];
     }
   }

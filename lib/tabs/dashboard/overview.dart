@@ -4,10 +4,12 @@ import 'package:phone_monitor/controllers/cpu_controller.dart';
 import 'package:phone_monitor/controllers/dashboard_controller.dart';
 import 'package:phone_monitor/utils/constants.dart';
 import 'package:phone_monitor/widgets/custom_card.dart';
-import 'package:phone_monitor/widgets/progressWithPercentage.dart';
-import 'package:phone_monitor/widgets/usageProgressDisplay.dart';
+import 'package:phone_monitor/widgets/progress_with_percentage.dart';
+import 'package:phone_monitor/widgets/usage_progress_display.dart';
 
 class DashboardOverview extends GetView<DashboardController> {
+  const DashboardOverview({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return CustomCard(
@@ -33,7 +35,7 @@ class DashboardOverview extends GetView<DashboardController> {
                     )
                   ],
                 )),
-            Divider(
+            const Divider(
               height: 30,
             ),
             Row(
@@ -41,12 +43,12 @@ class DashboardOverview extends GetView<DashboardController> {
               children: [
                 Column(
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.phone_android,
                       size: 40,
                       color: Colors.blue,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 5,
                     ),
                     Obx(() => Text(
@@ -57,12 +59,12 @@ class DashboardOverview extends GetView<DashboardController> {
                 ),
                 Column(
                   children: [
-                    Icon(
+                    const Icon(
                       Icons.android,
                       size: 40,
                       color: kPrimaryColor,
                     ),
-                    SizedBox(
+                    const SizedBox(
                       height: 5,
                     ),
                     Obx(() => Text(
@@ -74,7 +76,7 @@ class DashboardOverview extends GetView<DashboardController> {
                 ),
               ],
             ),
-            Divider(
+            const Divider(
               height: 30,
             ),
             Row(
