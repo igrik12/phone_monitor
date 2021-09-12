@@ -5,6 +5,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:phone_monitor/api/purchase_api.dart';
 import 'package:phone_monitor/controllers/themeController.dart';
+import 'package:phone_monitor/screens/google_sign_in.dart';
 import 'package:phone_monitor/screens/home.dart';
 import 'package:phone_monitor/screens/settings.dart';
 
@@ -57,8 +58,8 @@ class MyApp extends StatelessWidget {
           textTheme: const TextTheme(
               subtitle1: TextStyle(fontSize: 18),
               bodyText2: TextStyle(fontWeight: FontWeight.w500, fontSize: 12))),
-      home: const Scaffold(
-        body: Home(),
+      home: Scaffold(
+        body: GSignInScreen(),
       ),
       getPages: [
         GetPage(name: '/settings', page: () => const SettingsScreen()),

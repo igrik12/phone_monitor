@@ -15,6 +15,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "1098351934781-22eechg4qffpk25ntgupdao5qoj146u9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.twarkapps.phone_monitor",
+            "certificate_hash": "92ad2d016f031ce708c2c5941a360b5cb8ca8b34"
+          }
+        },
+        {
           "client_id": "1098351934781-0d44h9hi1hjrase0bs7flormei4fcvv6.apps.googleusercontent.com",
           "client_type": 3
         }

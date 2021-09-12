@@ -69,7 +69,7 @@ class ChartController implements OnChartValueSelectedListener {
         ),
         0);
     //remove entry which is out of visible range
-    if (set0.getEntryCount() > configuration.unitVisibleCount) {
+    if (set0.getEntryCount() > configuration.unitVisibleCount.toInt()) {
       data.removeEntry2(_removalCounter.toDouble(), 0);
       _removalCounter++;
     }
