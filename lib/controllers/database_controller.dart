@@ -27,6 +27,10 @@ class DatabaseController extends GetxController {
     Get.find<PurchasesController>().paid(isPremium);
   }
 
+  Future<bool> getPremium() async {
+    return api.getPremium();
+  }
+
   Future<void> setPremium(bool isPremium) async {
     final set = await api.setPremium(isPremium);
     if (set) {

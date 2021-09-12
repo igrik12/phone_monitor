@@ -3,11 +3,10 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:path/path.dart';
+import 'package:phone_monitor/api/purchase_api.dart';
 import 'package:phone_monitor/controllers/themeController.dart';
 import 'package:phone_monitor/screens/home.dart';
 import 'package:phone_monitor/screens/settings.dart';
-import 'package:sqflite/sqflite.dart';
 
 import 'controllers/bindings.dart';
 

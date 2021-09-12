@@ -56,7 +56,8 @@ class _SettingsScreenState extends State<SettingsScreen> {
                   title: 'Remove Ads',
                   leading: const Icon(Icons.star),
                   onPressed: (context) async {
-                    await PurchaseApi.init();
+                    await PurchaseApi.init(
+                        id: "843736f5bc494f0caf9293b7b431f397");
                     final packages =
                         await PurchaseApi.fetchOffersByIds(PurchaseApi.allIds);
                     Get.bottomSheet(

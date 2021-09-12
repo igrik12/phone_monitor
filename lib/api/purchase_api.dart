@@ -10,9 +10,9 @@ class PurchaseApi {
 
   static const allIds = [adsRemoval, adsRemovalAndSupport];
 
-  static Future init() async {
+  static Future init({String id}) async {
     await Purchases.setDebugLogsEnabled(true);
-    await Purchases.setup(_apiKey);
+    await Purchases.setup(_apiKey, appUserId: id);
   }
 
   static Future<List<Offering>> fetchOffersByIds(List<String> ids) async {

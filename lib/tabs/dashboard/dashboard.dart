@@ -28,16 +28,19 @@ class _DashboardState extends State<Dashboard> {
   @override
   void initState() {
     super.initState();
-    if (Get.find<PurchasesController>().paid.value) return;
-    _bannerAd = AdManager.loadSmallBanner(() {
-      setState(() {
-        _isBannerAdReady = true;
-      });
-    }, (ad, err) {
-      _isBannerAdReady = false;
-      ad.dispose();
+    Get.find<PurchasesController>().paid.listen((premium) {
+      if (!premium) {
+        _bannerAd = AdManager.loadSmallBanner(() {
+          setState(() {
+            _isBannerAdReady = true;
+          });
+        }, (ad, err) {
+          _isBannerAdReady = false;
+          ad.dispose();
+        });
+        _bannerAd.load();
+      }
     });
-    _bannerAd.load();
   }
 
   @override

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:phone_monitor/controllers/cpu_controller.dart';
+import 'package:phone_monitor/controllers/database_controller.dart';
 import 'package:phone_monitor/controllers/purchases_controller.dart';
 import 'package:phone_monitor/tabs/cpu/charts.dart';
 import 'package:phone_monitor/tabs/cpu/cpu_progess_grid.dart';
@@ -20,9 +21,11 @@ class _CpuTabState extends State<CpuTab> {
   BannerAd _bannerAd;
   bool _isBannerAdReady = false;
   @override
-  void initState() {
+  void initState() async {
     super.initState();
-    if (Get.find<PurchasesController>().paid.value) return;
+
+    if (await Get.find<DatabaseController>().getPremium()) return;
+
     _bannerAd = AdManager.loadSmallBanner(() {
       setState(() {
         _isBannerAdReady = true;
