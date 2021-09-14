@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:phone_monitor/api/purchase_api.dart';
 import 'package:phone_monitor/controllers/homeController.dart';
 import 'package:phone_monitor/controllers/purchases_controller.dart';
 import 'package:phone_monitor/controllers/tab_click_controller.dart';
@@ -13,7 +12,6 @@ import 'package:phone_monitor/tabs/display/display.dart';
 import 'package:phone_monitor/tabs/sensors/sensors.dart';
 import 'package:phone_monitor/tabs/system/system.dart';
 import 'package:phone_monitor/utils/ad_manager.dart';
-import 'package:purchases_flutter/purchases_flutter.dart';
 
 class Home extends StatefulWidget {
   const Home({Key key}) : super(key: key);
@@ -25,7 +23,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   TabController _tabController;
   HomeController homeController;
-
+  bool initial = true;
   InterstitialAd _interstitialAd;
 
   @override
@@ -35,13 +33,17 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     _tabController = TabController(vsync: this, length: 6);
     homeController.setController(_tabController);
     final clickController = Get.find<TabClickController>();
+
     _tabController.addListener(() {
-      clickController.click();
+      if (_tabController.indexIsChanging ||
+          _tabController.index != _tabController.previousIndex) {
+        clickController.click();
+      }
     });
 
     clickController.clicked.stream.listen((clicks) {
-      if (Get.find<PurchasesController>().paid.value) return;
-      if (clicks == 3) {
+      if (initial || clicks == 3) {
+        initial = false;
         InterstitialAd.load(
             adUnitId: AdManager.interstitialAdUnitId,
             request: const AdRequest(),
@@ -50,19 +52,14 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                 _interstitialAd = ad;
                 _interstitialAd.fullScreenContentCallback =
                     FullScreenContentCallback(
-                        onAdShowedFullScreenContent: (InterstitialAd ad) {
-                  clickController.resetClicks();
-                }, onAdDismissedFullScreenContent: (InterstitialAd ad) {
-                  clickController.resetClicks();
-                }, onAdFailedToShowFullScreenContent:
-                            (InterstitialAd ad, AdError error) {
-                  clickController.resetClicks();
-                  ad.dispose();
-                }, onAdImpression: (InterstitialAd ad) {
-                  clickController.resetClicks();
-                });
+                        onAdShowedFullScreenContent: (InterstitialAd ad) {},
+                        onAdDismissedFullScreenContent: (InterstitialAd ad) {
+                          clickController.resetClicks();
+                        },
+                        onAdFailedToShowFullScreenContent:
+                            (InterstitialAd ad, AdError error) {},
+                        onAdImpression: (InterstitialAd ad) {});
                 _interstitialAd.show();
-                clickController.resetClicks();
               },
               onAdFailedToLoad: (LoadAdError error) {
                 clickController.resetClicks();

@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:phone_monitor/controllers/dashboard_controller.dart';
-import 'package:phone_monitor/controllers/purchases_controller.dart';
 import 'package:phone_monitor/tabs/dashboard/battery_card.dart';
 import 'package:phone_monitor/tabs/dashboard/overview.dart';
 import 'package:phone_monitor/utils/ad_manager.dart';
@@ -28,24 +27,20 @@ class _DashboardState extends State<Dashboard> {
   @override
   void initState() {
     super.initState();
-    Get.find<PurchasesController>().paid.listen((premium) {
-      if (!premium) {
-        _bannerAd = AdManager.loadSmallBanner(() {
-          setState(() {
-            _isBannerAdReady = true;
-          });
-        }, (ad, err) {
-          _isBannerAdReady = false;
-          ad.dispose();
-        });
-        _bannerAd.load();
-      }
+    _bannerAd = AdManager.loadSmallBanner(() {
+      setState(() {
+        _isBannerAdReady = true;
+      });
+    }, (ad, err) {
+      _isBannerAdReady = false;
+      ad.dispose();
     });
+    _bannerAd.load();
   }
 
   @override
   void dispose() {
-    _bannerAd.dispose();
+    _bannerAd?.dispose();
     super.dispose();
   }
 

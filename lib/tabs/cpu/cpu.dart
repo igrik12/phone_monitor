@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:phone_monitor/controllers/cpu_controller.dart';
-import 'package:phone_monitor/controllers/database_controller.dart';
-import 'package:phone_monitor/controllers/purchases_controller.dart';
 import 'package:phone_monitor/tabs/cpu/charts.dart';
 import 'package:phone_monitor/tabs/cpu/cpu_progess_grid.dart';
 import 'package:phone_monitor/tabs/cpu/cpu_overview.dart';
@@ -21,11 +18,8 @@ class _CpuTabState extends State<CpuTab> {
   BannerAd _bannerAd;
   bool _isBannerAdReady = false;
   @override
-  void initState() async {
+  void initState() {
     super.initState();
-
-    if (await Get.find<DatabaseController>().getPremium()) return;
-
     _bannerAd = AdManager.loadSmallBanner(() {
       setState(() {
         _isBannerAdReady = true;
@@ -66,7 +60,7 @@ class _CpuTabState extends State<CpuTab> {
             // DismissableAdBanner(),
             const Charts(),
             CpuController.to.cpuInfo.cpuTemperature != -1
-                ? TemperatureChart()
+                ? const TemperatureChart()
                 : const SizedBox()
           ],
         ),

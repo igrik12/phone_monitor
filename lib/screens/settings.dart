@@ -52,30 +52,30 @@ class _SettingsScreenState extends State<SettingsScreen> {
                         androidAppId: "com.twarkapps.phone_monitor");
                   },
                   subtitle: "Please rate the app on Play Store"),
-              SettingsTile(
-                  title: 'Remove Ads',
-                  leading: const Icon(Icons.star),
-                  onPressed: (context) async {
-                    await PurchaseApi.init(
-                        id: "843736f5bc494f0caf9293b7b431f397");
-                    final packages =
-                        await PurchaseApi.fetchOffersByIds(PurchaseApi.allIds);
-                    Get.bottomSheet(
-                      PaywallWidget(
-                        packages: packages
-                            .map((offer) => offer.availablePackages)
-                            .expand((pair) => pair)
-                            .toList(),
-                        title: "Remove ads",
-                        description: "Remove ads and support developer ",
-                        onClickedPackage: (package) async {
-                          await PurchaseApi.purchasePackage(package);
-                          Get.back();
-                        },
-                      ),
-                    );
-                  },
-                  subtitle: "Remove ads and support the developer")
+              // SettingsTile(
+              //     title: 'Remove Ads',
+              //     leading: const Icon(Icons.star),
+              //     onPressed: (context) async {
+              //       await PurchaseApi.init(
+              //           id: "843736f5bc494f0caf9293b7b431f397");
+              //       final packages =
+              //           await PurchaseApi.fetchOffersByIds(PurchaseApi.allIds);
+              //       Get.bottomSheet(
+              //         PaywallWidget(
+              //           packages: packages
+              //               .map((offer) => offer.availablePackages)
+              //               .expand((pair) => pair)
+              //               .toList(),
+              //           title: "Remove ads",
+              //           description: "Remove ads and support developer ",
+              //           onClickedPackage: (package) async {
+              //             await PurchaseApi.purchasePackage(package);
+              //             Get.back();
+              //           },
+              //         ),
+              //       );
+              //     },
+              //     subtitle: "Remove ads and support the developer")
             ],
           ),
           CustomSection(

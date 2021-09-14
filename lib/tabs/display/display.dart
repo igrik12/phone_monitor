@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:phone_monitor/controllers/dashboard_controller.dart';
-import 'package:phone_monitor/controllers/database_controller.dart';
 import 'package:phone_monitor/models/display_info.dart';
 import 'package:phone_monitor/utils/ad_manager.dart';
 import 'package:phone_monitor/widgets/custom_card.dart';
@@ -20,9 +19,8 @@ class _DisplayState extends State<Display> {
   BannerAd _bannerAd;
   bool _isBannerAdReady = false;
   @override
-  void initState() async {
+  void initState() {
     super.initState();
-    if (await Get.find<DatabaseController>().getPremium()) return;
     _bannerAd = AdManager.loadSmallBanner(() {
       setState(() {
         _isBannerAdReady = true;
