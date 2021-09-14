@@ -1,16 +1,16 @@
 import 'package:device_apps/device_apps.dart';
 import 'package:get/get.dart';
 
-enum AppType { All, User, System }
+enum AppType { all, user, system }
 
 extension SelectedAppType on AppType {
   String get displayValue {
     switch (this) {
-      case AppType.All:
+      case AppType.all:
         return "All Apps";
-      case AppType.User:
+      case AppType.user:
         return "User Apps";
-      case AppType.System:
+      case AppType.system:
         return "System Apps";
         break;
       default:
@@ -20,9 +20,9 @@ extension SelectedAppType on AppType {
 }
 
 class ApplicationsController extends GetxController {
-  var applications = List<Application>().obs;
+  var applications = <Application>[].obs;
 
-  var _appType = AppType.All.obs;
+  final _appType = AppType.all.obs;
   AppType get appType => _appType.value;
   void setAppType(AppType value) {
     _appType.value = value;

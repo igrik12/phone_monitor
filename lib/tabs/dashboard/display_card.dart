@@ -38,43 +38,43 @@ class DisplayCard extends GetView<DashboardController> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text('Screen Height', textScaleFactor: 1.2),
+                            const Text('Screen Height', textScaleFactor: 1.2),
                             Text(
                                 "${controller.wrapper.value.display.heightPixels} px",
                                 textScaleFactor: 1.2)
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 5,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text('Screen Width', textScaleFactor: 1.2),
+                            const Text('Screen Width', textScaleFactor: 1.2),
                             Text(
                                 "${controller.wrapper.value.display.widthPixels} px",
                                 textScaleFactor: 1.2)
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 5,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text('Density', textScaleFactor: 1.2),
+                            const Text('Density', textScaleFactor: 1.2),
                             Text(
                                 "${controller.wrapper.value.display.densityDpi} ppi",
                                 textScaleFactor: 1.2)
                           ],
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 5,
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text('Screen Size', textScaleFactor: 1.2),
+                            const Text('Screen Size', textScaleFactor: 1.2),
                             Text(
                                 "${controller.wrapper.value.display.screenSize} inch",
                                 textScaleFactor: 1.2)
@@ -90,8 +90,3 @@ class DisplayCard extends GetView<DashboardController> {
     );
   }
 }
-
-// 1. Height
-// 2. Width
-// 3. DPI
-// 4. Physical Size

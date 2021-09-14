@@ -1,10 +1,10 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:phone_monitor/controllers/homeController.dart';
+import 'package:phone_monitor/controllers/purchases_controller.dart';
+import 'package:phone_monitor/controllers/tab_click_controller.dart';
 import 'package:phone_monitor/tabs/cpu/cpu.dart';
 import 'package:phone_monitor/tabs/applications/applications.dart';
 import 'package:phone_monitor/tabs/dashboard/dashboard.dart';
@@ -14,6 +14,8 @@ import 'package:phone_monitor/tabs/system/system.dart';
 import 'package:phone_monitor/utils/ad_manager.dart';
 
 class Home extends StatefulWidget {
+  const Home({Key key}) : super(key: key);
+
   @override
   _HomeState createState() => _HomeState();
 }
@@ -21,7 +23,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   TabController _tabController;
   HomeController homeController;
-
+  bool initial = true;
   InterstitialAd _interstitialAd;
 
   @override
@@ -30,33 +32,42 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     homeController = Get.find<HomeController>();
     _tabController = TabController(vsync: this, length: 6);
     homeController.setController(_tabController);
-    InterstitialAd.load(
-        adUnitId: AdManager.interstitialAdUnitId,
-        request: AdRequest(),
-        adLoadCallback: InterstitialAdLoadCallback(
-          onAdLoaded: (InterstitialAd ad) {
-            this._interstitialAd = ad;
-            this._interstitialAd.fullScreenContentCallback =
-                FullScreenContentCallback(
-              onAdShowedFullScreenContent: (InterstitialAd ad) =>
-                  print('%ad onAdShowedFullScreenContent.'),
-              onAdDismissedFullScreenContent: (InterstitialAd ad) {
-                print('$ad onAdDismissedFullScreenContent.');
+    final clickController = Get.find<TabClickController>();
+
+    _tabController.addListener(() {
+      if (_tabController.indexIsChanging ||
+          _tabController.index != _tabController.previousIndex) {
+        clickController.click();
+      }
+    });
+
+    clickController.clicked.stream.listen((clicks) {
+      if (initial || clicks == 3) {
+        initial = false;
+        InterstitialAd.load(
+            adUnitId: AdManager.interstitialAdUnitId,
+            request: const AdRequest(),
+            adLoadCallback: InterstitialAdLoadCallback(
+              onAdLoaded: (InterstitialAd ad) {
+                _interstitialAd = ad;
+                _interstitialAd.fullScreenContentCallback =
+                    FullScreenContentCallback(
+                        onAdShowedFullScreenContent: (InterstitialAd ad) {},
+                        onAdDismissedFullScreenContent: (InterstitialAd ad) {
+                          clickController.resetClicks();
+                        },
+                        onAdFailedToShowFullScreenContent:
+                            (InterstitialAd ad, AdError error) {},
+                        onAdImpression: (InterstitialAd ad) {});
+                _interstitialAd.show();
               },
-              onAdFailedToShowFullScreenContent:
-                  (InterstitialAd ad, AdError error) {
-                print('$ad onAdFailedToShowFullScreenContent: $error');
-                ad.dispose();
+              onAdFailedToLoad: (LoadAdError error) {
+                clickController.resetClicks();
               },
-              onAdImpression: (InterstitialAd ad) =>
-                  print('$ad impression occurred.'),
-            );
-            this._interstitialAd.show();
-          },
-          onAdFailedToLoad: (LoadAdError error) {
-            print('InterstitialAd failed to load: $error');
-          },
-        ));
+            ));
+        clickController.resetClicks();
+      }
+    });
   }
 
   @override
@@ -75,21 +86,27 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
             if (_tabController.index == 0) {
               return showDialog(
                     context: context,
-                    builder: (context) => new AlertDialog(
-                      title: new Text('Are you sure?'),
-                      content: new Text('Do you want to exit Phone Monitor?'),
+                    builder: (context) => AlertDialog(
+                      title: const Text('Are you sure?'),
+                      content: const Text('Do you want to exit Phone Monitor?'),
                       actions: <Widget>[
-                        OutlineButton(
-                          shape: RoundedRectangleBorder(
-                              borderRadius: new BorderRadius.circular(20.0)),
-                          onPressed: () => Navigator.of(context).pop(false),
-                          child: Text("No"),
-                        ),
-                        OutlineButton(
+                        OutlinedButton(
+                          style: OutlinedButton.styleFrom(
                             shape: RoundedRectangleBorder(
-                                borderRadius: new BorderRadius.circular(20.0)),
-                            onPressed: () => Navigator.of(context).pop(true),
-                            child: Text("Yes")),
+                              borderRadius: BorderRadius.circular(20.0),
+                            ),
+                          ),
+                          onPressed: () => Navigator.of(context).pop(false),
+                          child: const Text("No"),
+                        ),
+                        OutlinedButton(
+                            style: OutlinedButton.styleFrom(
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(20.0),
+                              ),
+                            ),
+                            onPressed: () => Get.back(),
+                            child: const Text("Yes")),
                       ],
                     ),
                   ) ??
@@ -113,7 +130,8 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   indicatorColor: Theme.of(context).tabBarTheme.labelColor),
               actions: [
                 IconButton(
-                    icon: Icon(Icons.settings),
+                    icon: Icon(Icons.settings,
+                        color: Theme.of(context).iconTheme.color),
                     onPressed: () {
                       Get.toNamed("/settings");
                     }),
@@ -130,10 +148,10 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   List<Widget> _buildTabView() {
     return [
       Dashboard(),
-      CpuTab(),
-      System(),
-      Display(),
-      Applications(),
+      const CpuTab(),
+      const System(),
+      const Display(),
+      const Applications(),
       Sensors()
     ];
   }

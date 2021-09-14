@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 
 class WaveWidget extends StatelessWidget {
+  const WaveWidget({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Container(
       color: Colors.grey.shade200,
-      child: Center(
+      child: const Center(
         child: WaveBall(
           circleColor: Colors.white,
           progress: 0.6,
@@ -21,7 +23,7 @@ class WaveWidget extends StatelessWidget {
   }
 }
 
-const int WaveCount = 4;
+const int waveCount = 4;
 
 class WaveBall extends StatefulWidget {
   final double progress;
@@ -116,14 +118,14 @@ class WaveBallPainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
     double levelHeight = (1.0 - progress) * size.height;
-    double specWidget = size.width / WaveCount;
+    double specWidget = size.width / waveCount;
     double translateX = size.width * animationValue;
     double translateX2 = size.width * (1 - animationValue);
 
-    Path path = new Path();
+    Path path = Path();
     path.moveTo(0 - translateX, size.height);
     path.lineTo(0 - translateX, levelHeight);
-    for (int i = 1; i <= WaveCount; i++) {
+    for (int i = 1; i <= waveCount; i++) {
       double controllerX = specWidget * (i * 2 - 1) - translateX;
       double controllerY =
           i % 2 == 0 ? levelHeight - range : levelHeight + range;
@@ -133,10 +135,10 @@ class WaveBallPainter extends CustomPainter {
     path.lineTo(size.width + translateX, size.height);
     path.close();
 
-    Path path2 = new Path();
+    Path path2 = Path();
     path2.moveTo(0 - translateX2, size.height);
     path2.lineTo(0 - translateX2, levelHeight);
-    for (int i = 1; i <= WaveCount; i++) {
+    for (int i = 1; i <= waveCount; i++) {
       double controllerX = specWidget * (i * 2 - 1) - translateX2;
       double controllerY =
           i % 2 != 0 ? levelHeight - range : levelHeight + range;
@@ -147,7 +149,7 @@ class WaveBallPainter extends CustomPainter {
     path2.lineTo(size.width + translateX2, size.height);
     path2.close();
 
-    Path path3 = new Path();
+    Path path3 = Path();
     path3.addOval(Rect.fromCircle(
         center: Offset(size.width / 2, size.height / 2),
         radius: size.width / 2));
@@ -155,7 +157,7 @@ class WaveBallPainter extends CustomPainter {
 
     canvas.clipPath(path3, doAntiAlias: true);
 
-    Paint mPaint = new Paint();
+    Paint mPaint = Paint();
 
     mPaint.style = PaintingStyle.fill;
     mPaint.isAntiAlias = true;
@@ -173,11 +175,11 @@ class WaveBallPainter extends CustomPainter {
 
   @override
   bool shouldRepaint(WaveBallPainter oldDelegate) {
-    return oldDelegate.animationValue != this.animationValue ||
-        oldDelegate.range != this.range ||
-        oldDelegate.progress != this.progress ||
-        oldDelegate.backgroundColor != this.backgroundColor ||
-        oldDelegate.foregroundColor != this.foregroundColor ||
-        oldDelegate.circleColor != this.circleColor;
+    return oldDelegate.animationValue != animationValue ||
+        oldDelegate.range != range ||
+        oldDelegate.progress != progress ||
+        oldDelegate.backgroundColor != backgroundColor ||
+        oldDelegate.foregroundColor != foregroundColor ||
+        oldDelegate.circleColor != circleColor;
   }
 }

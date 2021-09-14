@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:phone_monitor/controllers/cpu_controller.dart';
 import 'package:phone_monitor/controllers/themeController.dart';
-import 'package:phone_monitor/widgets/cpuChart.dart';
+import 'package:phone_monitor/widgets/cpu_chart.dart';
 import 'package:phone_monitor/widgets/custom_card.dart';
 
 class Charts extends StatelessWidget {
@@ -20,14 +20,14 @@ class Charts extends StatelessWidget {
                 'Cpu Frequency Charts',
                 style: Get.theme.textTheme.subtitle1,
               ),
-              Divider(
+              const Divider(
                 height: 15,
               ),
               GridView.builder(
                   shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
+                  physics: const NeverScrollableScrollPhysics(),
                   itemCount: cpuController.cpuInfo.numberOfCores,
-                  gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
                     mainAxisSpacing: 12.0,
                     crossAxisSpacing: 12.0,
@@ -48,53 +48,3 @@ class Charts extends StatelessWidget {
     });
   }
 }
-// SliverChildBuilderDelegate(
-//                     (BuildContext context, int index) {
-//                       return GetBuilder<ThemeController>(
-//                           builder: (themeController) => CpuChart(
-//                                 minMax: cpuController
-//                                     .cpuInfo.minMaxFrequencies[index],
-//                                 index: index,
-//                                 stream: cpuController.stream,
-//                                 themMode: themeController.themeMode,
-//                               ));
-//                     },
-//                     childCount: cpuController.cpuInfo?.numberOfCores ?? 0,
-//                   )
-// CustomScrollView(
-//             shrinkWrap: true,
-//             physics: NeverScrollableScrollPhysics(),
-//             slivers: [
-//               SliverToBoxAdapter(
-//                   child: Text(
-//                 'Cpu Frequency Charts',
-//                 style: Get.theme.textTheme.subtitle1,
-//               )),
-//               SliverToBoxAdapter(
-//                 child: Divider(
-//                   height: 15,
-//                 ),
-//               ),
-//               SliverGrid(
-//                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-//                   crossAxisCount: Get.context.isLandscape ? 4 : 2,
-//                   mainAxisSpacing: 12.0,
-//                   crossAxisSpacing: 12.0,
-//                   childAspectRatio: 1.8,
-//                 ),
-//                 delegate: SliverChildBuilderDelegate(
-//                   (BuildContext context, int index) {
-//                     return GetBuilder<ThemeController>(
-//                         builder: (themeController) => CpuChart(
-//                               minMax: cpuController
-//                                   .cpuInfo.minMaxFrequencies[index],
-//                               index: index,
-//                               stream: cpuController.stream,
-//                               themMode: themeController.themeMode,
-//                             ));
-//                   },
-//                   childCount: cpuController.cpuInfo?.numberOfCores ?? 0,
-//                 ),
-//               )
-//             ],
-//           ),

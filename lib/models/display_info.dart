@@ -16,21 +16,21 @@ class DisplayInfo {
   DisplayInfo();
 
   DisplayInfo.fromJson(Map<String, dynamic> json) {
-    this.name = json['name'];
-    this.isHrd = json['isHdr'];
-    this.density = json['density'];
-    this.densityDpi = json['densityDpi'];
-    this.heightPixels = json['heightPixels'];
-    this.widthPixels = json['widthPixels'];
-    this.scaledDensity = json['scaledDensity'];
-    this.xdpi = json['xdpi'];
-    this.ydpi = json['ydpi'];
-    this.refreshRate = json['refreshRate'];
-    this.screenSize = calcScreenSize(this);
+    name = json['name'];
+    isHrd = json['isHdr'];
+    density = json['density'];
+    densityDpi = json['densityDpi'];
+    heightPixels = json['heightPixels'];
+    widthPixels = json['widthPixels'];
+    scaledDensity = json['scaledDensity'];
+    xdpi = json['xdpi'];
+    ydpi = json['ydpi'];
+    refreshRate = json['refreshRate'];
+    screenSize = calcScreenSize(this);
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     return data;
   }
 

@@ -6,32 +6,32 @@ import 'package:device_info/device_info.dart';
 import 'package:get/get.dart';
 
 final androidInfo = DeviceInfoPlugin().androidInfo;
-final cache = Map<int, Queue<double>>();
+final cache = <int, Queue<double>>{};
 final tempCache = Queue<double>();
 
 class CpuController extends GetxController {
   static CpuController get to => Get.find();
 
   // Device info getter/setter
-  Rx<AndroidDeviceInfo> _deviceInfo = Rx<AndroidDeviceInfo>(null);
+  final Rx<AndroidDeviceInfo> _deviceInfo = Rx<AndroidDeviceInfo>(null);
   AndroidDeviceInfo get deviceInfo => _deviceInfo.value;
   set deviceInfo(AndroidDeviceInfo value) {
     _deviceInfo.value = value;
   }
 
   // CPU information object
-  Rx<CpuInfo> _cpuInfo = CpuInfo().obs..value.numberOfCores = 0;
+  final Rx<CpuInfo> _cpuInfo = CpuInfo().obs..value.numberOfCores = 0;
   CpuInfo get cpuInfo => _cpuInfo.value;
 
   // Overall CPU usage in percentage
-  var _overallUsage = Rx<OverallUsage>(OverallUsage());
+  final _overallUsage = Rx<OverallUsage>(OverallUsage());
   OverallUsage get overallUsage => _overallUsage.value;
   set overallUsage(OverallUsage value) {
     _overallUsage.value = value;
   }
 
   // Overall CPU temperature
-  var _cpuTemperature = 0.0.obs;
+  final _cpuTemperature = 0.0.obs;
   double get cpuTemperature => _cpuTemperature.value;
   set cpuTemperature(double value) {
     _cpuTemperature.value = value;
@@ -60,7 +60,7 @@ class CpuController extends GetxController {
 
 // Calculate overall CPU usage for all cores
 OverallUsage _calculateOverallUsage(CpuInfo info) {
-  Map<int, double> overAllPerCore = Map<int, double>();
+  Map<int, double> overAllPerCore = <int, double>{};
   var frequencies = info.currentFrequencies;
   var minMax = info.minMaxFrequencies;
 

@@ -2,13 +2,13 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:phone_monitor/widgets/customProgressIndicator.dart';
+import 'package:phone_monitor/widgets/custom_progress_indicator.dart';
 
 class UsageProgressDisplay extends StatelessWidget {
   final String title;
   final double value;
 
-  UsageProgressDisplay({
+  const UsageProgressDisplay({
     Key key,
     @required this.title,
     @required this.value,
@@ -18,7 +18,7 @@ class UsageProgressDisplay extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        Container(
+        SizedBox(
           width: Get.width * 0.25,
           height: Get.width * 0.25,
           child: Stack(
@@ -30,27 +30,27 @@ class UsageProgressDisplay extends StatelessWidget {
                   angle: -pi,
                   child: CustomProgressIndicator(
                     type: ProgressIndicatorType.circular,
-                    value: this.value,
+                    value: value,
                   ),
                 ),
               ),
               Align(
                   alignment: Alignment.center,
                   child: Text(
-                    '${(this.value * 100).toInt()} %',
-                    style: TextStyle(fontSize: 20),
+                    '${(value * 100).toInt()} %',
+                    style: const TextStyle(fontSize: 20),
                   )),
             ],
           ),
         ),
         Container(
-          margin: EdgeInsets.only(top: 5),
+          margin: const EdgeInsets.only(top: 5),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Text(
-                this.title,
-                style: TextStyle(fontSize: 14),
+                title,
+                style: const TextStyle(fontSize: 14),
               ),
             ],
           ),

@@ -2,10 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:launch_review/launch_review.dart';
 import 'package:package_info/package_info.dart';
+import 'package:phone_monitor/api/purchase_api.dart';
 import 'package:phone_monitor/controllers/themeController.dart';
+import 'package:phone_monitor/widgets/paywall_widget.dart';
 import 'package:settings_ui/settings_ui.dart';
 
 class SettingsScreen extends StatefulWidget {
+  const SettingsScreen({Key key}) : super(key: key);
+
   @override
   _SettingsScreenState createState() => _SettingsScreenState();
 }
@@ -16,7 +20,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Settings UI')),
+      appBar: AppBar(title: const Text('Settings UI')),
       body: SettingsList(
         sections: [
           SettingsSection(
@@ -24,7 +28,7 @@ class _SettingsScreenState extends State<SettingsScreen> {
             tiles: [
               SettingsTile.switchTile(
                 title: theme,
-                leading: Icon(Icons.phonelink_lock),
+                leading: const Icon(Icons.phonelink_lock),
                 switchValue: lockInBackground,
                 onToggle: (bool value) {
                   setState(() {
@@ -42,17 +46,43 @@ class _SettingsScreenState extends State<SettingsScreen> {
             tiles: [
               SettingsTile(
                   title: 'Rate',
-                  leading: Icon(Icons.star),
-                  onTap: () => LaunchReview.launch(
-                      androidAppId: "com.twarkapps.phone_monitor"),
+                  leading: const Icon(Icons.star),
+                  onPressed: (context) {
+                    LaunchReview.launch(
+                        androidAppId: "com.twarkapps.phone_monitor");
+                  },
                   subtitle: "Please rate the app on Play Store"),
+              // SettingsTile(
+              //     title: 'Remove Ads',
+              //     leading: const Icon(Icons.star),
+              //     onPressed: (context) async {
+              //       await PurchaseApi.init(
+              //           id: "843736f5bc494f0caf9293b7b431f397");
+              //       final packages =
+              //           await PurchaseApi.fetchOffersByIds(PurchaseApi.allIds);
+              //       Get.bottomSheet(
+              //         PaywallWidget(
+              //           packages: packages
+              //               .map((offer) => offer.availablePackages)
+              //               .expand((pair) => pair)
+              //               .toList(),
+              //           title: "Remove ads",
+              //           description: "Remove ads and support developer ",
+              //           onClickedPackage: (package) async {
+              //             await PurchaseApi.purchasePackage(package);
+              //             Get.back();
+              //           },
+              //         ),
+              //       );
+              //     },
+              //     subtitle: "Remove ads and support the developer")
             ],
           ),
           CustomSection(
             child: Column(
               children: [
-                Padding(
-                    padding: const EdgeInsets.only(top: 22, bottom: 8),
+                const Padding(
+                    padding: EdgeInsets.only(top: 22, bottom: 8),
                     child: Icon(
                       Icons.settings,
                       color: Color(0xFF777777),
@@ -64,10 +94,10 @@ class _SettingsScreenState extends State<SettingsScreen> {
                       if (snapshot.hasData) {
                         return Text(
                           'Version: ${snapshot.data.version}',
-                          style: TextStyle(color: Color(0xFF777777)),
+                          style: const TextStyle(color: Color(0xFF777777)),
                         );
                       }
-                      return Text(
+                      return const Text(
                         'Version: N/A',
                         style: TextStyle(color: Color(0xFF777777)),
                       );

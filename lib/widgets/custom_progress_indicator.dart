@@ -34,23 +34,22 @@ class _CustomProgressIndicatorState extends State<CustomProgressIndicator>
       animationBehavior: AnimationBehavior.preserve,
     )..forward();
 
-    this.curve = CurvedAnimation(
-      parent: this._controller,
+    curve = CurvedAnimation(
+      parent: _controller,
       curve: Curves.easeInOut,
     );
-    _animation = Tween<double>(begin: 0, end: this.widget.value);
+    _animation = Tween<double>(begin: 0, end: widget.value);
   }
 
   @override
   void didUpdateWidget(CustomProgressIndicator oldWidget) {
     super.didUpdateWidget(oldWidget);
 
-    double beginValue =
-        _animation?.evaluate(this.curve) ?? oldWidget?.value ?? 0;
+    double beginValue = _animation?.evaluate(curve) ?? oldWidget?.value ?? 0;
 
     _animation = Tween<double>(
       begin: beginValue,
-      end: this.widget.value ?? 1,
+      end: widget.value ?? 1,
     );
     _controller
       ..value = 0
@@ -77,8 +76,7 @@ class _CustomProgressIndicatorState extends State<CustomProgressIndicator>
                 ? Get.theme.scaffoldBackgroundColor
                 : Colors.blue[50],
             value: _animation.evaluate(_controller),
-            valueColor:
-                new AlwaysStoppedAnimation<Color>(Get.theme.primaryColor),
+            valueColor: AlwaysStoppedAnimation<Color>(Get.theme.primaryColor),
           ),
         );
       default:

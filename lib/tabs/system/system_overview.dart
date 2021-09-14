@@ -5,6 +5,8 @@ import 'package:phone_monitor/utils/constants.dart';
 import 'package:phone_monitor/widgets/custom_card.dart';
 
 class SystemOverview extends GetView<CpuController> {
+  const SystemOverview({Key key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return CustomCard(
@@ -15,12 +17,12 @@ class SystemOverview extends GetView<CpuController> {
           children: [
             Column(
               children: [
-                Icon(
+                const Icon(
                   Icons.phone_android,
                   size: 50,
                   color: Colors.blue,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Text(
@@ -31,12 +33,12 @@ class SystemOverview extends GetView<CpuController> {
             ),
             Column(
               children: [
-                Icon(
+                const Icon(
                   Icons.android,
                   size: 50,
                   color: kPrimaryColor,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 Text(

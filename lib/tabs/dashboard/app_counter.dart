@@ -15,7 +15,7 @@ class AppCounter extends GetView<HomeController> {
       onTap: () => controller.goTo(4),
       child: CustomCard(
           child: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(14.0),
         child: Row(
           children: [
             Icon(
@@ -23,7 +23,7 @@ class AppCounter extends GetView<HomeController> {
               size: 50,
               color: Theme.of(context).primaryColor,
             ),
-            SizedBox(
+            const SizedBox(
               width: 10,
             ),
             FutureBuilder<List<Application>>(
@@ -38,13 +38,13 @@ class AppCounter extends GetView<HomeController> {
                           "${snapshot.data.length}",
                           style: Get.textTheme.headline4,
                         ),
-                        Text(
+                        const Text(
                           "Apps installed",
                         )
                       ],
                     );
                   }
-                  return CircularProgressIndicator();
+                  return const CircularProgressIndicator();
                 }),
           ],
         ),

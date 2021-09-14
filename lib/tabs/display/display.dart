@@ -1,18 +1,47 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:phone_monitor/controllers/dashboard_controller.dart';
 import 'package:phone_monitor/models/display_info.dart';
+import 'package:phone_monitor/utils/ad_manager.dart';
 import 'package:phone_monitor/widgets/custom_card.dart';
 
-class Display extends StatelessWidget {
+class Display extends StatefulWidget {
   const Display({
     Key key,
   }) : super(key: key);
 
   @override
+  _DisplayState createState() => _DisplayState();
+}
+
+class _DisplayState extends State<Display> {
+  BannerAd _bannerAd;
+  bool _isBannerAdReady = false;
+  @override
+  void initState() {
+    super.initState();
+    _bannerAd = AdManager.loadSmallBanner(() {
+      setState(() {
+        _isBannerAdReady = true;
+      });
+    }, (ad, err) {
+      _isBannerAdReady = false;
+      ad.dispose();
+    });
+    _bannerAd.load();
+  }
+
+  @override
+  void dispose() {
+    _bannerAd.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.all(8),
+      padding: const EdgeInsets.all(8),
       child: CustomCard(
         child: GetX<DashboardController>(builder: (dbController) {
           final displayItems =
@@ -22,17 +51,26 @@ class Display extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                if (_isBannerAdReady)
+                  Align(
+                    alignment: Alignment.topCenter,
+                    child: SizedBox(
+                      width: _bannerAd.size.width.toDouble(),
+                      height: _bannerAd.size.height.toDouble(),
+                      child: AdWidget(ad: _bannerAd),
+                    ),
+                  ),
                 Text(
                   "Display",
                   style: Get.theme.textTheme.subtitle1,
                 ),
-                Divider(
+                const Divider(
                   height: 20,
                 ),
                 ListView.builder(
                     shrinkWrap: true,
                     itemCount: displayItems.length,
-                    physics: NeverScrollableScrollPhysics(),
+                    physics: const NeverScrollableScrollPhysics(),
                     itemBuilder: (_, index) {
                       String dispKey = displayItems.keys.elementAt(index);
                       return Column(
@@ -40,13 +78,13 @@ class Display extends StatelessWidget {
                           Row(
                             children: [
                               Text(
-                                "$dispKey",
+                                dispKey,
                                 textScaleFactor: 1.2,
                               ),
-                              Container(
+                              SizedBox(
                                 width: Get.width * 0.35,
                                 child: Text(
-                                  "${displayItems[dispKey]}",
+                                  displayItems[dispKey],
                                   textAlign: TextAlign.left,
                                   textScaleFactor: 1.2,
                                 ),
@@ -54,7 +92,7 @@ class Display extends StatelessWidget {
                             ],
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             height: 15,
                           ),
                         ],
