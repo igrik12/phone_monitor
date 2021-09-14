@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get/utils.dart';
-import 'package:phone_monitor/widgets/custom_card.dart';
 
 class FeedbackForm extends StatefulWidget {
   const FeedbackForm({Key key}) : super(key: key);

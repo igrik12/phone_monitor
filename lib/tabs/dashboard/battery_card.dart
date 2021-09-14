@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:phone_monitor/controllers/dashboard_controller.dart';
-import 'package:phone_monitor/widgets/customProgressIndicator.dart';
+import 'package:phone_monitor/widgets/custom_progress_indicator.dart';
 import 'package:phone_monitor/widgets/custom_card.dart';
 
 class BatteryCard extends GetView<DashboardController> {
@@ -38,7 +38,7 @@ class BatteryCard extends GetView<DashboardController> {
                         "Battery (${getBatteryChargeStatus(controller.wrapper.value.battery.chargingStatus)})",
                         textScaleFactor: 1.3,
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
                       Row(
@@ -53,7 +53,7 @@ class BatteryCard extends GetView<DashboardController> {
                                   100,
                             ),
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 10,
                           ),
                           Text(
@@ -62,7 +62,7 @@ class BatteryCard extends GetView<DashboardController> {
                           )
                         ],
                       ),
-                      SizedBox(
+                      const SizedBox(
                         height: 5,
                       ),
                       Text(

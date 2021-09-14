@@ -31,26 +31,26 @@ SensorInfoHolder getMeAnInstanceOfSensorInfoHolder(Map<String, String> data) {
 
 class _SensorsState extends State<Sensors> {
   EventChannel _eventChannel;
-  List<Accelerometer> _listAccelerometer = [];
-  List<UncalibratedAccelerometer> _listUncalibratedAccelerometer = [];
-  List<Gravity> _listGravity = [];
-  List<LinearAcceleration> _listLinearAcceleration = [];
-  List<MagneticField> _listMagneticField = [];
-  List<OrientationSensor> _listOrientationSensor = [];
-  List<Gyroscope> _listGyroscope = [];
-  List<UncalibratedGyroscope> _listUncalibratedGyroscope = [];
-  List<HeartBeat> _listHeartBeat = [];
-  List<AmbientLight> _listAmbientLight = [];
-  List<AtmosphericPressure> _listAtmosphericPressure = [];
-  List<Proximity> _listProximity = [];
-  List<RotationVector> _listRotationVector = [];
-  List<GameRotationVector> _listGameRotationVector = [];
-  List<GeoMagneticRotationVector> _listGeoMagneticRotationVector = [];
-  List<RelativeHumidity> _listRelativeHumidity = [];
-  List<AmbientRoomTemperature> _listAmbientRoomTemperature = [];
-  List<LowLatencyOffBodyDetect> _listLowLatencyOffBodyDetect = [];
-  List<MotionDetect> _listMotionDetect = [];
-  List<StationaryDetect> _listStationaryDetect = [];
+  final List<Accelerometer> _listAccelerometer = [];
+  final List<UncalibratedAccelerometer> _listUncalibratedAccelerometer = [];
+  final List<Gravity> _listGravity = [];
+  final List<LinearAcceleration> _listLinearAcceleration = [];
+  final List<MagneticField> _listMagneticField = [];
+  final List<OrientationSensor> _listOrientationSensor = [];
+  final List<Gyroscope> _listGyroscope = [];
+  final List<UncalibratedGyroscope> _listUncalibratedGyroscope = [];
+  final List<HeartBeat> _listHeartBeat = [];
+  final List<AmbientLight> _listAmbientLight = [];
+  final List<AtmosphericPressure> _listAtmosphericPressure = [];
+  final List<Proximity> _listProximity = [];
+  final List<RotationVector> _listRotationVector = [];
+  final List<GameRotationVector> _listGameRotationVector = [];
+  final List<GeoMagneticRotationVector> _listGeoMagneticRotationVector = [];
+  final List<RelativeHumidity> _listRelativeHumidity = [];
+  final List<AmbientRoomTemperature> _listAmbientRoomTemperature = [];
+  final List<LowLatencyOffBodyDetect> _listLowLatencyOffBodyDetect = [];
+  final List<MotionDetect> _listMotionDetect = [];
+  final List<StationaryDetect> _listStationaryDetect = [];
 
   StreamSubscription _subscription;
   bool _mounted = false;
@@ -63,20 +63,20 @@ class _SensorsState extends State<Sensors> {
       sensorCount.forEach((String key, List<dynamic> value) {
         switch (key) {
           case '1':
-            if (value.length > 0) {
-              value.forEach((dynamic element) {
+            if (value.isNotEmpty) {
+              for (var element in value) {
                 _listAccelerometer.add(Accelerometer(
                     getMeAnInstanceOfSensorInfoHolder(
                         Map<String, String>.from(element)),
                     'NA',
                     'NA',
                     'NA'));
-              });
+              }
             }
             break;
           case '35':
-            if (value.length > 0) {
-              value.forEach((dynamic element) {
+            if (value.isNotEmpty) {
+              for (var element in value) {
                 _listUncalibratedAccelerometer.add(UncalibratedAccelerometer(
                     getMeAnInstanceOfSensorInfoHolder(
                         Map<String, String>.from(element)),
@@ -86,72 +86,72 @@ class _SensorsState extends State<Sensors> {
                     'NA',
                     'NA',
                     'NA'));
-              });
+              }
             }
             break;
           case '9':
-            if (value.length > 0) {
-              value.forEach((dynamic element) {
+            if (value.isNotEmpty) {
+              for (var element in value) {
                 _listGravity.add(Gravity(
                     getMeAnInstanceOfSensorInfoHolder(
                         Map<String, String>.from(element)),
                     'NA',
                     'NA',
                     'NA'));
-              });
+              }
             }
             break;
           case '10':
-            if (value.length > 0) {
-              value.forEach((dynamic element) {
+            if (value.isNotEmpty) {
+              for (var element in value) {
                 _listLinearAcceleration.add(LinearAcceleration(
                     getMeAnInstanceOfSensorInfoHolder(
                         Map<String, String>.from(element)),
                     'NA',
                     'NA',
                     'NA'));
-              });
+              }
             }
             break;
           case '2':
-            if (value.length > 0) {
-              value.forEach((dynamic element) {
+            if (value.isNotEmpty) {
+              for (var element in value) {
                 _listMagneticField.add(MagneticField(
                     getMeAnInstanceOfSensorInfoHolder(
                         Map<String, String>.from(element)),
                     'NA',
                     'NA',
                     'NA'));
-              });
+              }
             }
             break;
           case '3':
-            if (value.length > 0) {
-              value.forEach((dynamic element) {
+            if (value.isNotEmpty) {
+              for (var element in value) {
                 _listOrientationSensor.add(OrientationSensor(
                     getMeAnInstanceOfSensorInfoHolder(
                         Map<String, String>.from(element)),
                     'NA',
                     'NA',
                     'NA'));
-              });
+              }
             }
             break;
           case '4':
-            if (value.length > 0) {
-              value.forEach((dynamic element) {
+            if (value.isNotEmpty) {
+              for (var element in value) {
                 _listGyroscope.add(Gyroscope(
                     getMeAnInstanceOfSensorInfoHolder(
                         Map<String, String>.from(element)),
                     'NA',
                     'NA',
                     'NA'));
-              });
+              }
             }
             break;
           case '16':
-            if (value.length > 0) {
-              value.forEach((dynamic element) {
+            if (value.isNotEmpty) {
+              for (var element in value) {
                 _listUncalibratedGyroscope.add(UncalibratedGyroscope(
                     getMeAnInstanceOfSensorInfoHolder(
                         Map<String, String>.from(element)),
@@ -161,52 +161,52 @@ class _SensorsState extends State<Sensors> {
                     'NA',
                     'NA',
                     'NA'));
-              });
+              }
             }
             break;
           case '31':
-            if (value.length > 0) {
-              value.forEach((dynamic element) {
+            if (value.isNotEmpty) {
+              for (var element in value) {
                 _listHeartBeat.add(HeartBeat(
                     getMeAnInstanceOfSensorInfoHolder(
                         Map<String, String>.from(element)),
                     'NA'));
-              });
+              }
             }
             break;
           case '5':
-            if (value.length > 0) {
-              value.forEach((dynamic element) {
+            if (value.isNotEmpty) {
+              for (var element in value) {
                 _listAmbientLight.add(AmbientLight(
                     getMeAnInstanceOfSensorInfoHolder(
                         Map<String, String>.from(element)),
                     'NA'));
-              });
+              }
             }
             break;
           case '6':
-            if (value.length > 0) {
-              value.forEach((dynamic element) {
+            if (value.isNotEmpty) {
+              for (var element in value) {
                 _listAtmosphericPressure.add(AtmosphericPressure(
                     getMeAnInstanceOfSensorInfoHolder(
                         Map<String, String>.from(element)),
                     'NA'));
-              });
+              }
             }
             break;
           case '8':
-            if (value.length > 0) {
-              value.forEach((dynamic element) {
+            if (value.isNotEmpty) {
+              for (var element in value) {
                 _listProximity.add(Proximity(
                     getMeAnInstanceOfSensorInfoHolder(
                         Map<String, String>.from(element)),
                     'NA'));
-              });
+              }
             }
             break;
           case '11':
-            if (value.length > 0) {
-              value.forEach((dynamic element) {
+            if (value.isNotEmpty) {
+              for (var element in value) {
                 _listRotationVector.add(RotationVector(
                     getMeAnInstanceOfSensorInfoHolder(
                         Map<String, String>.from(element)),
@@ -215,12 +215,12 @@ class _SensorsState extends State<Sensors> {
                     'NA',
                     'NA',
                     'NA'));
-              });
+              }
             }
             break;
           case '15':
-            if (value.length > 0) {
-              value.forEach((dynamic element) {
+            if (value.isNotEmpty) {
+              for (var element in value) {
                 _listGameRotationVector.add(GameRotationVector(
                     getMeAnInstanceOfSensorInfoHolder(
                         Map<String, String>.from(element)),
@@ -229,12 +229,12 @@ class _SensorsState extends State<Sensors> {
                     'NA',
                     'NA',
                     'NA'));
-              });
+              }
             }
             break;
           case '20':
-            if (value.length > 0) {
-              value.forEach((dynamic element) {
+            if (value.isNotEmpty) {
+              for (var element in value) {
                 _listGeoMagneticRotationVector.add(GeoMagneticRotationVector(
                     getMeAnInstanceOfSensorInfoHolder(
                         Map<String, String>.from(element)),
@@ -243,57 +243,57 @@ class _SensorsState extends State<Sensors> {
                     'NA',
                     'NA',
                     'NA'));
-              });
+              }
             }
             break;
           case '12':
-            if (value.length > 0) {
-              value.forEach((dynamic element) {
+            if (value.isNotEmpty) {
+              for (var element in value) {
                 _listRelativeHumidity.add(RelativeHumidity(
                     getMeAnInstanceOfSensorInfoHolder(
                         Map<String, String>.from(element)),
                     'NA'));
-              });
+              }
             }
             break;
           case '13':
-            if (value.length > 0) {
-              value.forEach((dynamic element) {
+            if (value.isNotEmpty) {
+              for (var element in value) {
                 _listAmbientRoomTemperature.add(AmbientRoomTemperature(
                     getMeAnInstanceOfSensorInfoHolder(
                         Map<String, String>.from(element)),
                     'NA'));
-              });
+              }
             }
             break;
           case '29':
-            if (value.length > 0) {
-              value.forEach((dynamic element) {
+            if (value.isNotEmpty) {
+              for (var element in value) {
                 _listStationaryDetect.add(StationaryDetect(
                     getMeAnInstanceOfSensorInfoHolder(
                         Map<String, String>.from(element)),
                     'NA'));
-              });
+              }
             }
             break;
           case '30':
-            if (value.length > 0) {
-              value.forEach((dynamic element) {
+            if (value.isNotEmpty) {
+              for (var element in value) {
                 _listMotionDetect.add(MotionDetect(
                     getMeAnInstanceOfSensorInfoHolder(
                         Map<String, String>.from(element)),
                     'NA'));
-              });
+              }
             }
             break;
           case '34':
-            if (value.length > 0) {
-              value.forEach((dynamic element) {
+            if (value.isNotEmpty) {
+              for (var element in value) {
                 _listLowLatencyOffBodyDetect.add(LowLatencyOffBodyDetect(
                     getMeAnInstanceOfSensorInfoHolder(
                         Map<String, String>.from(element)),
                     'NA'));
-              });
+              }
             }
             break;
           default:
@@ -341,7 +341,7 @@ class _SensorsState extends State<Sensors> {
     Map<String, String> receivedData = Map<String, String>.from(event);
     switch (receivedData['type']) {
       case '1':
-        _listAccelerometer.forEach((item) {
+        for (var item in _listAccelerometer) {
           if (isAMatch(item.sensor, receivedData)) {
             List<String> sensorFeed = receivedData['values'].split(';');
             if (!mounted) return;
@@ -351,10 +351,10 @@ class _SensorsState extends State<Sensors> {
               item.z = sensorFeed[2];
             });
           }
-        });
+        }
         break;
       case '35':
-        _listUncalibratedAccelerometer.forEach((item) {
+        for (var item in _listUncalibratedAccelerometer) {
           if (isAMatch(item.sensor, receivedData)) {
             List<String> sensorFeed = receivedData['values'].split(';');
             if (!mounted) return;
@@ -367,10 +367,10 @@ class _SensorsState extends State<Sensors> {
               item.estimatedZBias = sensorFeed[5];
             });
           }
-        });
+        }
         break;
       case '9':
-        _listGravity.forEach((item) {
+        for (var item in _listGravity) {
           if (isAMatch(item.sensor, receivedData)) {
             List<String> sensorFeed = receivedData['values'].split(';');
             if (!mounted) return;
@@ -380,10 +380,10 @@ class _SensorsState extends State<Sensors> {
               item.z = sensorFeed[2];
             });
           }
-        });
+        }
         break;
       case '10':
-        _listLinearAcceleration.forEach((item) {
+        for (var item in _listLinearAcceleration) {
           if (isAMatch(item.sensor, receivedData)) {
             List<String> sensorFeed = receivedData['values'].split(';');
             if (!mounted) return;
@@ -393,10 +393,10 @@ class _SensorsState extends State<Sensors> {
               item.z = sensorFeed[2];
             });
           }
-        });
+        }
         break;
       case '2':
-        _listMagneticField.forEach((item) {
+        for (var item in _listMagneticField) {
           if (isAMatch(item.sensor, receivedData)) {
             List<String> sensorFeed = receivedData['values'].split(';');
             if (!mounted) return;
@@ -406,10 +406,10 @@ class _SensorsState extends State<Sensors> {
               item.z = sensorFeed[2];
             });
           }
-        });
+        }
         break;
       case '3':
-        _listOrientationSensor.forEach((item) {
+        for (var item in _listOrientationSensor) {
           if (isAMatch(item.sensor, receivedData)) {
             List<String> sensorFeed = receivedData['values'].split(';');
             if (!mounted) return;
@@ -419,10 +419,10 @@ class _SensorsState extends State<Sensors> {
               item.roll = sensorFeed[2];
             });
           }
-        });
+        }
         break;
       case '4':
-        _listGyroscope.forEach((item) {
+        for (var item in _listGyroscope) {
           if (isAMatch(item.sensor, receivedData)) {
             List<String> sensorFeed = receivedData['values'].split(';');
             if (!mounted) return;
@@ -432,10 +432,10 @@ class _SensorsState extends State<Sensors> {
               item.angularSpeedAroundZ = sensorFeed[2];
             });
           }
-        });
+        }
         break;
       case '16':
-        _listUncalibratedGyroscope.forEach((item) {
+        for (var item in _listUncalibratedGyroscope) {
           if (isAMatch(item.sensor, receivedData)) {
             List<String> sensorFeed = receivedData['values'].split(';');
             if (!mounted) return;
@@ -448,10 +448,10 @@ class _SensorsState extends State<Sensors> {
               item.estimatedDriftAroundZ = sensorFeed[5];
             });
           }
-        });
+        }
         break;
       case '31':
-        _listHeartBeat.forEach((item) {
+        for (var item in _listHeartBeat) {
           if (isAMatch(item.sensor, receivedData)) {
             List<String> sensorFeed = receivedData['values'].split(';');
             if (!mounted) return;
@@ -459,10 +459,10 @@ class _SensorsState extends State<Sensors> {
               item.confidence = sensorFeed[0];
             });
           }
-        });
+        }
         break;
       case '5':
-        _listAmbientLight.forEach((item) {
+        for (var item in _listAmbientLight) {
           if (isAMatch(item.sensor, receivedData)) {
             List<String> sensorFeed = receivedData['values'].split(';');
             if (!mounted) return;
@@ -470,10 +470,10 @@ class _SensorsState extends State<Sensors> {
               item.level = sensorFeed[0];
             });
           }
-        });
+        }
         break;
       case '6':
-        _listAtmosphericPressure.forEach((item) {
+        for (var item in _listAtmosphericPressure) {
           if (isAMatch(item.sensor, receivedData)) {
             List<String> sensorFeed = receivedData['values'].split(';');
             if (!mounted) return;
@@ -481,10 +481,10 @@ class _SensorsState extends State<Sensors> {
               item.pressure = sensorFeed[0];
             });
           }
-        });
+        }
         break;
       case '8':
-        _listProximity.forEach((item) {
+        for (var item in _listProximity) {
           if (isAMatch(item.sensor, receivedData)) {
             List<String> sensorFeed = receivedData['values'].split(';');
             if (!mounted) return;
@@ -492,10 +492,10 @@ class _SensorsState extends State<Sensors> {
               item.distance = sensorFeed[0];
             });
           }
-        });
+        }
         break;
       case '11':
-        _listRotationVector.forEach((item) {
+        for (var item in _listRotationVector) {
           if (isAMatch(item.sensor, receivedData)) {
             List<String> sensorFeed = receivedData['values'].split(';');
             if (!mounted) return;
@@ -503,16 +503,17 @@ class _SensorsState extends State<Sensors> {
               item.x = sensorFeed[0];
               item.y = sensorFeed[1];
               item.z = sensorFeed[2];
-              if (sensorFeed.length == 4)
+              if (sensorFeed.length == 4) {
                 item.someVal = sensorFeed[3];
-              else if (sensorFeed.length == 5)
+              } else if (sensorFeed.length == 5) {
                 item.estimatedHeadingAccuracy = sensorFeed[4];
+              }
             });
           }
-        });
+        }
         break;
       case '15':
-        _listGameRotationVector.forEach((item) {
+        for (var item in _listGameRotationVector) {
           if (isAMatch(item.sensor, receivedData)) {
             List<String> sensorFeed = receivedData['values'].split(';');
             if (!mounted) return;
@@ -520,16 +521,17 @@ class _SensorsState extends State<Sensors> {
               item.x = sensorFeed[0];
               item.y = sensorFeed[1];
               item.z = sensorFeed[2];
-              if (sensorFeed.length == 4)
+              if (sensorFeed.length == 4) {
                 item.someVal = sensorFeed[3];
-              else if (sensorFeed.length == 5)
+              } else if (sensorFeed.length == 5) {
                 item.estimatedHeadingAccuracy = sensorFeed[4];
+              }
             });
           }
-        });
+        }
         break;
       case '20':
-        _listGeoMagneticRotationVector.forEach((item) {
+        for (var item in _listGeoMagneticRotationVector) {
           if (isAMatch(item.sensor, receivedData)) {
             List<String> sensorFeed = receivedData['values'].split(';');
             if (!mounted) return;
@@ -537,16 +539,17 @@ class _SensorsState extends State<Sensors> {
               item.x = sensorFeed[0];
               item.y = sensorFeed[1];
               item.z = sensorFeed[2];
-              if (sensorFeed.length == 4)
+              if (sensorFeed.length == 4) {
                 item.someVal = sensorFeed[3];
-              else if (sensorFeed.length == 5)
+              } else if (sensorFeed.length == 5) {
                 item.estimatedHeadingAccuracy = sensorFeed[4];
+              }
             });
           }
-        });
+        }
         break;
       case '12':
-        _listRelativeHumidity.forEach((item) {
+        for (var item in _listRelativeHumidity) {
           if (isAMatch(item.sensor, receivedData)) {
             List<String> sensorFeed = receivedData['values'].split(';');
             if (!mounted) return;
@@ -554,10 +557,10 @@ class _SensorsState extends State<Sensors> {
               item.humidity = sensorFeed[0];
             });
           }
-        });
+        }
         break;
       case '13':
-        _listAmbientRoomTemperature.forEach((item) {
+        for (var item in _listAmbientRoomTemperature) {
           if (isAMatch(item.sensor, receivedData)) {
             List<String> sensorFeed = receivedData['values'].split(';');
             if (!mounted) return;
@@ -565,10 +568,10 @@ class _SensorsState extends State<Sensors> {
               item.temperature = sensorFeed[0];
             });
           }
-        });
+        }
         break;
       case '29':
-        _listStationaryDetect.forEach((item) {
+        for (var item in _listStationaryDetect) {
           if (isAMatch(item.sensor, receivedData)) {
             List<String> sensorFeed = receivedData['values'].split(';');
             if (!mounted) return;
@@ -576,10 +579,10 @@ class _SensorsState extends State<Sensors> {
               item.isImmobile = sensorFeed[0];
             });
           }
-        });
+        }
         break;
       case '30':
-        _listMotionDetect.forEach((item) {
+        for (var item in _listMotionDetect) {
           if (isAMatch(item.sensor, receivedData)) {
             List<String> sensorFeed = receivedData['values'].split(';');
             if (!mounted) return;
@@ -587,10 +590,10 @@ class _SensorsState extends State<Sensors> {
               item.isInMotion = sensorFeed[0];
             });
           }
-        });
+        }
         break;
       case '34':
-        _listLowLatencyOffBodyDetect.forEach((item) {
+        for (var item in _listLowLatencyOffBodyDetect) {
           if (isAMatch(item.sensor, receivedData)) {
             List<String> sensorFeed = receivedData['values'].split(';');
             if (!mounted) return;
@@ -598,7 +601,7 @@ class _SensorsState extends State<Sensors> {
               item.offBodyState = sensorFeed[0];
             });
           }
-        });
+        }
         break;
       default:
       //not supported yet
@@ -609,7 +612,7 @@ class _SensorsState extends State<Sensors> {
 
   List<Widget> buildUI() {
     List<Widget> tmpUI = [];
-    <List<dynamic>>[
+    for (var elem in <List<dynamic>>[
       _listAccelerometer,
       _listUncalibratedAccelerometer,
       _listGravity,
@@ -630,11 +633,11 @@ class _SensorsState extends State<Sensors> {
       _listStationaryDetect,
       _listMotionDetect,
       _listLowLatencyOffBodyDetect,
-    ].forEach((List<dynamic> elem) {
-      elem.forEach((dynamic item) {
+    ]) {
+      for (var item in elem) {
         tmpUI.add(item.getCard());
-      });
-    });
+      }
+    }
     return tmpUI;
   }
 

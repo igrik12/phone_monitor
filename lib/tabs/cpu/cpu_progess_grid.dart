@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:phone_monitor/controllers/cpu_controller.dart';
 import 'package:phone_monitor/widgets/custom_card.dart';
-import 'package:phone_monitor/widgets/progressWithPercentage.dart';
+import 'package:phone_monitor/widgets/progress_with_percentage.dart';
 
 class CpuProgressGrid extends StatelessWidget {
-  CpuProgressGrid({Key key}) : super(key: key);
+  const CpuProgressGrid({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,14 +21,15 @@ class CpuProgressGrid extends StatelessWidget {
                           "CPU Core Usage",
                           style: Get.theme.textTheme.subtitle1,
                         )),
-                    Divider(
+                    const Divider(
                       height: 15,
                     ),
                     GridView.builder(
                         shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
+                        physics: const NeverScrollableScrollPhysics(),
                         itemCount: controller.cpuInfo.numberOfCores,
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
                           mainAxisSpacing: 12.0,
                           crossAxisSpacing: 12.0,
@@ -47,24 +48,4 @@ class CpuProgressGrid extends StatelessWidget {
               ),
             ));
   }
-}
-
-List<Widget> _buildCpuGrid(CpuController controller) {
-  if (controller.cpuInfo == null || controller.overallUsage == null) {
-    return List.generate(
-        controller.cpuInfo?.numberOfCores,
-        (index) => ProgressWithPercentage(
-              height: 12,
-              title: "cpu$index 0 mhz",
-              value: 0.0,
-            ));
-  }
-  return List.generate(
-      controller.cpuInfo?.numberOfCores ?? 0,
-      (index) => ProgressWithPercentage(
-            height: 12,
-            title:
-                "cpu$index ${controller.cpuInfo.currentFrequencies[index].truncateToDouble()} mhz",
-            value: controller.overallUsage.overAllPerCore[index],
-          ));
 }

@@ -66,101 +66,102 @@ class SensorInfoHolder {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Text(
-            this.name,
-            style: TextStyle(color: Colors.blue, fontStyle: FontStyle.italic),
+            name,
+            style: const TextStyle(
+                color: Colors.blue, fontStyle: FontStyle.italic),
           ),
           Text(
-            this.vendorName,
+            vendorName,
             style: TextStyle(
                 color: Colors.greenAccent[400], fontWeight: FontWeight.bold),
           )
         ],
       ),
-      Divider(
+      const Divider(
         height: 14.0,
         color: Colors.black54,
       ),
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          Text(
+          const Text(
             'Type',
           ),
           Text(
-            this.type,
+            type,
           ),
         ],
       ),
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          Text(
+          const Text(
             'Version',
           ),
           Text(
-            this.version,
+            version,
           ),
         ],
       ),
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          Text(
+          const Text(
             'Power',
           ),
           Text(
-            '${this.power} mA',
+            '$power mA',
           ),
         ],
       ),
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          Text(
+          const Text(
             'Resolution',
           ),
           Text(
-            '${this.resolution} unit',
+            '$resolution unit',
           ),
         ],
       ),
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          Text(
+          const Text(
             'Maximum Range',
           ),
           Text(
-            '${this.maxRange} unit',
+            '$maxRange unit',
           ),
         ],
       ),
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          Text(
+          const Text(
             'Maximum Delay',
           ),
           Text(
-            '${this.maxDelay} s',
+            '$maxDelay s',
           ),
         ],
       ),
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          Text(
+          const Text(
             'Minimum Delay',
           ),
           Text(
-            '${this.minDelay} s',
+            '$minDelay s',
           ),
         ],
       ),
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          Text(
+          const Text(
             'Reporting Mode',
           ),
           Text(
@@ -170,36 +171,36 @@ class SensorInfoHolder {
               '2': 'One Shot',
               '3': 'Special Trigger',
               'NA': 'NA',
-            }[this.reportingMode],
+            }[reportingMode],
           ),
         ],
       ),
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          Text(
+          const Text(
             'Wake Up',
           ),
           Text(
-            this.capitalize(this.isWakeup),
+            capitalize(isWakeup),
           ),
         ],
       ),
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          Text(
+          const Text(
             'Dynamic',
           ),
           Text(
-            this.capitalize(this.isDynamic),
+            capitalize(isDynamic),
           ),
         ],
       ),
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          Text(
+          const Text(
             'Highest Direct Report Rate Value',
           ),
           Text(
@@ -209,29 +210,29 @@ class SensorInfoHolder {
               '2': 'Fast',
               '3': 'Very Fast',
               'NA': 'NA',
-            }[this.highestDirectReportRateValue],
+            }[highestDirectReportRateValue],
           ),
         ],
       ),
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          Text(
+          const Text(
             'Fifo Max Event Count',
           ),
           Text(
-            this.fifoMaxEventCount,
+            fifoMaxEventCount,
           ),
         ],
       ),
       Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
-          Text(
+          const Text(
             'Fifo Reserved Event Count',
           ),
           Text(
-            this.fifoReservedEventCount,
+            fifoReservedEventCount,
           ),
         ],
       )
@@ -239,10 +240,10 @@ class SensorInfoHolder {
   }
 
   List<Widget> appendThem(List<Widget> myList) {
-    List<Widget> target = this.displaySensorData();
-    myList.forEach((Widget element) {
+    List<Widget> target = displaySensorData();
+    for (var element in myList) {
       target.add(element);
-    });
+    }
     return target;
   }
 
@@ -264,32 +265,32 @@ class Accelerometer {
 
       child: Container(
         child: Column(
-          children: this.sensor.appendThem([
+          children: sensor.appendThem([
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text('Along X-axis'),
-                Text('${this.x} m/s^2'),
+                const Text('Along X-axis'),
+                Text('$x m/s^2'),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text('Along Y-axis'),
-                Text('${this.y} m/s^2'),
+                const Text('Along Y-axis'),
+                Text('$y m/s^2'),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text('Along Z-axis'),
-                Text('${this.z} m/s^2'),
+                const Text('Along Z-axis'),
+                Text('$z m/s^2'),
               ],
             )
           ]),
         ),
-        padding:
-            EdgeInsets.only(left: 10.0, right: 10.0, top: 12.0, bottom: 12.0),
+        padding: const EdgeInsets.only(
+            left: 10.0, right: 10.0, top: 12.0, bottom: 12.0),
       ),
     );
   }
@@ -318,53 +319,53 @@ class UncalibratedAccelerometer {
 
       child: Container(
         child: Column(
-          children: this.sensor.appendThem([
+          children: sensor.appendThem([
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text('X Uncalibrated'),
-                Text('${this.xUncalib} m/s^2'),
+                const Text('X Uncalibrated'),
+                Text('$xUncalib m/s^2'),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text('Y Uncalibrated'),
-                Text('${this.yUncalib} m/s^2'),
+                const Text('Y Uncalibrated'),
+                Text('$yUncalib m/s^2'),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text('Z Uncalibrated'),
-                Text('${this.zUnclaib} m/s^2'),
+                const Text('Z Uncalibrated'),
+                Text('$zUnclaib m/s^2'),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text('Estimated X Bias'),
-                Text('${this.estimatedXBias} m/s^2'),
+                const Text('Estimated X Bias'),
+                Text('$estimatedXBias m/s^2'),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text('Estimated Y Bias'),
-                Text('${this.estimatedYBias} m/s^2'),
+                const Text('Estimated Y Bias'),
+                Text('$estimatedYBias m/s^2'),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text('Estimated Z Bias'),
-                Text('${this.estimatedZBias} m/s^2'),
+                const Text('Estimated Z Bias'),
+                Text('$estimatedZBias m/s^2'),
               ],
             ),
           ]),
         ),
-        padding:
-            EdgeInsets.only(left: 10.0, right: 10.0, top: 12.0, bottom: 12.0),
+        padding: const EdgeInsets.only(
+            left: 10.0, right: 10.0, top: 12.0, bottom: 12.0),
       ),
     );
   }
@@ -383,32 +384,32 @@ class Gravity {
 
       child: Container(
         child: Column(
-          children: this.sensor.appendThem([
+          children: sensor.appendThem([
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text('Along X-axis'),
-                Text('${this.x} m/s^2'),
+                const Text('Along X-axis'),
+                Text('$x m/s^2'),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text('Along Y-axis'),
-                Text('${this.y} m/s^2'),
+                const Text('Along Y-axis'),
+                Text('$y m/s^2'),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text('Along Z-axis'),
-                Text('${this.z} m/s^2'),
+                const Text('Along Z-axis'),
+                Text('$z m/s^2'),
               ],
             ),
           ]),
         ),
-        padding:
-            EdgeInsets.only(left: 10.0, right: 10.0, top: 12.0, bottom: 12.0),
+        padding: const EdgeInsets.only(
+            left: 10.0, right: 10.0, top: 12.0, bottom: 12.0),
       ),
     );
   }
@@ -427,32 +428,32 @@ class LinearAcceleration {
 
       child: Container(
         child: Column(
-          children: this.sensor.appendThem([
+          children: sensor.appendThem([
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text('Along X-axis'),
-                Text('${this.x} m/s^2'),
+                const Text('Along X-axis'),
+                Text('$x m/s^2'),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text('Along Y-axis'),
-                Text('${this.y} m/s^2'),
+                const Text('Along Y-axis'),
+                Text('$y m/s^2'),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text('Along Z-axis'),
-                Text('${this.z} m/s^2'),
+                const Text('Along Z-axis'),
+                Text('$z m/s^2'),
               ],
             ),
           ]),
         ),
-        padding:
-            EdgeInsets.only(left: 10.0, right: 10.0, top: 12.0, bottom: 12.0),
+        padding: const EdgeInsets.only(
+            left: 10.0, right: 10.0, top: 12.0, bottom: 12.0),
       ),
     );
   }
@@ -470,32 +471,32 @@ class MagneticField {
       // Magnetic Field
       child: Container(
         child: Column(
-          children: this.sensor.appendThem([
+          children: sensor.appendThem([
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text('Along X-axis'),
-                Text('${this.x} uT'),
+                const Text('Along X-axis'),
+                Text('$x uT'),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text('Along Y-axis'),
-                Text('${this.y} uT'),
+                const Text('Along Y-axis'),
+                Text('$y uT'),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                Text('Along Z-axis'),
-                Text('${this.z} uT'),
+                const Text('Along Z-axis'),
+                Text('$z uT'),
               ],
             ),
           ]),
         ),
-        padding:
-            EdgeInsets.only(left: 10.0, right: 10.0, top: 12.0, bottom: 12.0),
+        padding: const EdgeInsets.only(
+            left: 10.0, right: 10.0, top: 12.0, bottom: 12.0),
       ),
     );
   }
@@ -514,26 +515,26 @@ class OrientationSensor {
 
       child: Container(
         child: Column(
-          children: this.sensor.appendThem([
+          children: sensor.appendThem([
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text('Azimuth'),
-                Text('${this.azimuth}'),
+                Text(azimuth),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text('Pitch'),
-                Text('${this.pitch}'),
+                Text(pitch),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text('Roll'),
-                Text('${this.roll}'),
+                Text(roll),
               ],
             ),
           ]),
@@ -559,26 +560,26 @@ class Gyroscope {
 
       child: Container(
         child: Column(
-          children: this.sensor.appendThem([
+          children: sensor.appendThem([
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text('Angular Speed around X'),
-                Text('${this.angularSpeedAroundX} rad/s'),
+                Text('$angularSpeedAroundX rad/s'),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text('Angular Speed around Y'),
-                Text('${this.angularSpeedAroundY} rad/s'),
+                Text('$angularSpeedAroundY rad/s'),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text('Angular Speed around Z'),
-                Text('${this.angularSpeedAroundZ} rad/s'),
+                Text('$angularSpeedAroundZ rad/s'),
               ],
             ),
           ]),
@@ -613,47 +614,47 @@ class UncalibratedGyroscope {
 
       child: Container(
         child: Column(
-          children: this.sensor.appendThem([
+          children: sensor.appendThem([
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text('Angular Speed around X'),
-                Text('${this.angularSpeedAroundX} rad/s'),
+                Text('$angularSpeedAroundX rad/s'),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text('Angular Speed around Y'),
-                Text('${this.angularSpeedAroundY} rad/s'),
+                Text('$angularSpeedAroundY rad/s'),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text('Angular Speed around Z'),
-                Text('${this.angularSpeedAroundZ} rad/s'),
+                Text('$angularSpeedAroundZ rad/s'),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text('Estimated Drift around X'),
-                Text('${this.estimatedDriftAroundX} rad/s'),
+                Text('$estimatedDriftAroundX rad/s'),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text('Estimated Drift around Y'),
-                Text('${this.estimatedDriftAroundY} rad/s'),
+                Text('$estimatedDriftAroundY rad/s'),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text('Estimated Drift around Z'),
-                Text('${this.estimatedDriftAroundZ} rad/s'),
+                Text('$estimatedDriftAroundZ rad/s'),
               ],
             ),
           ]),
@@ -676,12 +677,12 @@ class HeartBeat {
 
       child: Container(
         child: Column(
-          children: this.sensor.appendThem([
+          children: sensor.appendThem([
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text('Confidence'),
-                Text('${this.confidence}'),
+                Text(confidence),
               ],
             ),
           ]),
@@ -704,12 +705,12 @@ class AmbientLight {
 
       child: Container(
         child: Column(
-          children: this.sensor.appendThem([
+          children: sensor.appendThem([
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text('Ambient Light Level'),
-                Text('${this.level} lux'),
+                Text('$level lux'),
               ],
             ),
           ]),
@@ -732,12 +733,12 @@ class AtmosphericPressure {
 
       child: Container(
         child: Column(
-          children: this.sensor.appendThem([
+          children: sensor.appendThem([
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text('Atmospheric Pressure'),
-                Text('${this.pressure} hPa'),
+                Text('$pressure hPa'),
               ],
             ),
           ]),
@@ -760,12 +761,12 @@ class Proximity {
 
       child: Container(
         child: Column(
-          children: this.sensor.appendThem([
+          children: sensor.appendThem([
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text('Distance From Screen'),
-                Text('${this.distance} cm'),
+                Text('$distance cm'),
               ],
             ),
           ]),
@@ -793,40 +794,40 @@ class RotationVector {
 
       child: Container(
         child: Column(
-          children: this.sensor.appendThem([
+          children: sensor.appendThem([
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text('X * Sin(\u{03b8}/2)'),
-                Text('${this.x}'),
+                Text(x),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text('Y * Sin(\u{03b8}/2)'),
-                Text('${this.y}'),
+                Text(y),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text('Z * Sin(\u{03b8}/2)'),
-                Text('${this.z}'),
+                Text(z),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text('Cos(\u{03b8}/2)'),
-                Text('${this.someVal}'),
+                Text(someVal),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text('Estimated Heading Accuracy'),
-                Text('${this.estimatedHeadingAccuracy} rad'),
+                Text('$estimatedHeadingAccuracy rad'),
               ],
             ),
           ]),
@@ -854,40 +855,40 @@ class GameRotationVector {
 
       child: Container(
         child: Column(
-          children: this.sensor.appendThem([
+          children: sensor.appendThem([
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text('X * Sin(\u{03b8}/2)'),
-                Text('${this.x}'),
+                Text(x),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text('Y * Sin(\u{03b8}/2)'),
-                Text('${this.y}'),
+                Text(y),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text('Z * Sin(\u{03b8}/2)'),
-                Text('${this.z}'),
+                Text(z),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text('Cos(\u{03b8}/2)'),
-                Text('${this.someVal}'),
+                Text(someVal),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text('Estimated Heading Accuracy'),
-                Text('${this.estimatedHeadingAccuracy} rad'),
+                Text('$estimatedHeadingAccuracy rad'),
               ],
             ),
           ]),
@@ -915,40 +916,40 @@ class GeoMagneticRotationVector {
 
       child: Container(
         child: Column(
-          children: this.sensor.appendThem([
+          children: sensor.appendThem([
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text('X * Sin(\u{03b8}/2)'),
-                Text('${this.x}'),
+                Text(x),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text('Y * Sin(\u{03b8}/2)'),
-                Text('${this.y}'),
+                Text(y),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text('Z * Sin(\u{03b8}/2)'),
-                Text('${this.z}'),
+                Text(z),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text('Cos(\u{03b8}/2)'),
-                Text('${this.someVal}'),
+                Text(someVal),
               ],
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text('Estimated Heading Accuracy'),
-                Text('${this.estimatedHeadingAccuracy} rad'),
+                Text('$estimatedHeadingAccuracy rad'),
               ],
             ),
           ]),
@@ -971,12 +972,12 @@ class RelativeHumidity {
 
       child: Container(
         child: Column(
-          children: this.sensor.appendThem([
+          children: sensor.appendThem([
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text('Relative Air Humidity'),
-                Text('${this.humidity} %'),
+                Text('$humidity %'),
               ],
             ),
           ]),
@@ -999,12 +1000,12 @@ class AmbientRoomTemperature {
 
       child: Container(
         child: Column(
-          children: this.sensor.appendThem([
+          children: sensor.appendThem([
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text('Temperature'),
-                Text('${this.temperature} C'),
+                Text('$temperature C'),
               ],
             ),
           ]),
@@ -1023,7 +1024,7 @@ class LowLatencyOffBodyDetect {
   String offBodyState;
 
   String getStateText() {
-    return this.offBodyState == '1.0' ? 'Device on-body' : 'Device off-body';
+    return offBodyState == '1.0' ? 'Device on-body' : 'Device off-body';
   }
 
   Widget getCard() {
@@ -1032,12 +1033,12 @@ class LowLatencyOffBodyDetect {
 
       child: Container(
         child: Column(
-          children: this.sensor.appendThem([
+          children: sensor.appendThem([
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text('Off Body State'),
-                Text('${getStateText()}'),
+                Text(getStateText()),
               ],
             ),
           ]),
@@ -1075,9 +1076,7 @@ class MotionDetect {
   String isInMotion;
 
   String getStateText() {
-    return this.isInMotion == '1.0'
-        ? 'Device in Motion'
-        : 'Device not in Motion';
+    return isInMotion == '1.0' ? 'Device in Motion' : 'Device not in Motion';
   }
 
   Widget getCard() {
@@ -1086,12 +1085,12 @@ class MotionDetect {
 
       child: Container(
         child: Column(
-          children: this.sensor.appendThem([
+          children: sensor.appendThem([
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text('Motion Detection'),
-                Text('${getStateText()}'),
+                Text(getStateText()),
               ],
             ),
           ]),
@@ -1110,7 +1109,7 @@ class StationaryDetect {
   String isImmobile;
 
   String getStateText() {
-    return this.isImmobile == '1.0'
+    return isImmobile == '1.0'
         ? 'Device in Stationary State'
         : 'Device not in Stationary State';
   }
@@ -1121,12 +1120,12 @@ class StationaryDetect {
 
       child: Container(
         child: Column(
-          children: this.sensor.appendThem([
+          children: sensor.appendThem([
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 Text('Motion Detection'),
-                Text('${getStateText()}'),
+                Text(getStateText()),
               ],
             ),
           ]),

@@ -7,7 +7,8 @@ class AnimatedTextWidget extends StatefulWidget {
 
   @override
   _AnimatedTextWidgetState createState() => _AnimatedTextWidgetState();
-  AnimatedTextWidget({this.staticText, this.animatedText});
+  const AnimatedTextWidget({Key key, this.staticText, this.animatedText})
+      : super(key: key);
 }
 
 class _AnimatedTextWidgetState extends State<AnimatedTextWidget>
@@ -19,7 +20,7 @@ class _AnimatedTextWidgetState extends State<AnimatedTextWidget>
   void initState() {
     super.initState();
     controller =
-        AnimationController(vsync: this, duration: Duration(seconds: 3));
+        AnimationController(vsync: this, duration: const Duration(seconds: 3));
     animation = TypewriterTween(end: widget.animatedText).animate(controller);
     controller.repeat();
   }
@@ -49,6 +50,7 @@ class TypewriterTween extends Tween<String> {
   TypewriterTween({String begin = '', String end})
       : super(begin: begin, end: end);
 
+  @override
   String lerp(double t) {
     var cutoff = (end.length * t).round();
     return end.substring(0, cutoff);
