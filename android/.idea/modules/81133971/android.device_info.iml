@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<module external.linked.project.id=":device_info" external.linked.project.path="$USER_HOME$/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/device_info-2.0.2/android" external.root.project.path="$MODULE_DIR$/../../.." external.system.id="GRADLE" external.system.module.group="io.flutter.plugins.deviceinfo" external.system.module.version="1.0-SNAPSHOT" type="JAVA_MODULE" version="4">
+<module type="JAVA_MODULE" version="4">
   <component name="FacetManager">
     <facet type="android-gradle" name="Android-Gradle">
       <configuration>
@@ -30,10 +30,6 @@
     <output url="file://$MODULE_DIR$/../../../../build/device_info/intermediates/javac/debug/classes" />
     <output-test url="file://$MODULE_DIR$/../../../../build/device_info/intermediates/javac/debugUnitTest/classes" />
     <exclude-output />
-    <content url="file://$USER_HOME$/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/device_info-2.0.2">
-      <sourceFolder url="file://$USER_HOME$/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/device_info-2.0.2/android/src/main/java" isTestSource="false" />
-      <excludeFolder url="file://$USER_HOME$/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/device_info-2.0.2/android/.gradle" />
-    </content>
     <content url="file://$MODULE_DIR$/../../../../build/device_info/generated/aidl_source_output_dir/debug/out" />
     <content url="file://$MODULE_DIR$/../../../../build/device_info/generated/aidl_source_output_dir/debugAndroidTest/out" />
     <content url="file://$MODULE_DIR$/../../../../build/device_info/generated/ap_generated_sources/debug/out">
@@ -52,6 +48,10 @@
     <content url="file://$MODULE_DIR$/../../../../build/device_info/generated/source/buildConfig/androidTest/debug" />
     <content url="file://$MODULE_DIR$/../../../../build/device_info/generated/source/buildConfig/debug">
       <sourceFolder url="file://$MODULE_DIR$/../../../../build/device_info/generated/source/buildConfig/debug" isTestSource="false" generated="true" />
+    </content>
+    <content url="file://$USER_HOME$/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/device_info-2.0.2">
+      <sourceFolder url="file://$USER_HOME$/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/device_info-2.0.2/android/src/main/java" isTestSource="false" />
+      <excludeFolder url="file://$USER_HOME$/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/device_info-2.0.2/android/.gradle" />
     </content>
     <orderEntry type="jdk" jdkName="Android API 29 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />

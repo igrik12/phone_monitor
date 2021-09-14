@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="GradleMigrationSettings" migrationVersion="1" />
   <component name="GradleSettings">
     <option name="linkedExternalProjectsSettings">
       <GradleProjectSettings>
-        <option name="testRunner" value="PLATFORM" />
+        <option name="testRunner" value="GRADLE" />
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
         <option name="gradleJvm" value="1.8" />
         <option name="modules">
           <set>
-            <option value="$USER_HOME$/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/battery_info-1.0.8/android" />
-            <option value="$USER_HOME$/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/cpu_reader-3.0.0/android" />
-            <option value="$USER_HOME$/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/device_apps-2.1.1/android" />
-            <option value="$USER_HOME$/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/device_info-2.0.2/android" />
-            <option value="$USER_HOME$/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/disk_space-0.1.1/android" />
-            <option value="$USER_HOME$/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_auth-0.6.2+1/android" />
-            <option value="$USER_HOME$/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core-0.7.0/android" />
-            <option value="$USER_HOME$/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/google_mobile_ads-0.13.4/android" />
-            <option value="$USER_HOME$/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/google_sign_in-4.5.9/android" />
-            <option value="$USER_HOME$/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/image_gallery_saver-1.6.9/android" />
-            <option value="$USER_HOME$/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/launch_review-3.0.1/android" />
-            <option value="$USER_HOME$/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/package_info-2.0.2/android" />
-            <option value="$USER_HOME$/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-2.0.3/android" />
-            <option value="$USER_HOME$/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/purchases_flutter-3.4.5/android" />
-            <option value="$USER_HOME$/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences-2.0.7/android" />
-            <option value="$USER_HOME$/Downloads/flutter/.pub-cache/hosted/pub.dartlang.org/sqflite-2.0.0+4/android" />
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/../../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/battery_info-1.0.8/android" />
+            <option value="$PROJECT_DIR$/../../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/cpu_reader-3.0.0/android" />
+            <option value="$PROJECT_DIR$/../../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/device_apps-2.1.1/android" />
+            <option value="$PROJECT_DIR$/../../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/device_info-2.0.2/android" />
+            <option value="$PROJECT_DIR$/../../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/disk_space-0.1.1/android" />
+            <option value="$PROJECT_DIR$/../../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_auth-0.6.2+1/android" />
+            <option value="$PROJECT_DIR$/../../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/firebase_core-0.7.0/android" />
+            <option value="$PROJECT_DIR$/../../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/google_mobile_ads-0.13.4/android" />
+            <option value="$PROJECT_DIR$/../../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/google_sign_in-4.5.9/android" />
+            <option value="$PROJECT_DIR$/../../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/image_gallery_saver-1.6.9/android" />
+            <option value="$PROJECT_DIR$/../../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/launch_review-3.0.1/android" />
+            <option value="$PROJECT_DIR$/../../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/package_info-2.0.2/android" />
+            <option value="$PROJECT_DIR$/../../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/path_provider-2.0.3/android" />
+            <option value="$PROJECT_DIR$/../../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/purchases_flutter-3.4.4/android" />
+            <option value="$PROJECT_DIR$/../../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/shared_preferences-2.0.7/android" />
+            <option value="$PROJECT_DIR$/../../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/sqflite-2.0.0+4/android" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
-        <option name="useQualifiedModuleNames" value="true" />
       </GradleProjectSettings>
     </option>
   </component>

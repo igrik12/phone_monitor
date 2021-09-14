@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module external.linked.project.id=":purchases_flutter" external.linked.project.path="$MODULE_DIR$/../../../../../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/purchases_flutter-3.4.4/android" external.root.project.path="$MODULE_DIR$/../../.." external.system.id="GRADLE" external.system.module.group="com.revenuecat.purchases_flutter" external.system.module.version="3.4.4" type="JAVA_MODULE" version="4">
+  <component name="FacetManager">
+    <facet type="android-gradle" name="Android-Gradle">
+      <configuration>
+        <option name="GRADLE_PROJECT_PATH" value=":purchases_flutter" />
+        <option name="LAST_SUCCESSFUL_SYNC_AGP_VERSION" />
+        <option name="LAST_KNOWN_AGP_VERSION" value="4.1.3" />
+      </configuration>
+    </facet>
+    <facet type="kotlin-language" name="Kotlin">
+      <configuration version="4" platform="JVM 1.6" allPlatforms="JVM [1.6]" useProjectSettings="false">
+        <compilerSettings>
+          <option name="additionalArguments" value="-Xallow-no-source-files" />
+        </compilerSettings>
+        <compilerArguments>
+          <option name="destination" value="$MODULE_DIR$/../../../../build/purchases_flutter/tmp/kotlin-classes/debug" />
+          <option name="classpath" value="$MODULE_DIR$/../../../../build/purchases_flutter/intermediates/compile_r_class_jar/debug/R.jar;C:/Users/igrik/.gradle/caches/transforms-2/files-2.1/287445844a53d034b8a594ddd4619608/jetified-kotlin-stdlib-jdk7-1.4.10.jar;C:/Users/igrik/.gradle/caches/transforms-2/files-2.1/fa1f07e1562de5a6474dd9a0546bbc72/jetified-kotlin-stdlib-1.4.10.jar;C:/Users/igrik/.gradle/caches/transforms-2/files-2.1/8211da862189ff359a88c1fb8bbf96b5/jetified-kotlin-stdlib-common-1.4.10.jar;C:/Users/igrik/.gradle/caches/transforms-2/files-2.1/81bb48eac2779ae3dfb111290d6d66ee/jetified-annotations-13.0.jar;C:/Users/igrik/.gradle/caches/transforms-2/files-2.1/3b488a8247507c999a72ff3d0c10f2c2/jetified-purchases-hybrid-common-1.8.2-api.jar;C:/Users/igrik/.gradle/caches/transforms-2/files-2.1/82e1e69dd647d4db32130bab864431d3/jetified-purchases-4.3.0-api.jar;C:/Users/igrik/.gradle/caches/transforms-2/files-2.1/da4f4362a3341551f0a811799b98cf3b/jetified-purchases-core-public-4.3.0-api.jar;C:/Users/igrik/.gradle/caches/transforms-2/files-2.1/36c03bc2b9a78522678ab0dc5efc43f2/jetified-purchases-core-utils-4.3.0-api.jar;C:/Users/igrik/.gradle/caches/transforms-2/files-2.1/7f2abb57967a60c2fdd79a3cfc1049cd/jetified-billing-4.0.0-api.jar;C:/Users/igrik/.gradle/caches/transforms-2/files-2.1/40d89e10a2047a41e7240639a6aa2c0d/jetified-purchases-core-common-4.3.0-api.jar;C:/Users/igrik/AppData/Local/Android/sdk/platforms/android-30/android.jar" />
+          <option name="noStdlib" value="true" />
+          <option name="noReflect" value="true" />
+          <option name="moduleName" value="purchases_flutter_debug" />
+          <option name="jvmTarget" value="1.6" />
+          <option name="languageVersion" value="1.3" />
+          <option name="apiVersion" value="1.3" />
+          <option name="pluginOptions">
+            <array />
+          </option>
+          <option name="pluginClasspaths">
+            <array />
+          </option>
+          <option name="errors">
+            <ArgumentParseErrors />
+          </option>
+        </compilerArguments>
+      </configuration>
+    </facet>
+    <facet type="android" name="Android">
+      <configuration>
+        <option name="SELECTED_BUILD_VARIANT" value="debug" />
+        <option name="ASSEMBLE_TASK_NAME" value="assembleDebug" />
+        <option name="COMPILE_JAVA_TASK_NAME" value="compileDebugSources" />
+        <afterSyncTasks>
+          <task>generateDebugSources</task>
+        </afterSyncTasks>
+        <option name="ALLOW_USER_CONFIGURATION" value="false" />
+        <option name="MANIFEST_FILE_RELATIVE_PATH" value="/src/main/AndroidManifest.xml" />
+        <option name="RES_FOLDER_RELATIVE_PATH" value="/src/main/res" />
+        <option name="RES_FOLDERS_RELATIVE_PATH" value="file://$MODULE_DIR$/../../../../../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/purchases_flutter-3.4.4/android/src/main/res;file://$MODULE_DIR$/../../../../../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/purchases_flutter-3.4.4/android/src/debug/res;file://$MODULE_DIR$/../../../../build/purchases_flutter/generated/res/rs/debug;file://$MODULE_DIR$/../../../../build/purchases_flutter/generated/res/resValues/debug" />
+        <option name="TEST_RES_FOLDERS_RELATIVE_PATH" value="file://$MODULE_DIR$/../../../../../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/purchases_flutter-3.4.4/android/src/androidTest/res;file://$MODULE_DIR$/../../../../../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/purchases_flutter-3.4.4/android/src/androidTestDebug/res;file://$MODULE_DIR$/../../../../build/purchases_flutter/generated/res/rs/androidTest/debug;file://$MODULE_DIR$/../../../../build/purchases_flutter/generated/res/resValues/androidTest/debug" />
+        <option name="ASSETS_FOLDER_RELATIVE_PATH" value="/src/main/assets" />
+        <option name="PROJECT_TYPE" value="1" />
+      </configuration>
+    </facet>
+  </component>
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_7">
+    <output url="file://$MODULE_DIR$/../../../../build/purchases_flutter/intermediates/javac/debug/classes" />
+    <output-test url="file://$MODULE_DIR$/../../../../build/purchases_flutter/intermediates/javac/debugUnitTest/classes" />
+    <exclude-output />
+    <content url="file://$MODULE_DIR$/../../../../build/purchases_flutter/generated/aidl_source_output_dir/debug/out" />
+    <content url="file://$MODULE_DIR$/../../../../build/purchases_flutter/generated/aidl_source_output_dir/debugAndroidTest/out" />
+    <content url="file://$MODULE_DIR$/../../../../build/purchases_flutter/generated/ap_generated_sources/debug/out">
+      <sourceFolder url="file://$MODULE_DIR$/../../../../build/purchases_flutter/generated/ap_generated_sources/debug/out" isTestSource="false" generated="true" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../../../build/purchases_flutter/generated/ap_generated_sources/debugAndroidTest/out" />
+    <content url="file://$MODULE_DIR$/../../../../build/purchases_flutter/generated/ap_generated_sources/debugUnitTest/out" />
+    <content url="file://$MODULE_DIR$/../../../../build/purchases_flutter/generated/renderscript_source_output_dir/debug/out" />
+    <content url="file://$MODULE_DIR$/../../../../build/purchases_flutter/generated/renderscript_source_output_dir/debugAndroidTest/out" />
+    <content url="file://$MODULE_DIR$/../../../../build/purchases_flutter/generated/res/resValues/androidTest/debug" />
+    <content url="file://$MODULE_DIR$/../../../../build/purchases_flutter/generated/res/resValues/debug">
+      <sourceFolder url="file://$MODULE_DIR$/../../../../build/purchases_flutter/generated/res/resValues/debug" type="java-resource" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../../../build/purchases_flutter/generated/res/rs/androidTest/debug" />
+    <content url="file://$MODULE_DIR$/../../../../build/purchases_flutter/generated/res/rs/debug" />
+    <content url="file://$MODULE_DIR$/../../../../build/purchases_flutter/generated/source/buildConfig/androidTest/debug" />
+    <content url="file://$MODULE_DIR$/../../../../build/purchases_flutter/generated/source/buildConfig/debug">
+      <sourceFolder url="file://$MODULE_DIR$/../../../../build/purchases_flutter/generated/source/buildConfig/debug" isTestSource="false" generated="true" />
+    </content>
+    <content url="file://$MODULE_DIR$/../../../../../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/purchases_flutter-3.4.4/android">
+      <sourceFolder url="file://$MODULE_DIR$/../../../../../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/purchases_flutter-3.4.4/android/src/main/java" isTestSource="false" />
+      <excludeFolder url="file://$MODULE_DIR$/../../../../../../../tools/flutter/.pub-cache/hosted/pub.dartlang.org/purchases_flutter-3.4.4/android/.gradle" />
+    </content>
+    <orderEntry type="jdk" jdkName="Android API 28 Platform" jdkType="Android SDK" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-jdk7:1.4.10" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib:1.4.10" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains.kotlin:kotlin-stdlib-common:1.4.10" level="project" />
+    <orderEntry type="library" name="Gradle: org.jetbrains:annotations:13.0" level="project" />
+    <orderEntry type="library" name="Gradle: com.revenuecat.purchases:purchases-hybrid-common:1.8.2@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.revenuecat.purchases:purchases:4.3.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.revenuecat.purchases:purchases-core-public:4.3.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.revenuecat.purchases:purchases-core-utils:4.3.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.android.billingclient:billing:4.0.0@aar" level="project" />
+    <orderEntry type="library" name="Gradle: com.revenuecat.purchases:purchases-core-common:4.3.0@aar" level="project" />
+  </component>
+</module>

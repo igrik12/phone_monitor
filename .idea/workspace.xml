@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
   <component name="BranchesTreeState">
     <expand>
       <path>
@@ -41,32 +44,13 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4fc786a1-d1ec-4116-be9c-d2c2d3e427e5" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/lib/widgets/animatedText.dart" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/lib/widgets/progressWave.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.flutter-plugins" beforeDir="false" afterPath="$PROJECT_DIR$/.flutter-plugins" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/android/app/src/main/kotlin/com/example/phone_monitor/MainActivity.kt" beforeDir="false" afterPath="$PROJECT_DIR$/android/app/src/main/kotlin/com/example/phone_monitor/MainActivity.kt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/controllers/bindings.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/controllers/bindings.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/controllers/cpu_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/controllers/cpu_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/controllers/dashboard_controller.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/controllers/dashboard_controller.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/main.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/main.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/models/battery_info.dart" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/models/dashboard_wrapper.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/models/dashboard_wrapper.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/home.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/home.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/screens/settings.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/screens/settings.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/tabs/dashboard/battery_card.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/tabs/dashboard/battery_card.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/tabs/dashboard/dashboard.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/tabs/dashboard/dashboard.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/tabs/dashboard/overview.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/tabs/dashboard/overview.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/tabs/dashboard/storage_card.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/tabs/dashboard/storage_card.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/lib/utils/native_comms.dart" beforeDir="false" afterPath="$PROJECT_DIR$/lib/utils/native_comms.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pubspec.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/pubspec.yaml" afterDir="false" />
-    </list>
+    <list default="true" id="4fc786a1-d1ec-4116-be9c-d2c2d3e427e5" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ExecutionTargetManager" SELECTED_TARGET="Pixel_2_API_30" />
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[C:\Android\.android\avd\Nexus_5X_API_30.avd]" />
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -91,7 +75,7 @@
     <property name="dart.analysis.tool.window.force.activate" value="false" />
     <property name="dart.analysis.tool.window.visible" value="false" />
     <property name="io.flutter.reload.alreadyRun" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/android" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
     <property name="show.migrate.to.gradle.popup" value="false" />
   </component>
@@ -100,6 +84,7 @@
       <recent name="C:\SourceCode\Mobile\phone_monitor\android\app\src\main\kotlin\com\example\phone_monitor" />
     </key>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -136,31 +121,5 @@
       </map>
     </option>
     <option name="oldMeFiltersMigrated" value="true" />
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="1822" y="311" key="FileChooserDialogImpl" timestamp="1598817575661">
-      <screen x="0" y="0" width="2752" height="1112" />
-    </state>
-    <state x="1822" y="311" key="FileChooserDialogImpl/3440.205.1536.824/0.0.2752.1112@0.0.2752.1112" timestamp="1598817575661" />
-    <state width="1316" height="328" key="GridCell.Tab.0.bottom" timestamp="1599904398242">
-      <screen x="0" y="0" width="2752" height="1112" />
-    </state>
-    <state width="1316" height="328" key="GridCell.Tab.0.bottom/3440.205.1536.824/0.0.2752.1112@0.0.2752.1112" timestamp="1599904398242" />
-    <state width="1316" height="328" key="GridCell.Tab.0.center" timestamp="1599904398242">
-      <screen x="0" y="0" width="2752" height="1112" />
-    </state>
-    <state width="1316" height="328" key="GridCell.Tab.0.center/3440.205.1536.824/0.0.2752.1112@0.0.2752.1112" timestamp="1599904398242" />
-    <state width="1316" height="328" key="GridCell.Tab.0.left" timestamp="1599904398240">
-      <screen x="0" y="0" width="2752" height="1112" />
-    </state>
-    <state width="1316" height="328" key="GridCell.Tab.0.left/3440.205.1536.824/0.0.2752.1112@0.0.2752.1112" timestamp="1599904398240" />
-    <state width="1316" height="328" key="GridCell.Tab.0.right" timestamp="1599904398242">
-      <screen x="0" y="0" width="2752" height="1112" />
-    </state>
-    <state width="1316" height="328" key="GridCell.Tab.0.right/3440.205.1536.824/0.0.2752.1112@0.0.2752.1112" timestamp="1599904398242" />
-    <state x="885" y="201" key="SettingsEditor" timestamp="1599415902194">
-      <screen x="0" y="0" width="2752" height="1112" />
-    </state>
-    <state x="885" y="201" key="SettingsEditor/3440.205.1536.824/0.0.2752.1112@0.0.2752.1112" timestamp="1599415902194" />
   </component>
 </project>

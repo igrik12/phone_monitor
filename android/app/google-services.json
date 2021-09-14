@@ -15,11 +15,19 @@
       },
       "oauth_client": [
         {
-          "client_id": "1098351934781-22eechg4qffpk25ntgupdao5qoj146u9.apps.googleusercontent.com",
+          "client_id": "1098351934781-b6lgec95vstusaordv52l1uptnqa3htc.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.twarkapps.phone_monitor",
             "certificate_hash": "92ad2d016f031ce708c2c5941a360b5cb8ca8b34"
+          }
+        },
+        {
+          "client_id": "1098351934781-hio915hpdboskoqbosmf0uqcs7nsnadk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.twarkapps.phone_monitor",
+            "certificate_hash": "100c69b6458db198df1c98cb55f979499ffb50bf"
           }
         },
         {
@@ -42,7 +50,7 @@
           ]
         }
       },
-      "admob_app_id": "ca-app-pub-9203200566585009~4031425375"
+      "admob_app_id": "ca-app-pub-8553583576390987~6421066446"
     }
   ],
   "configuration_version": "1"
