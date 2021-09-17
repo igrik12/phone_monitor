@@ -1,9 +1,8 @@
+import 'package:facebook_audience_network/ad/ad_interstitial.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:phone_monitor/controllers/homeController.dart';
-import 'package:phone_monitor/controllers/purchases_controller.dart';
 import 'package:phone_monitor/controllers/tab_click_controller.dart';
 import 'package:phone_monitor/tabs/cpu/cpu.dart';
 import 'package:phone_monitor/tabs/applications/applications.dart';
@@ -11,7 +10,6 @@ import 'package:phone_monitor/tabs/dashboard/dashboard.dart';
 import 'package:phone_monitor/tabs/display/display.dart';
 import 'package:phone_monitor/tabs/sensors/sensors.dart';
 import 'package:phone_monitor/tabs/system/system.dart';
-import 'package:phone_monitor/utils/ad_manager.dart';
 
 class Home extends StatefulWidget {
   const Home({Key key}) : super(key: key);
@@ -24,7 +22,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
   TabController _tabController;
   HomeController homeController;
   bool initial = true;
-  InterstitialAd _interstitialAd;
 
   @override
   void initState() {
@@ -44,36 +41,16 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     clickController.clicked.stream.listen((clicks) {
       if (initial || clicks == 3) {
         initial = false;
-        InterstitialAd.load(
-            adUnitId: AdManager.interstitialAdUnitId,
-            request: const AdRequest(),
-            adLoadCallback: InterstitialAdLoadCallback(
-              onAdLoaded: (InterstitialAd ad) {
-                _interstitialAd = ad;
-                _interstitialAd.fullScreenContentCallback =
-                    FullScreenContentCallback(
-                        onAdShowedFullScreenContent: (InterstitialAd ad) {},
-                        onAdDismissedFullScreenContent: (InterstitialAd ad) {
-                          clickController.resetClicks();
-                        },
-                        onAdFailedToShowFullScreenContent:
-                            (InterstitialAd ad, AdError error) {},
-                        onAdImpression: (InterstitialAd ad) {});
-                _interstitialAd.show();
-              },
-              onAdFailedToLoad: (LoadAdError error) {
-                clickController.resetClicks();
-              },
-            ));
+        FacebookInterstitialAd.loadInterstitialAd(
+          placementId: "IMG_16_9_APP_INSTALL#2312433698835503_2650502525028617",
+          listener: (result, value) {
+            if (result == InterstitialAdResult.LOADED)
+              FacebookInterstitialAd.showInterstitialAd(delay: 500);
+          },
+        );
         clickController.resetClicks();
       }
     });
-  }
-
-  @override
-  void dispose() {
-    _interstitialAd.dispose();
-    super.dispose();
   }
 
   var tabIndex = 0;

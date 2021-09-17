@@ -1,11 +1,10 @@
+import 'package:facebook_audience_network/facebook_audience_network.dart';
 import 'package:flutter/material.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:phone_monitor/controllers/cpu_controller.dart';
 import 'package:phone_monitor/tabs/cpu/charts.dart';
 import 'package:phone_monitor/tabs/cpu/cpu_progess_grid.dart';
 import 'package:phone_monitor/tabs/cpu/cpu_overview.dart';
 import 'package:phone_monitor/tabs/cpu/temp_chart.dart';
-import 'package:phone_monitor/utils/ad_manager.dart';
 
 class CpuTab extends StatefulWidget {
   const CpuTab({Key key}) : super(key: key);
@@ -15,30 +14,6 @@ class CpuTab extends StatefulWidget {
 }
 
 class _CpuTabState extends State<CpuTab> {
-  BannerAd _bannerAd;
-  bool _isBannerAdReady = false;
-  @override
-  void initState() {
-    super.initState();
-    _bannerAd = AdManager.loadSmallBanner(() {
-      setState(() {
-        _isBannerAdReady = true;
-      });
-    }, (ad, err) {
-      _isBannerAdReady = false;
-      ad.dispose();
-    });
-
-    _bannerAd.load();
-  }
-
-  @override
-  void dispose() {
-    _bannerAd.dispose();
-
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -46,15 +21,25 @@ class _CpuTabState extends State<CpuTab> {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            if (_isBannerAdReady)
-              Align(
-                alignment: Alignment.topCenter,
-                child: SizedBox(
-                  width: _bannerAd.size.width.toDouble(),
-                  height: _bannerAd.size.height.toDouble(),
-                  child: AdWidget(ad: _bannerAd),
-                ),
+            SizedBox(
+              height: 50,
+              child: FacebookNativeAd(
+                placementId:
+                    "IMG_16_9_APP_INSTALL#2312433698835503_2964953543583512",
+                adType: NativeAdType.NATIVE_BANNER_AD,
+                bannerAdSize: NativeBannerAdSize.HEIGHT_50,
+                width: double.infinity,
+                backgroundColor: Theme.of(context).primaryColor,
+                titleColor: Colors.white,
+                descriptionColor: Colors.white,
+                buttonColor: Colors.deepPurple,
+                buttonTitleColor: Colors.white,
+                buttonBorderColor: Colors.white,
+                listener: (result, value) {
+                  print("Native Banner Ad: $result --> $value");
+                },
               ),
+            ),
             const CpuOverview(),
             const CpuProgressGrid(),
             // DismissableAdBanner(),

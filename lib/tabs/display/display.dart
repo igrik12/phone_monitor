@@ -1,9 +1,8 @@
+import 'package:facebook_audience_network/facebook_audience_network.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:phone_monitor/controllers/dashboard_controller.dart';
 import 'package:phone_monitor/models/display_info.dart';
-import 'package:phone_monitor/utils/ad_manager.dart';
 import 'package:phone_monitor/widgets/custom_card.dart';
 
 class Display extends StatefulWidget {
@@ -16,28 +15,6 @@ class Display extends StatefulWidget {
 }
 
 class _DisplayState extends State<Display> {
-  BannerAd _bannerAd;
-  bool _isBannerAdReady = false;
-  @override
-  void initState() {
-    super.initState();
-    _bannerAd = AdManager.loadSmallBanner(() {
-      setState(() {
-        _isBannerAdReady = true;
-      });
-    }, (ad, err) {
-      _isBannerAdReady = false;
-      ad.dispose();
-    });
-    _bannerAd.load();
-  }
-
-  @override
-  void dispose() {
-    _bannerAd.dispose();
-    super.dispose();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -51,15 +28,29 @@ class _DisplayState extends State<Display> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                if (_isBannerAdReady)
-                  Align(
-                    alignment: Alignment.topCenter,
-                    child: SizedBox(
-                      width: _bannerAd.size.width.toDouble(),
-                      height: _bannerAd.size.height.toDouble(),
-                      child: AdWidget(ad: _bannerAd),
-                    ),
+                SizedBox(
+                  height: 50,
+                  child: FacebookNativeAd(
+                    placementId:
+                        "IMG_16_9_APP_INSTALL#2312433698835503_2964953543583512",
+                    adType: NativeAdType.NATIVE_BANNER_AD,
+                    bannerAdSize: NativeBannerAdSize.HEIGHT_50,
+                    width: double.infinity,
+                    backgroundColor: Theme.of(context).primaryColor,
+                    titleColor: Colors.white,
+                    descriptionColor: Colors.white,
+                    buttonColor: Colors.deepPurple,
+                    buttonTitleColor: Colors.white,
+                    buttonBorderColor: Colors.white,
+                    listener: (result, value) {
+                      print("Native Banner Ad: $result --> $value");
+                    },
                   ),
+                ),
+                SizedBox(
+                  height: 10,
+                  width: double.infinity,
+                ),
                 Text(
                   "Display",
                   style: Get.theme.textTheme.subtitle1,

@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:google_mobile_ads/google_mobile_ads.dart';
+import 'package:facebook_audience_network/ad/ad_banner.dart';
 
 class AdManager {
   static String get appId {
@@ -31,20 +31,28 @@ class AdManager {
     }
   }
 
-  static BannerAd loadSmallBanner(
-      Function callbackOnLoaded, Function(Ad, LoadAdError) callBackOnFailed) {
-    return BannerAd(
-      adUnitId: AdManager.bannerAdUnitId,
-      request: AdRequest(),
-      size: AdSize.banner,
-      listener: BannerAdListener(
-        onAdLoaded: (_) {
-          callbackOnLoaded();
-        },
-        onAdFailedToLoad: (ad, err) {
-          callBackOnFailed(ad, err);
-        },
-      ),
+  static FacebookBannerAd loadSmallBanner() {
+    return FacebookBannerAd(
+      placementId: Platform.isAndroid
+          ? "MG_16_9_APP_INSTALL#2312433698835503_2964944860251047"
+          : "MG_16_9_APP_INSTALL#2312433698835503_2964944860251047",
+      bannerSize: BannerSize.STANDARD,
+      listener: (result, value) {
+        switch (result) {
+          case BannerAdResult.ERROR:
+            print("Error: $value");
+            break;
+          case BannerAdResult.LOADED:
+            print("Loaded: $value");
+            break;
+          case BannerAdResult.CLICKED:
+            print("Clicked: $value");
+            break;
+          case BannerAdResult.LOGGING_IMPRESSION:
+            print("Logging Impression: $value");
+            break;
+        }
+      },
     );
   }
 }

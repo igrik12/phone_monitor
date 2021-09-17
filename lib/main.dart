@@ -1,9 +1,8 @@
+import 'package:facebook_audience_network/facebook_audience_network.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
-import 'package:phone_monitor/api/purchase_api.dart';
 import 'package:phone_monitor/controllers/themeController.dart';
 import 'package:phone_monitor/screens/home.dart';
 import 'package:phone_monitor/screens/settings.dart';
@@ -13,7 +12,9 @@ import 'controllers/bindings.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await GetStorage.init();
-  await MobileAds.instance.initialize();
+  FacebookAudienceNetwork.init(
+    testingId: "37b1da9d-b48c-4103-a393-2e095e734bd6", //optional
+  );
   Get.lazyPut<ThemeController>(() => ThemeController());
   runApp(const MyApp());
 }
